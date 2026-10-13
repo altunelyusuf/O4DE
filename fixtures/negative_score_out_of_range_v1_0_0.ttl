@@ -1,0 +1,8 @@
+# EXPECT: must lie between
+# A product whose quality score is 11 on a 0 to 10 scale.
+@prefix o4de: <http://www.zt4swe.io/o4de#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+o4de:BadProduct a owl:NamedIndividual, o4de:Product ; rdfs:label "Bad product" ; o4de:qualityScore "11.0"^^xsd:decimal .

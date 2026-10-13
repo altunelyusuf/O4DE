@@ -1,0 +1,363 @@
+# O4DE: Ontology for Domain Engineering - SHACL shapes
+# Version 1.0.0 (2026-10-13). Copyright 2026 Yusuf Altunel. Licensed under the Apache License, Version 2.0.
+# Role: SHACL. Shapes only. Validate the T-Box and A-Box together with SHACL advanced features on.
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix o4de: <http://www.zt4swe.io/o4de#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+o4de:BusinessProcessRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Business Process obey the T-Box restrictions"@en ;
+    sh:property [ sh:message "A Business Process needs at least 1 value of 'has business role'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:hasBusinessRole ] ;
+    sh:targetClass o4de:BusinessProcess .
+
+o4de:BusinessRuleRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Business Rule obey the T-Box restrictions"@en ;
+    sh:property [ sh:message "A Business Rule needs at least 1 value of 'rule type'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:ruleType ] ;
+    sh:targetClass o4de:BusinessRule .
+
+o4de:ClassDocumentationShape a sh:NodeShape ;
+    rdfs:label "Every class has a label and a definition"@en ;
+    sh:property [ sh:message "A class needs a definition (skos:definition) of at least 20 characters."@en ;
+            sh:minCount 1 ;
+            sh:minLength 20 ;
+            sh:path skos:definition ],
+        [ sh:message "A class needs a human label (rdfs:label)."@en ;
+            sh:minCount 1 ;
+            sh:path rdfs:label ] ;
+    sh:target [ a sh:SPARQLTarget ;
+            sh:prefixes <http://www.zt4swe.io/o4de-shapes> ;
+            sh:select "SELECT ?this WHERE { ?this a owl:Class . FILTER(isIRI(?this) && STRSTARTS(STR(?this), \"http://www.zt4swe.io/o4de#\")) }" ] .
+
+o4de:ConceptSchemeShape a sh:NodeShape ;
+    rdfs:label "A taxonomy has a title and at least one top concept"@en ;
+    sh:property [ sh:message "A taxonomy needs a top concept."@en ;
+            sh:minCount 1 ;
+            sh:path skos:hasTopConcept ],
+        [ sh:message "A taxonomy needs a title."@en ;
+            sh:minCount 1 ;
+            sh:path dc:title ] ;
+    sh:targetClass skos:ConceptScheme .
+
+o4de:ConceptShape a sh:NodeShape ;
+    rdfs:label "A concept has a label, belongs to one taxonomy and sits in the tree"@en ;
+    sh:property [ sh:maxCount 1 ;
+            sh:message "A concept belongs to exactly one taxonomy."@en ;
+            sh:minCount 1 ;
+            sh:path skos:inScheme ],
+        [ sh:message "A concept needs a preferred label."@en ;
+            sh:minCount 1 ;
+            sh:path skos:prefLabel ] ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "A concept that points to a class (rdfs:seeAlso) must point to a declared class."@en ;
+            sh:prefixes <http://www.zt4swe.io/o4de-shapes> ;
+            sh:select "PREFIX o4de: <http://www.zt4swe.io/o4de#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT $this ?c WHERE { $this rdfs:seeAlso ?c . FILTER(STRSTARTS(STR(?c), \"http://www.zt4swe.io/o4de#\")) FILTER NOT EXISTS { ?c a owl:Class } }" ],
+        [ a sh:SPARQLConstraint ;
+            sh:message "A broader concept must be in the same taxonomy."@en ;
+            sh:prefixes <http://www.zt4swe.io/o4de-shapes> ;
+            sh:select "PREFIX o4de: <http://www.zt4swe.io/o4de#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT $this ?b WHERE { $this skos:broader ?b ; skos:inScheme ?s . ?b skos:inScheme ?s2 . FILTER(?s != ?s2) }" ],
+        [ a sh:SPARQLConstraint ;
+            sh:message "A concept must have a broader concept or be the top concept of its taxonomy."@en ;
+            sh:prefixes <http://www.zt4swe.io/o4de-shapes> ;
+            sh:select "PREFIX o4de: <http://www.zt4swe.io/o4de#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT $this WHERE { FILTER NOT EXISTS { $this skos:broader ?b } FILTER NOT EXISTS { $this skos:topConceptOf ?s } }" ],
+        [ a sh:SPARQLConstraint ;
+            sh:message "A narrower concept must name this concept as its broader concept."@en ;
+            sh:prefixes <http://www.zt4swe.io/o4de-shapes> ;
+            sh:select "PREFIX o4de: <http://www.zt4swe.io/o4de#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT $this ?n WHERE { $this skos:narrower ?n . FILTER NOT EXISTS { ?n skos:broader $this } }" ] ;
+    sh:targetClass skos:Concept .
+
+o4de:CustomerRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Customer obey the T-Box restrictions"@en ;
+    sh:property [ sh:message "A Customer needs at least 1 value of 'belongs to segment'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:belongsToSegment ] ;
+    sh:targetClass o4de:Customer .
+
+o4de:DataCollectionLogRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Data Collection Log obey the T-Box restrictions"@en ;
+    sh:property [ sh:message "A Data Collection Log needs at least 1 value of 'collection date'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:collectionDate ],
+        [ sh:message "A Data Collection Log needs at least 1 value of 'collection method'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:collectionMethod ] ;
+    sh:targetClass o4de:DataCollectionLog .
+
+o4de:DatatypePropertyRangeShape a sh:NodeShape ;
+    rdfs:label "The range of a datatype property is an XML Schema datatype"@en ;
+    sh:property [ sh:in ( xsd:string xsd:int xsd:decimal xsd:date xsd:duration xsd:boolean ) ;
+            sh:message "The range of a datatype property must be one of the XML Schema datatypes used by O4DE."@en ;
+            sh:path rdfs:range ] ;
+    sh:target [ a sh:SPARQLTarget ;
+            sh:prefixes <http://www.zt4swe.io/o4de-shapes> ;
+            sh:select "SELECT ?this WHERE { ?this a owl:DatatypeProperty . FILTER(isIRI(?this) && STRSTARTS(STR(?this), \"http://www.zt4swe.io/o4de#\")) }" ] .
+
+o4de:DiscountRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Discount obey the T-Box restrictions"@en ;
+    sh:property [ sh:maxInclusive 100.0 ;
+            sh:message "The value of 'discount percentage' must lie between 0.0 and 100.0."@en ;
+            sh:minInclusive 0.0 ;
+            sh:path o4de:discountPercentage ] ;
+    sh:targetClass o4de:Discount .
+
+o4de:DomainAnalysisRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Domain Analysis obey the T-Box restrictions"@en ;
+    sh:property [ sh:message "A Domain Analysis needs a value of 'precedes'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:precedes ] ;
+    sh:targetClass o4de:DomainAnalysis .
+
+o4de:DomainDesignRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Domain Design obey the T-Box restrictions"@en ;
+    sh:property [ sh:message "A Domain Design needs a value of 'precedes'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:precedes ] ;
+    sh:targetClass o4de:DomainDesign .
+
+o4de:DomainEngineeringProcessRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Domain Engineering Process obey the T-Box restrictions"@en ;
+    sh:property [ sh:maxInclusive "5"^^xsd:int ;
+            sh:message "The value of 'has maturity level' must lie between 1 and 5."@en ;
+            sh:minInclusive "1"^^xsd:int ;
+            sh:path o4de:hasMaturityLevel ] ;
+    sh:targetClass o4de:DomainEngineeringProcess .
+
+o4de:EmployeeRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Employee obey the T-Box restrictions"@en ;
+    sh:property [ sh:message "A Employee needs a value of 'belongs to unit'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:belongsToUnit ],
+        [ sh:maxInclusive 5.0 ;
+            sh:message "The value of 'performance rating' must lie between 0.0 and 5.0."@en ;
+            sh:minInclusive 0.0 ;
+            sh:path o4de:performanceRating ],
+        [ sh:message "A Employee needs a value of 'holds position'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:holdsPosition ] ;
+    sh:targetClass o4de:Employee .
+
+o4de:IndividualShape a sh:NodeShape ;
+    rdfs:label "Every individual has a label and a declared class"@en ;
+    sh:property [ sh:message "An individual needs a human label."@en ;
+            sh:minCount 1 ;
+            sh:path rdfs:label ] ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "An individual may only be typed with classes declared in the T-Box."@en ;
+            sh:prefixes <http://www.zt4swe.io/o4de-shapes> ;
+            sh:select "PREFIX o4de: <http://www.zt4swe.io/o4de#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT $this ?c WHERE { $this a ?c . FILTER(STRSTARTS(STR(?c), \"http://www.zt4swe.io/o4de#\")) FILTER NOT EXISTS { ?c a owl:Class } }" ],
+        [ a sh:SPARQLConstraint ;
+            sh:message "The subject of an O4DE property must belong to the property's domain."@en ;
+            sh:prefixes <http://www.zt4swe.io/o4de-shapes> ;
+            sh:select "PREFIX o4de: <http://www.zt4swe.io/o4de#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT $this ?p ?d WHERE { $this ?p ?o . ?p rdfs:domain ?d . FILTER(STRSTARTS(STR(?p), \"http://www.zt4swe.io/o4de#\")) FILTER(?d != owl:Thing) FILTER( (isIRI(?d) && NOT EXISTS { $this a/rdfs:subClassOf* ?d }) || (isBlank(?d) && NOT EXISTS { ?d owl:unionOf/rdf:rest*/rdf:first ?m . $this a/rdfs:subClassOf* ?m }) ) }" ],
+        [ a sh:SPARQLConstraint ;
+            sh:message "The value of an O4DE object property must belong to the property's range."@en ;
+            sh:prefixes <http://www.zt4swe.io/o4de-shapes> ;
+            sh:select "PREFIX o4de: <http://www.zt4swe.io/o4de#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT $this ?p ?o WHERE { $this ?p ?o . ?p a owl:ObjectProperty ; rdfs:range ?r . FILTER(STRSTARTS(STR(?p), \"http://www.zt4swe.io/o4de#\")) FILTER NOT EXISTS { ?o a/rdfs:subClassOf* ?r } }" ],
+        [ a sh:SPARQLConstraint ;
+            sh:message "The value of an O4DE datatype property must have the datatype of the property's range."@en ;
+            sh:prefixes <http://www.zt4swe.io/o4de-shapes> ;
+            sh:select "PREFIX o4de: <http://www.zt4swe.io/o4de#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT $this ?p ?o WHERE { $this ?p ?o . ?p a owl:DatatypeProperty ; rdfs:range ?r . FILTER(STRSTARTS(STR(?p), \"http://www.zt4swe.io/o4de#\")) FILTER(!isLiteral(?o) || datatype(?o) != ?r) }" ] ;
+    sh:targetClass owl:NamedIndividual .
+
+o4de:MarketingCampaignRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Marketing Campaign obey the T-Box restrictions"@en ;
+    sh:property [ sh:message "A Marketing Campaign needs at least 1 value of 'campaign end date'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:campaignEndDate ],
+        [ sh:message "A Marketing Campaign needs at least 1 value of 'campaign start date'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:campaignStartDate ] ;
+    sh:targetClass o4de:MarketingCampaign .
+
+o4de:ObjectPropertyRangeShape a sh:NodeShape ;
+    rdfs:label "The range of an object property is a declared class"@en ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "The range of an object property must be a class declared in the T-Box."@en ;
+            sh:prefixes <http://www.zt4swe.io/o4de-shapes> ;
+            sh:select "PREFIX o4de: <http://www.zt4swe.io/o4de#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT $this ?r WHERE { $this rdfs:range ?r . FILTER NOT EXISTS { ?r a owl:Class } }" ],
+        [ a sh:SPARQLConstraint ;
+            sh:message "The domain of an object property must be a class declared in the T-Box (or owl:Thing)."@en ;
+            sh:prefixes <http://www.zt4swe.io/o4de-shapes> ;
+            sh:select "PREFIX o4de: <http://www.zt4swe.io/o4de#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT $this ?d WHERE { $this rdfs:domain ?d . FILTER(?d != owl:Thing) FILTER NOT EXISTS { ?d a owl:Class } }" ] ;
+    sh:target [ a sh:SPARQLTarget ;
+            sh:prefixes <http://www.zt4swe.io/o4de-shapes> ;
+            sh:select "SELECT ?this WHERE { ?this a owl:ObjectProperty . FILTER(isIRI(?this) && STRSTARTS(STR(?this), \"http://www.zt4swe.io/o4de#\")) }" ] .
+
+o4de:OntologyHeaderShape a sh:NodeShape ;
+    rdfs:label "Every ontology header carries its metadata"@en ;
+    sh:property [ sh:message "An ontology header needs this metadata item."@en ;
+            sh:minCount 1 ;
+            sh:path dcterms:title ],
+        [ sh:message "An ontology header needs this metadata item."@en ;
+            sh:minCount 1 ;
+            sh:path owl:versionInfo ],
+        [ sh:message "An ontology header needs a purpose statement of at least 120 characters in rdfs:comment."@en ;
+            sh:minCount 1 ;
+            sh:minLength 120 ;
+            sh:path rdfs:comment ],
+        [ sh:message "An ontology header needs this metadata item."@en ;
+            sh:minCount 1 ;
+            sh:path dcterms:license ],
+        [ sh:message "An ontology header needs this metadata item."@en ;
+            sh:minCount 1 ;
+            sh:path owl:versionIRI ],
+        [ sh:message "An ontology header needs this metadata item."@en ;
+            sh:minCount 1 ;
+            sh:path dcterms:created ],
+        [ sh:message "An ontology header needs this metadata item."@en ;
+            sh:minCount 1 ;
+            sh:path dcterms:modified ],
+        [ sh:message "An ontology header needs this metadata item."@en ;
+            sh:minCount 1 ;
+            sh:path dcterms:creator ] ;
+    sh:targetClass owl:Ontology .
+
+o4de:OperationalEnvironmentRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Operational Environment obey the T-Box restrictions"@en ;
+    sh:property [ sh:maxInclusive 100.0 ;
+            sh:message "The value of 'utilization rate' must lie between 0.0 and 100.0."@en ;
+            sh:minInclusive 0.0 ;
+            sh:path o4de:utilizationRate ] ;
+    sh:targetClass o4de:OperationalEnvironment .
+
+o4de:ProblemDescriptionRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Problem Description obey the T-Box restrictions"@en ;
+    sh:property [ sh:in ( "High" "Medium" "Low" ) ;
+            sh:message "The value of 'priority level' must be one of: High, Medium, Low."@en ;
+            sh:path o4de:priorityLevel ],
+        [ sh:in ( "Critical" "Major" "Minor" ) ;
+            sh:message "The value of 'problem severity' must be one of: Critical, Major, Minor."@en ;
+            sh:path o4de:problemSeverity ] ;
+    sh:targetClass o4de:ProblemDescription .
+
+o4de:ProcessActivityRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Process Activity obey the T-Box restrictions"@en ;
+    sh:property [ sh:message "A Process Activity needs at least 1 value of 'has duration'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:hasDuration ] ;
+    sh:targetClass o4de:ProcessActivity .
+
+o4de:ProductRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Product obey the T-Box restrictions"@en ;
+    sh:property [ sh:message "A Product needs a value of 'current stage'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:currentStage ],
+        [ sh:message "A Product needs a value of 'has lifecycle'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:hasLifecycle ],
+        [ sh:maxInclusive 10.0 ;
+            sh:message "The value of 'quality score' must lie between 0.0 and 10.0."@en ;
+            sh:minInclusive 0.0 ;
+            sh:path o4de:qualityScore ] ;
+    sh:targetClass o4de:Product .
+
+o4de:PropertyDocumentationShape a sh:NodeShape ;
+    rdfs:label "Every property has a label, a definition, a domain and a range"@en ;
+    sh:property [ sh:message "A property needs a human label (rdfs:label)."@en ;
+            sh:minCount 1 ;
+            sh:path rdfs:label ],
+        [ sh:message "A property needs a domain (rdfs:domain)."@en ;
+            sh:minCount 1 ;
+            sh:path rdfs:domain ],
+        [ sh:message "A property needs a range (rdfs:range)."@en ;
+            sh:minCount 1 ;
+            sh:path rdfs:range ],
+        [ sh:message "A property needs a definition (skos:definition) of at least 20 characters."@en ;
+            sh:minCount 1 ;
+            sh:minLength 20 ;
+            sh:path skos:definition ] ;
+    sh:target [ a sh:SPARQLTarget ;
+            sh:prefixes <http://www.zt4swe.io/o4de-shapes> ;
+            sh:select "SELECT ?this WHERE { ?this a ?t . VALUES ?t { owl:ObjectProperty owl:DatatypeProperty } FILTER(isIRI(?this) && STRSTARTS(STR(?this), \"http://www.zt4swe.io/o4de#\")) }" ] .
+
+o4de:QualityAttributeRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Quality Attribute obey the T-Box restrictions"@en ;
+    sh:property [ sh:message "A Quality Attribute needs at least 1 value of 'measured by'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:measuredBy ] ;
+    sh:targetClass o4de:QualityAttribute .
+
+o4de:SIPOCAnalysisRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of SIPOC Analysis obey the T-Box restrictions"@en ;
+    sh:property [ sh:message "A SIPOC Analysis needs at least 1 value of 'has supplier'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:hasSupplier ],
+        [ sh:message "A SIPOC Analysis needs at least 1 value of 'has output'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:hasOutput ],
+        [ sh:message "A SIPOC Analysis needs at least 1 value of 'has customer'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:hasCustomer ],
+        [ sh:message "A SIPOC Analysis needs at least 1 value of 'has input'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:hasInput ] ;
+    sh:targetClass o4de:SIPOCAnalysis .
+
+o4de:SWOTAnalysisRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of SWOT Analysis obey the T-Box restrictions"@en ;
+    sh:property [ sh:message "A SWOT Analysis needs at least 1 value of 'has strength'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:hasStrength ],
+        [ sh:message "A SWOT Analysis needs at least 1 value of 'has weakness'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:hasWeakness ],
+        [ sh:message "A SWOT Analysis needs at least 1 value of 'has threat'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:hasThreat ],
+        [ sh:message "A SWOT Analysis needs at least 1 value of 'has opportunity'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:hasOpportunity ] ;
+    sh:targetClass o4de:SWOTAnalysis .
+
+o4de:VendorRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Vendor obey the T-Box restrictions"@en ;
+    sh:property [ sh:message "A Vendor needs at least 1 value of 'vendor name'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:vendorName ] ;
+    sh:targetClass o4de:Vendor .
+
+o4de:VendorSolutionRestrictionShape a sh:NodeShape ;
+    rdfs:label "Individuals of Vendor Solution obey the T-Box restrictions"@en ;
+    sh:property [ sh:maxInclusive 5.0 ;
+            sh:message "The value of 'solution rating' must lie between 0.0 and 5.0."@en ;
+            sh:minInclusive 0.0 ;
+            sh:path o4de:solutionRating ],
+        [ sh:message "A Vendor Solution needs at least 1 value of 'provided by vendor'."@en ;
+            sh:minCount 1 ;
+            sh:path o4de:providedByVendor ] ;
+    sh:targetClass o4de:VendorSolution .
+
+<http://www.zt4swe.io/o4de-shapes> a owl:Ontology ;
+    dc:title "O4DE: Ontology for Domain Engineering (SHACL shapes)"@en ;
+    dcterms:created "2026-10-13"^^xsd:date ;
+    dcterms:creator "Yusuf Altunel" ;
+    dcterms:license <http://www.apache.org/licenses/LICENSE-2.0> ;
+    dcterms:modified "2026-10-13"^^xsd:date ;
+    dcterms:rights "Copyright 2026 Yusuf Altunel" ;
+    dcterms:title "O4DE: Ontology for Domain Engineering (SHACL shapes)"@en ;
+    rdfs:comment "These shapes check that the O4DE T-Box and A-Box are documented and well formed, and that example and user data follow the T-Box in a closed-world way: every term has a label and a definition, every property has a domain and range, taxonomies are connected trees, and individuals obey the domain, range, cardinality and value restrictions that the T-Box states for OWL reasoners. Validate the T-Box and A-Box together as one data graph with SHACL advanced features switched on; the gate in 05-gates/o4de_gate_v1_0_0.py shows how."@en ;
+    owl:versionIRI <http://www.zt4swe.io/o4de-shapes/1.0.0> ;
+    owl:versionInfo "1.0.0" ;
+    sh:declare [ sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+            sh:prefix "rdf" ],
+        [ sh:namespace "http://www.zt4swe.io/o4de#"^^xsd:anyURI ;
+            sh:prefix "o4de" ],
+        [ sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ;
+            sh:prefix "xsd" ],
+        [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ;
+            sh:prefix "owl" ],
+        [ sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ;
+            sh:prefix "skos" ] .
+

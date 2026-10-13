@@ -1,21 +1,46 @@
-# O4DE — Ontology for Domain Engineering
+# O4DE: Ontology for Domain Engineering
 
-Collection point for the domain engineering material of the Owner (Yusuf Altunel), pushed as received so that it can be processed and consolidated here. Nothing in this repository has been edited, repaired or merged yet; every file is as it was received.
+O4DE is a formal ontology that gives analysts and architects one shared, machine-checkable vocabulary for **domain engineering**: the activities, assets, features and variability of the discipline, the processes, roles, rules and metrics that govern it, and the business context it works in (customers, products, channels, vendors, organization and agility).
 
-## Contents
+Current version: **1.0.0** (2026-10-13). Licence: Apache License 2.0 (`LICENSE`). Owner: Yusuf Altunel.
 
-| Folder | What it holds | Status found |
-|---|---|---|
-| `01-framework-and-documentation/` | Domain Engineering Framework and Documentation: a documentation template (sections 2 to 9, including 8 Application Engineering Guidelines), an ontology (137 named classes, 106 with definitions, CC BY 4.0 stated in the file), competency questions, and a reference on the metadefinition of ontology and taxonomy. Rebuilt from the Owner's conversation of 2025-09-25 because the original files were not stored. | Ontology parses |
-| `02-ontology-v5.2/` | Domain Engineering Ontology v5.2.0 (enhanced) with its summaries and checklist. 206 classes, 29 with definitions; its own statistics (513 classes, 100 percent definitions) do not match the file. Names "Domain Engineering Consortium" as creator; CC BY 4.0 stated in the file. An enterprise business-domain ontology rather than a domain-engineering-process ontology. | Parses |
-| `03-ai4se-material/` | The Domain Engineering module of the AI4SE ontology package (20 classes, announced as 30, no licence statement); book chapter 2, whose section 4 describes AI for business domain engineering; a comparison note; and the AI4SE Enterprise Edition v4.5 with its release notes (3,142 declared classes, 16 definitions, which includes a 30-class Domain Engineering module according to its notes). | Module has a syntax error at line 167; Enterprise Edition does not parse |
-| `04-owner-extracts/` | Section 2.1 (Domain Engineering) of the Owner's UAISE draft; headings of the Owner's 2013 thesis that bear on domain engineering, product lines and variant generation (headings only, body text not included). | Text |
+## What is in the package
 
-`INVENTORY.tsv` lists every file with size, SHA-256 and the Turtle parse status measured on receipt. `MANIFEST_SHA256.txt` is the checksum list.
+| Folder or file | What it is |
+|---|---|
+| `01-ontologies/o4de_tbox_v1_0_0.ttl` | The T-Box: every class, property and axiom, each with a label and a definition. |
+| `01-ontologies/o4de_abox_v1_0_0.ttl` | The A-Box: twelve SKOS taxonomies that mirror the class hierarchies, and illustrative example individuals (invented, not sourced facts). |
+| `02-shacl-safeguards/o4de_shacl_v1_0_0.ttl` | The shapes: they check documentation, taxonomy structure, domain, range, cardinality and value restrictions on data written with the T-Box. |
+| `03-tooling/o4de_hermit_check_v1_0_0.py` | Consistency check with the HermiT reasoner. |
+| `04-documentation/` | The documentation template, the 27 competency questions with SPARQL, the measured comparison with Domain Engineering Ontology v5.2, the text of the meta-definition the ontology follows, and the validation record (`O4DE_Validation_Record_v1_0_0.md`). |
+| `05-gates/o4de_gate_v1_0_0.py` | The release gate: runs every check below and exits non-zero if one fails. |
+| `vendored-received/` | The domain engineering material that reached this repository before the package was built, kept byte for byte (see its `RECEIPT_NOTE_v1_0_0.md`): the first framework files, Domain Engineering Ontology v5.2, the AI4SE material and two extracts from the owner's writing. |
+| `fixtures/` | Deliberately wrong inputs. The gate must refuse each one; a gate that cannot fail verifies nothing. |
 
-## Notes for consolidation
+The package follows the OE Operating Discipline rule of **one T-Box, one A-Box and one SHACL file**, each with one ontology header and one version.
 
-- All material is AI-assisted or an unreviewed draft of the Owner; the works cited inside it have not been verified.
-- The files that do not parse were left unrepaired on purpose; repair is part of consolidation.
-- The standard texts for domain engineering (ISO/IEC 26550:2015 and related) are not public and are not used; the sources named in the conversation (feature-oriented domain analysis, product line engineering) are not recorded in the files.
-- The repository's `LICENSE` is Apache 2.0. The files carry their own statements (CC BY 4.0 in two ontologies, none elsewhere); how they are to be licensed here is for the Owner to decide.
+## At a glance
+
+137 classes, 103 object properties and 84 datatype properties; 12 taxonomies with 218 concepts; 93 example individuals; 27 competency questions. The gate prints these counts from the files, so they can be reproduced:
+
+```
+pip install rdflib pyshacl
+python3 05-gates/o4de_gate_v1_0_0.py .
+```
+
+## Checks run on 1.0.0
+
+- The gate passes: one file per role, no mixing of roles, every term used is declared, the shapes accept the T-Box and A-Box together, all 27 competency questions return rows, and all 6 negative fixtures are refused.
+- HermiT finds the ontology consistent with no unsatisfiable class, and finds a deliberately contradictory input inconsistent (`pip install owlready2`, Java needed). HermiT has no `xsd:date` or `xsd:duration` in its datatype map, so it runs on a copy in which those two are replaced by `xsd:string`; the shipped files keep the real datatypes.
+
+## Origin and scope
+
+O4DE 1.0.0 formalises the domain engineering framework worked out in a series of working sessions: the documentation template (`04-documentation/O4DE_Documentation_Template_v1_0_0.md`) and the ontology were rebuilt from those sessions and then completed here: 223 missing definitions were written, and the shapes found and fixed two example individuals without a required duration.
+
+It does **not** yet contain the earlier Domain Engineering Ontology v5.2. The comparison in `04-documentation/O4DE_Fit_Gap_Domain_Engineering_Ontology_v5_2_v1_0_0.md` shows that the two are complementary (15 shared classes) and lists what absorbing v5.2 would take, including one decision about its authorship and licence that only the owner can make.
+
+## Using it
+
+- Namespace: `http://www.zt4swe.io/o4de#`. The T-Box ontology IRI is `http://www.zt4swe.io/o4de`; the A-Box imports it.
+- Open the T-Box in Protégé, load both files into a triple store, or query them with the SPARQL in the competency questions.
+- Validate your own data: put it in a file that uses the O4DE terms, load it together with the T-Box, and run the shapes with SHACL advanced features on (see the gate for a working call).

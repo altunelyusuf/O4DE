@@ -1,0 +1,8 @@
+# EXPECT: broader concept or be the top concept
+# A taxonomy concept that has neither a broader concept nor a top-concept link.
+@prefix o4de: <http://www.zt4swe.io/o4de#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+o4de:OrphanConcept a skos:Concept ; skos:prefLabel "Orphan"@en ; skos:inScheme o4de:DomainEngineeringTaxonomy .
