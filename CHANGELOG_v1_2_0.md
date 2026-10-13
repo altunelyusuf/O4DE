@@ -1,5 +1,25 @@
 # O4DE change history
 
+## 1.2.0 (2026-10-13), AI-assisted practice, business analysis and variation
+
+Predecessor: 1.1.0. The remaining received material that bears on domain engineering is taken over: the Domain Engineering module of the AI4SE ontology package, section 2.1 of the owner's UAISE draft, and the concepts named in the headings of the owner's 2013 thesis. The decisions are in `04-documentation/O4DE_Consolidation_Record_AI4SE_UAISE_Thesis_v1_2_0.md`.
+
+Added:
+- 52 classes (678 in all): 15 from the AI4SE module (AI-assisted domain discovery, single-agent and multi-agent domain engineering, domain ontology, domain knowledge graph, domain conceptualization, domain analysis techniques and their validation, the domain engineering tool, the OWL reasoner, prompt templates), 8 from the UAISE section (process phase, domain engineering phase, business analysis, business process modeling, business process model, business architecture, conceptual model, conceptual ERD) and 29 from the thesis headings (variation capacity and its kinds, eleven properties of variation capacity, the variation capacity metric, optional, exclusive and dependent elements, the variant generation process and its five steps).
+- 3 object properties (has key process, produces artifact, is basis for ontology) and 7 restrictions that state what the domain engineering phase includes (975 object properties and 152 restrictions in all).
+- 2 taxonomies and 68 concepts (15 taxonomies and 306 concepts in all): the *AI-Assisted Domain Engineering Taxonomy* with the techniques, formats, query languages, reasoners and validation methods that the AI4SE module names, and the *Variation and Variant Generation Taxonomy*, which follows the heading numbers of the thesis.
+- 3 example individuals (126 in all): the e-commerce and the financial services domain ontology of the AI4SE module and a conceptual ERD on which the first is built.
+- A module resource at the former IRI of the AI4SE module with its version, creator and date. Every class taken over carries its source in `dcterms:source`.
+- 7 competency questions (47 in all).
+
+Changed:
+- Four existing classes gain a super-class: ontology editor and reasoner now fall under domain engineering tool (and reasoner under tool through it), and scalability under variation capacity property.
+- The purpose statement and the description of the A-Box mention the new content; the version of every file is 1.2.0.
+
+Not taken over, and why (details in the consolidation record): the performance claims of the AI4SE module (accuracy ranges, time savings), which nothing in the file supports; its top class (its name is already a concept of the A-Box, and its parent is declared nowhere), its three restrictions, its book references and its class-level property assertions, whose values are kept as taxonomy concepts; the BPMN link of the UAISE section, which the extract gives without a namespace; the system analysis and design chapters of the thesis, which describe its own tool; the AI4SE Enterprise Edition v4.5, which is outside the scope of this package.
+
+Known limits: the definitions of the thesis classes are general readings of headings, not the thesis text, and say so in a scope note; the received AI4SE module file has one syntax error (`:FaCT++`, which Turtle cannot read as a name) that was repaired in a working copy, and the received file is unchanged.
+
 ## 1.1.0 (2026-10-13), consolidation of Domain Engineering Ontology v5.2
 
 Predecessor: 1.0.0 of this repository. The earlier Domain Engineering Ontology v5.2, which 1.0.0 only compared with O4DE, is now part of the package as a module of the three O4DE files. The full account of the decisions is in `04-documentation/O4DE_Consolidation_Record_Domain_Engineering_Ontology_v5_2_v1_1_0.md`.

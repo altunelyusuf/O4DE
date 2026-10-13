@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""o4de_gate_v1_1_0.py -- the release gate of the O4DE package.
+"""o4de_gate_v1_2_0.py -- the release gate of the O4DE package.
 
-Run from the package root:   python3 05-gates/o4de_gate_v1_1_0.py .
+Run from the package root:   python3 05-gates/o4de_gate_v1_2_0.py .
 
 It reads the package, never trusts a count written in a document, and fails with exit 1 on the first broken property:
   1. file structure: exactly one T-Box, one A-Box and one SHACL file (highest version of each), named <name>_<role>_v<M>_<m>_<p>.ttl

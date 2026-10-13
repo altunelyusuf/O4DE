@@ -1,7 +1,7 @@
-# O4DE competency questions, version 1.1.0
+# O4DE competency questions, version 1.2.0
 
 Each question is paired with a SPARQL query. Every query declares the prefix `PREFIX : <http://www.zt4swe.io/o4de#>` (with the usual rdf, rdfs, owl, skos and xsd prefixes; shown once here, left out of the blocks below) and must return at least one row when run against the T-Box and A-Box together; the gate script in `05-gates` runs them all.
-The questions are grouped by the part of the ontology they test. A longer list drafted in an earlier working session could not be recovered; the first 27 questions are those of version 1.0.0 and the last group was added in version 1.1.0 for the enterprise domain structure.
+The questions are grouped by the part of the ontology they test. A longer list drafted in an earlier working session could not be recovered; the first 27 questions are those of version 1.0.0, the next 13 were added in version 1.1.0 for the enterprise domain structure and the last group in version 1.2.0.
 
 ## Domain engineering core
 
@@ -251,4 +251,48 @@ SELECT ?class ?original WHERE { ?class rdfs:seeAlso ?original . FILTER(STRSTARTS
 
 ```sparql
 SELECT ?class ?twin WHERE { ?class owl:equivalentClass ?twin . }
+```
+
+## AI-assisted practice, business analysis and variation
+
+**CQ41. Which techniques of domain analysis are defined, and which are kinds of another technique?**
+
+```sparql
+SELECT ?technique ?kindOf WHERE { ?technique rdfs:subClassOf ?kindOf . ?kindOf rdfs:subClassOf* :DomainAnalysisTechnique . }
+```
+
+**CQ42. Which example domain ontologies are in the package?**
+
+```sparql
+SELECT ?ontology ?label WHERE { ?ontology a :DomainOntology ; rdfs:label ?label . }
+```
+
+**CQ43. Which key processes and artifacts belong to the domain engineering phase?**
+
+```sparql
+SELECT ?relation ?part WHERE { :DomainEngineeringPhase rdfs:subClassOf [ a owl:Restriction ; owl:onProperty ?relation ; owl:someValuesFrom ?part ] . }
+```
+
+**CQ44. Which quality attributes make up the variation capacity of a component?**
+
+```sparql
+SELECT ?attribute WHERE { ?attribute rdfs:subClassOf :VariationCapacityProperty . }
+```
+
+**CQ45. In what order are the steps of the variant generation process?**
+
+```sparql
+SELECT ?notation ?step WHERE { ?concept skos:broader :VariantGenerationProcessConcept ; skos:notation ?notation ; skos:prefLabel ?step . } ORDER BY ?notation
+```
+
+**CQ46. Which OWL reasoners and which methods of validating a domain model does the AI-assisted taxonomy list?**
+
+```sparql
+SELECT ?kind ?item WHERE { ?concept skos:broader ?group ; skos:prefLabel ?item . ?group skos:prefLabel ?kind . FILTER(?kind IN ("OWL Reasoners"@en, "Domain Model Validation Methods"@en)) }
+```
+
+**CQ47. Which conceptual entity-relationship diagrams are a basis for which domain ontology?**
+
+```sparql
+SELECT ?erd ?ontology WHERE { ?erd :isBasisForOntology ?ontology . }
 ```

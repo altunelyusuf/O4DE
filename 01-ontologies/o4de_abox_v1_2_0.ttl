@@ -1,5 +1,5 @@
 # O4DE: Ontology for Domain Engineering - A-Box
-# Version 1.1.0 (2026-10-13). Copyright 2026 Yusuf Altunel. Licensed under the Apache License, Version 2.0.
+# Version 1.2.0 (2026-10-13). Copyright 2026 Yusuf Altunel. Licensed under the Apache License, Version 2.0.
 # Role: A-Box. Taxonomies and example individuals only; no class or property declarations.
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -64,6 +64,12 @@ o4de:ECommerceAppPortfolio a owl:NamedIndividual,
     o4de:applicationCount "12"^^xsd:int ;
     o4de:includesApplication o4de:AuthenticationComponent .
 
+o4de:ECommerceConceptualERD a owl:NamedIndividual,
+        o4de:ConceptualERD ;
+    rdfs:label "E-Commerce Conceptual ERD"@en ;
+    o4de:hasDescription "Conceptual entity-relationship diagram of customers, products, orders, payments and shipments, on which the e-commerce domain ontology is built" ;
+    o4de:isBasisForOntology o4de:ECommerceDomainOntology .
+
 o4de:ECommerceProductPortfolio a owl:NamedIndividual,
         o4de:ProductPortfolio ;
     rdfs:label "E-Commerce Product Portfolio"@en ;
@@ -95,6 +101,11 @@ o4de:ExampleCommercePlatform a owl:NamedIndividual,
     o4de:solutionMaturity "Mature" ;
     o4de:solutionRating 4.5 ;
     o4de:supportsCapability o4de:PaymentProcessingCapability .
+
+o4de:FinancialServicesDomainOntology a owl:NamedIndividual,
+        o4de:DomainOntology ;
+    rdfs:label "Financial Services Domain Ontology"@en ;
+    o4de:hasDescription "Banking and financial services ontology with regulatory compliance support" .
 
 o4de:HRManagementProcess a owl:NamedIndividual,
         o4de:SupportingProcess ;
@@ -249,15 +260,15 @@ o4de:WarehousePickingOptimization a owl:NamedIndividual,
     dc:title "O4DE: Ontology for Domain Engineering (A-Box)"@en ;
     dcterms:created "2026-10-13"^^xsd:date ;
     dcterms:creator "Yusuf Altunel" ;
-    dcterms:description "Thirteen SKOS taxonomies and illustrative example individuals for the Ontology for Domain Engineering."@en ;
+    dcterms:description "Fifteen SKOS taxonomies and illustrative example individuals for the Ontology for Domain Engineering."@en ;
     dcterms:license <http://www.apache.org/licenses/LICENSE-2.0> ;
     dcterms:modified "2026-10-13"^^xsd:date ;
     dcterms:rights "Copyright 2026 Yusuf Altunel" ;
     dcterms:title "O4DE: Ontology for Domain Engineering (A-Box)"@en ;
-    rdfs:comment "This file holds the individuals of O4DE: the thirteen SKOS taxonomies that classify domain engineering and business concepts, and a small set of illustrative example individuals, among them the Fashion Retail case, that show how the T-Box is used. Examples are invented for teaching and are not sourced facts. Counts are reproduced by the gate script in 05-gates."@en ;
+    rdfs:comment "This file holds the individuals of O4DE: the fifteen SKOS taxonomies that classify domain engineering and business concepts, and a small set of illustrative example individuals, among them the Fashion Retail case, that show how the T-Box is used. Examples are invented for teaching and are not sourced facts. Counts are reproduced by the gate script in 05-gates."@en ;
     owl:imports <http://www.zt4swe.io/o4de> ;
-    owl:versionIRI <http://www.zt4swe.io/o4de-abox/1.1.0> ;
-    owl:versionInfo "1.1.0" .
+    owl:versionIRI <http://www.zt4swe.io/o4de-abox/1.2.0> ;
+    owl:versionInfo "1.2.0" .
 
 o4de:AIIntegration a owl:NamedIndividual,
         o4de:Opportunity ;
@@ -281,16 +292,51 @@ o4de:AdaptabilityConcept a skos:Concept ;
     skos:inScheme o4de:OrganizationalTaxonomy ;
     skos:prefLabel "Adaptability"@en .
 
+o4de:AdaptabilityVariationAndVariantGenerationConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Adaptability ;
+    skos:broader o4de:PropertiesOfVariationCapacityConcept ;
+    skos:definition "The quality attribute of adaptability."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.3.1" ;
+    skos:prefLabel "Adaptability"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:AlternativeSolutionConcept a skos:Concept ;
     rdfs:seeAlso o4de:AlternativeSolution ;
     skos:broader o4de:VendorSolutionsConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Alternative Solution"@en .
 
+o4de:AnalysisConcept a skos:Concept ;
+    rdfs:seeAlso o4de:VariantAnalysis ;
+    skos:broader o4de:VariantGenerationProcessConcept ;
+    skos:definition "The step in which the specification is analysed."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.2.9.2" ;
+    skos:prefLabel "Analysis"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:AnalysisProcessConcept a skos:Concept ;
     skos:broader o4de:CoreProcessesConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Analysis Process"@en .
+
+o4de:AnalysisVariationAndVariantGenerationConcept a skos:Concept ;
+    skos:broader o4de:ComponentBasedSoftwareDevelopmentProcessesConcept ;
+    skos:definition "Analysing the requirements and the domain for component-based development."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "2.4.5.3" ;
+    skos:prefLabel "Analysis"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:ApplicationConcept a skos:Concept ;
+    rdfs:seeAlso o4de:VariantApplication ;
+    skos:broader o4de:VariantGenerationProcessConcept ;
+    skos:definition "The step in which the transformation is applied."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.2.9.4" ;
+    skos:prefLabel "Application"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:ApplicationPortfolioConcept a skos:Concept ;
     rdfs:seeAlso o4de:ApplicationPortfolio ;
@@ -457,6 +503,13 @@ o4de:CloudMigration a owl:NamedIndividual,
     o4de:likelihoodScore 0.8 ;
     o4de:opportunityValue 750000.00 .
 
+o4de:CompetencyQuestionsConcept a skos:Concept ;
+    rdfs:seeAlso o4de:CompetencyQuestionValidation ;
+    skos:broader o4de:DomainModelValidationMethodsConcept ;
+    skos:definition "Checking that the model can answer the questions it was built for."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "Competency Questions"@en .
+
 o4de:CompetitiveAnalysisConcept a skos:Concept ;
     skos:broader o4de:DomainAnalysisConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
@@ -486,6 +539,22 @@ o4de:ComplianceIssuesConcept a skos:Concept ;
     skos:broader o4de:BusinessProblemsConcept ;
     skos:inScheme o4de:ProblemClassificationTaxonomy ;
     skos:prefLabel "Compliance Issues"@en .
+
+o4de:ComponentBasedArchitectureConcept a skos:Concept ;
+    skos:broader o4de:ComponentBasedSoftwareDevelopmentProcessesConcept ;
+    skos:definition "The architecture of a system assembled from components."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "2.4.5.5" ;
+    skos:prefLabel "Component-Based Architecture"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:ComponentBasedDesignConcept a skos:Concept ;
+    skos:broader o4de:ComponentBasedSoftwareDevelopmentProcessesConcept ;
+    skos:definition "The design of a system assembled from components."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "2.4.5.6" ;
+    skos:prefLabel "Component-Based Design"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:ComponentConcept a skos:Concept ;
     rdfs:seeAlso o4de:Component ;
@@ -518,6 +587,15 @@ o4de:ConditionalCompilationConcept a skos:Concept ;
     skos:inScheme o4de:VariabilityTaxonomy ;
     skos:prefLabel "Conditional Compilation"@en .
 
+o4de:ConfigurabilityConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Configurability ;
+    skos:broader o4de:PropertiesOfVariationCapacityConcept ;
+    skos:definition "The quality attribute of configurability."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.3.2" ;
+    skos:prefLabel "Configurability"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:ConfigurationManagementConcept a skos:Concept ;
     skos:broader o4de:SupportingProcessesConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
@@ -527,6 +605,13 @@ o4de:ConfigurationVariabilityConcept a skos:Concept ;
     skos:broader o4de:VariabilityTypesConcept ;
     skos:inScheme o4de:VariabilityTaxonomy ;
     skos:prefLabel "Configuration Variability"@en .
+
+o4de:ConsistencyCheckingConcept a skos:Concept ;
+    rdfs:seeAlso o4de:DomainModelValidation ;
+    skos:broader o4de:DomainModelValidationMethodsConcept ;
+    skos:definition "Checking with a reasoner that the model contains no contradiction."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "Consistency Checking"@en .
 
 o4de:ConstraintRulesConcept a skos:Concept ;
     skos:broader o4de:BusinessRuleTypesConcept ;
@@ -570,6 +655,15 @@ o4de:CustomersConcept a skos:Concept ;
     skos:broader o4de:SIPOCAnalysisConcept ;
     skos:inScheme o4de:StrategicAnalysisTaxonomy ;
     skos:prefLabel "Customers"@en .
+
+o4de:CustomisabilityConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Customisability ;
+    skos:broader o4de:PropertiesOfVariationCapacityConcept ;
+    skos:definition "The quality attribute of customisability."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.3.3" ;
+    skos:prefLabel "Customisability"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:CyberSecurityThreats a owl:NamedIndividual,
         o4de:Threat ;
@@ -635,6 +729,13 @@ o4de:DepartmentHeadPosition a owl:NamedIndividual,
         o4de:Position ;
     rdfs:label "Department Head Position"@en ;
     o4de:positionLevel "Executive" .
+
+o4de:DependencyParsingConcept a skos:Concept ;
+    rdfs:seeAlso o4de:RelationshipMapping ;
+    skos:broader o4de:NaturalLanguageProcessingTechniquesConcept ;
+    skos:definition "Analysing the grammatical links between the words of a sentence, used to find relationships."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "Dependency Parsing"@en .
 
 o4de:DesignDocumentsConcept a skos:Concept ;
     skos:broader o4de:DocumentationAssetsConcept ;
@@ -774,6 +875,13 @@ o4de:DomainModelsConcept a skos:Concept ;
     skos:inScheme o4de:AssetClassificationTaxonomy ;
     skos:prefLabel "Domain Models"@en .
 
+o4de:DomainSpecificLanguageAIAssistedDomainEngineeringConcept a skos:Concept ;
+    rdfs:seeAlso o4de:DomainSpecificLanguage ;
+    skos:broader o4de:DomainModelRepresentationFormatsConcept ;
+    skos:definition "A language tailored to a particular problem domain."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "Domain-Specific Language"@en .
+
 o4de:DomainSpecificLanguageConcept a skos:Concept ;
     rdfs:seeAlso o4de:DomainSpecificLanguage ;
     skos:broader o4de:DomainAssetsConcept ;
@@ -796,10 +904,49 @@ o4de:ECommerceDomain a owl:NamedIndividual,
     o4de:definesBusinessProcess o4de:OrderProcessingProcess ;
     o4de:hasDescription "Business environment for e-commerce: online retail, payment processing and customer management" .
 
+o4de:ECommerceDomainOntology a owl:NamedIndividual,
+        o4de:DomainOntology ;
+    rdfs:label "E-Commerce Domain Ontology"@en ;
+    o4de:hasDescription "Formal ontology for the e-commerce domain, covering products, orders, customers, payments and shipments" .
+
 o4de:ECommerceOperationalArch a owl:NamedIndividual,
         o4de:OperationalArchitecture ;
     rdfs:label "E-Commerce Operational Architecture"@en ;
     o4de:hasDescription "Operational architecture supporting e-commerce business processes" .
+
+o4de:ELKConcept a skos:Concept ;
+    rdfs:seeAlso o4de:OWLReasoner ;
+    skos:broader o4de:OWLReasonersConcept ;
+    skos:definition "A reasoner for the EL profile of OWL 2."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "ELK"@en .
+
+o4de:EffectOfDependentElementsConcept a skos:Concept ;
+    rdfs:seeAlso o4de:DependentElement ;
+    skos:broader o4de:VariationCapacityMetricConcept ;
+    skos:definition "The effect of dependent elements on variation capacity."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.4.3" ;
+    skos:prefLabel "Effect of Dependent Elements"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:EffectOfExclusiveElementsConcept a skos:Concept ;
+    rdfs:seeAlso o4de:ExclusiveElement ;
+    skos:broader o4de:VariationCapacityMetricConcept ;
+    skos:definition "The effect of exclusive elements on variation capacity."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.4.2" ;
+    skos:prefLabel "Effect of Exclusive Elements"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:EffectOfOptionalElementsConcept a skos:Concept ;
+    rdfs:seeAlso o4de:OptionalElement ;
+    skos:broader o4de:VariationCapacityMetricConcept ;
+    skos:definition "The effect of optional elements on variation capacity."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.4.1" ;
+    skos:prefLabel "Effect of Optional Elements"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:EmployeeConcept a skos:Concept ;
     rdfs:seeAlso o4de:Employee ;
@@ -807,10 +954,42 @@ o4de:EmployeeConcept a skos:Concept ;
     skos:inScheme o4de:OrganizationalTaxonomy ;
     skos:prefLabel "Employee"@en .
 
+o4de:EntityRelationshipDiagramConcept a skos:Concept ;
+    rdfs:seeAlso o4de:ConceptualERD ;
+    skos:broader o4de:DomainModelRepresentationFormatsConcept ;
+    skos:definition "A diagram of entities and the relationships between them."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "Entity-Relationship Diagram"@en .
+
+o4de:EstimationConcept a skos:Concept ;
+    skos:broader o4de:ComponentBasedSoftwareDevelopmentProcessesConcept ;
+    skos:definition "Estimating the effort of component-based development."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "2.4.5.8" ;
+    skos:prefLabel "Estimation"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:EvaluationConcept a skos:Concept ;
+    skos:broader o4de:ComponentBasedSoftwareDevelopmentProcessesConcept ;
+    skos:definition "Evaluating candidate components."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "2.4.5.4" ;
+    skos:prefLabel "Evaluation"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:EvolutionProcessConcept a skos:Concept ;
     skos:broader o4de:CoreProcessesConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Evolution Process"@en .
+
+o4de:EvolvabilityConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Evolvability ;
+    skos:broader o4de:PropertiesOfVariationCapacityConcept ;
+    skos:definition "The quality attribute of evolvability."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.3.4" ;
+    skos:prefLabel "Evolvability"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:ExampleCloudVendor a owl:NamedIndividual,
         o4de:Vendor ;
@@ -864,10 +1043,26 @@ o4de:ExistingCustomerBase a owl:NamedIndividual,
     rdfs:label "Existing Customer Base"@en ;
     o4de:strengthScore 4.0 .
 
+o4de:ExtensibilityConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Extensibility ;
+    skos:broader o4de:PropertiesOfVariationCapacityConcept ;
+    skos:definition "The quality attribute of extensibility."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.3.5" ;
+    skos:prefLabel "Extensibility"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:FODAMethod a owl:NamedIndividual,
         o4de:FODA ;
     rdfs:label "FODA Method"@en ;
     o4de:hasDescription "Method for identifying and organizing domain features" .
+
+o4de:FaCTConcept a skos:Concept ;
+    rdfs:seeAlso o4de:OWLReasoner ;
+    skos:broader o4de:OWLReasonersConcept ;
+    skos:definition "An OWL 2 reasoner based on tableau methods."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "FaCT++"@en .
 
 o4de:FacilitiesManagementConcept a skos:Concept ;
     skos:broader o4de:SupportingProcessesBPConcept ;
@@ -906,6 +1101,14 @@ o4de:FlatStructureConcept a skos:Concept ;
     skos:inScheme o4de:OrganizationalTaxonomy ;
     skos:prefLabel "Flat Structure"@en .
 
+o4de:FractalStructureConcept a skos:Concept ;
+    skos:broader o4de:ComponentBasedSoftwareDevelopmentProcessesConcept ;
+    skos:definition "The structure in which the development process repeats at each level of components."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "2.4.5.1" ;
+    skos:prefLabel "Fractal Structure"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:FrameworkConcept a skos:Concept ;
     rdfs:seeAlso o4de:Framework ;
     skos:broader o4de:DomainAssetsConcept ;
@@ -926,6 +1129,15 @@ o4de:FunctionalVariabilityConcept a skos:Concept ;
     skos:broader o4de:VariabilityTypesConcept ;
     skos:inScheme o4de:VariabilityTaxonomy ;
     skos:prefLabel "Functional Variability"@en .
+
+o4de:FunctionalVariationConcept a skos:Concept ;
+    rdfs:seeAlso o4de:FunctionalVariation ;
+    skos:broader o4de:TypesOfVariationConcept ;
+    skos:definition "Variation in what a product does."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.2.3" ;
+    skos:prefLabel "Functional Variation"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:GovernanceConcept a skos:Concept ;
     skos:broader o4de:ManagementProcessesConcept ;
@@ -994,6 +1206,13 @@ o4de:GuidelinesConcept a skos:Concept ;
     skos:inScheme o4de:AssetClassificationTaxonomy ;
     skos:prefLabel "Guidelines"@en .
 
+o4de:HermiTConcept a skos:Concept ;
+    rdfs:seeAlso o4de:OWLReasoner ;
+    skos:broader o4de:OWLReasonersConcept ;
+    skos:definition "An OWL 2 reasoner based on the hypertableau calculus."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "HermiT"@en .
+
 o4de:HierarchicalStructureConcept a skos:Concept ;
     skos:broader o4de:OrganizationalStructureConcept ;
     skos:inScheme o4de:OrganizationalTaxonomy ;
@@ -1013,6 +1232,13 @@ o4de:ImplementationProcessConcept a skos:Concept ;
     skos:broader o4de:CoreProcessesConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Implementation Process"@en .
+
+o4de:InformationExtractionConcept a skos:Concept ;
+    rdfs:seeAlso o4de:ConceptExtraction ;
+    skos:broader o4de:LanguageModelTechniquesConcept ;
+    skos:definition "Drawing structured facts out of unstructured text."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "Information Extraction"@en .
 
 o4de:InheritanceConcept a skos:Concept ;
     skos:broader o4de:VariabilityMechanismsConcept ;
@@ -1069,10 +1295,24 @@ o4de:InventoryTrackingComponent a owl:NamedIndividual,
     o4de:isReusable true ;
     o4de:reuseCount 12 .
 
+o4de:JSONLDConcept a skos:Concept ;
+    rdfs:seeAlso o4de:DomainOntology ;
+    skos:broader o4de:OntologySerializationFormatsConcept ;
+    skos:definition "A JSON syntax for RDF graphs."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "JSON-LD"@en .
+
 o4de:KanbanConcept a skos:Concept ;
     skos:broader o4de:AgileMethodologiesConcept ;
     skos:inScheme o4de:OrganizationalTaxonomy ;
     skos:prefLabel "Kanban"@en .
+
+o4de:KeyphraseExtractionConcept a skos:Concept ;
+    rdfs:seeAlso o4de:ConceptExtraction ;
+    skos:broader o4de:NaturalLanguageProcessingTechniquesConcept ;
+    skos:definition "Finding the phrases that carry the main topics of a text, used to extract concepts."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "Keyphrase Extraction"@en .
 
 o4de:KnowledgeManagementConcept a skos:Concept ;
     skos:broader o4de:SupportingProcessesConcept ;
@@ -1178,10 +1418,35 @@ o4de:MetricsConcept a skos:Concept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Metrics"@en .
 
+o4de:ModifiabilityConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Modifiability ;
+    skos:broader o4de:PropertiesOfVariationCapacityConcept ;
+    skos:definition "The quality attribute of modifiability."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.3.6" ;
+    skos:prefLabel "Modifiability"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:NamedEntityRecognitionConcept a skos:Concept ;
+    rdfs:seeAlso o4de:ConceptExtraction ;
+    skos:broader o4de:NaturalLanguageProcessingTechniquesConcept ;
+    skos:definition "Finding and classifying the names of things in text, used to extract concepts."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "Named Entity Recognition"@en .
+
 o4de:NetworkStructureConcept a skos:Concept ;
     skos:broader o4de:OrganizationalStructureConcept ;
     skos:inScheme o4de:OrganizationalTaxonomy ;
     skos:prefLabel "Network Structure"@en .
+
+o4de:NonFunctionalVariationConcept a skos:Concept ;
+    rdfs:seeAlso o4de:NonFunctionalVariation ;
+    skos:broader o4de:TypesOfVariationConcept ;
+    skos:definition "Variation in how well a product does it."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.2.4" ;
+    skos:prefLabel "Non-Functional Variation"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:OAuth2 a owl:NamedIndividual,
         o4de:AlternativeFeature ;
@@ -1191,6 +1456,13 @@ o4de:OAuth2 a owl:NamedIndividual,
 o4de:OAuth2Variant a owl:NamedIndividual,
         o4de:Variant ;
     rdfs:label "OAuth 2.0 Variant"@en .
+
+o4de:OWLOntologyConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Ontology ;
+    skos:broader o4de:DomainModelRepresentationFormatsConcept ;
+    skos:definition "A model written in the Web Ontology Language."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "OWL Ontology"@en .
 
 o4de:OntologyLifecycleTestingAndDeploymentPartConcept a skos:Concept ;
     rdfs:seeAlso o4de:ChangeLog,
@@ -1372,6 +1644,13 @@ o4de:PaymentProcessingConcept a skos:Concept ;
     skos:inScheme o4de:BusinessProcessTaxonomy ;
     skos:prefLabel "Payment Processing"@en .
 
+o4de:PelletConcept a skos:Concept ;
+    rdfs:seeAlso o4de:OWLReasoner ;
+    skos:broader o4de:OWLReasonersConcept ;
+    skos:definition "An OWL 2 reasoner."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "Pellet"@en .
+
 o4de:PeopleAndRolesPartConcept a skos:Concept ;
     rdfs:seeAlso o4de:Accountable,
         o4de:AssetManager,
@@ -1459,6 +1738,15 @@ o4de:PolicyRulesConcept a skos:Concept ;
     skos:inScheme o4de:BusinessRuleClassificationTaxonomy ;
     skos:prefLabel "Policy Rules"@en .
 
+o4de:PortabilityConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Portability ;
+    skos:broader o4de:PropertiesOfVariationCapacityConcept ;
+    skos:definition "The quality attribute of portability."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.3.7" ;
+    skos:prefLabel "Portability"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:PortersFiveForcesConcept a skos:Concept ;
     skos:broader o4de:StrategicAnalysisConcept ;
     skos:inScheme o4de:StrategicAnalysisTaxonomy ;
@@ -1508,6 +1796,24 @@ o4de:ProductDevelopmentConcept a skos:Concept ;
     skos:inScheme o4de:BusinessProcessTaxonomy ;
     skos:prefLabel "Product Development"@en .
 
+o4de:ProductFamilyLevelVariationConcept a skos:Concept ;
+    rdfs:seeAlso o4de:ProductFamilyLevelVariation ;
+    skos:broader o4de:TypesOfVariationConcept ;
+    skos:definition "Variation among the products of a family."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.2.2" ;
+    skos:prefLabel "Product-Family-Level Variation"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:ProductLevelVariationConcept a skos:Concept ;
+    rdfs:seeAlso o4de:ProductLevelVariation ;
+    skos:broader o4de:TypesOfVariationConcept ;
+    skos:definition "Variation among the individual products."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.2.1" ;
+    skos:prefLabel "Product-Level Variation"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:ProductLineEngineeringConcept a skos:Concept ;
     rdfs:seeAlso o4de:ProductLineEngineering ;
     skos:broader o4de:MethodologiesConcept ;
@@ -1535,11 +1841,26 @@ o4de:ProjectManagementConcept a skos:Concept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Project Management"@en .
 
+o4de:ProjectManagementVariationAndVariantGenerationConcept a skos:Concept ;
+    skos:broader o4de:ComponentBasedSoftwareDevelopmentProcessesConcept ;
+    skos:definition "Managing component-based development projects."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "2.4.5.7" ;
+    skos:prefLabel "Project Management"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:PromotionalCampaignConcept a skos:Concept ;
     rdfs:seeAlso o4de:PromotionalCampaign ;
     skos:broader o4de:CampaignManagementConcept ;
     skos:inScheme o4de:FinancialAndMarketingTaxonomy ;
     skos:prefLabel "Promotional Campaign"@en .
+
+o4de:PromptEngineeringConcept a skos:Concept ;
+    rdfs:seeAlso o4de:DomainEngineeringPrompt ;
+    skos:broader o4de:LanguageModelTechniquesConcept ;
+    skos:definition "Designing the instructions given to a language model so that it carries out a task well."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "Prompt Engineering"@en .
 
 o4de:QualityAndMetricsPartConcept a skos:Concept ;
     rdfs:seeAlso o4de:ComplianceMetric,
@@ -1611,6 +1932,13 @@ o4de:QuantitativelyManagedConcept a skos:Concept ;
     skos:notation "4" ;
     skos:prefLabel "Quantitatively Managed"@en .
 
+o4de:RDFXMLConcept a skos:Concept ;
+    rdfs:seeAlso o4de:DomainOntology ;
+    skos:broader o4de:OntologySerializationFormatsConcept ;
+    skos:definition "The XML syntax for RDF graphs."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "RDF/XML"@en .
+
 o4de:RefactoringConcept a skos:Concept ;
     skos:broader o4de:DomainEvolutionConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
@@ -1628,6 +1956,13 @@ o4de:RefundPolicyRule a owl:NamedIndividual,
     o4de:hasDescription "Customers may return items within 30 days for a full refund" ;
     o4de:ruleType "Policy" .
 
+o4de:RelationExtractionConcept a skos:Concept ;
+    rdfs:seeAlso o4de:RelationshipMapping ;
+    skos:broader o4de:NaturalLanguageProcessingTechniquesConcept ;
+    skos:definition "Finding the relations stated between entities in text."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "Relation Extraction"@en .
+
 o4de:ReplenishmentTimeSaving a owl:NamedIndividual,
         o4de:TimeSaving ;
     rdfs:label "Replenishment Time Saving"@en ;
@@ -1643,6 +1978,14 @@ o4de:RequirementsDocumentsConcept a skos:Concept ;
     skos:broader o4de:DocumentationAssetsConcept ;
     skos:inScheme o4de:AssetClassificationTaxonomy ;
     skos:prefLabel "Requirements Documents"@en .
+
+o4de:RequirementsIdentificationConcept a skos:Concept ;
+    skos:broader o4de:ComponentBasedSoftwareDevelopmentProcessesConcept ;
+    skos:definition "Finding the requirements that components must meet."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "2.4.5.2" ;
+    skos:prefLabel "Requirements Identification"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:RequirementsPartConcept a skos:Concept ;
     rdfs:seeAlso o4de:AcceptanceCriteria,
@@ -1726,11 +2069,27 @@ o4de:SAMLVariant a owl:NamedIndividual,
         o4de:Variant ;
     rdfs:label "SAML Variant"@en .
 
+o4de:SPARQLConcept a skos:Concept ;
+    rdfs:seeAlso o4de:CompetencyQuestionValidation ;
+    skos:broader o4de:OntologyQueryLanguagesConcept ;
+    skos:definition "The W3C query language for RDF graphs."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "SPARQL"@en .
+
 o4de:SalesChannelConcept a skos:Concept ;
     rdfs:seeAlso o4de:SalesChannel ;
     skos:broader o4de:ChannelManagementConcept ;
     skos:inScheme o4de:CustomerManagementTaxonomy ;
     skos:prefLabel "Sales Channel"@en .
+
+o4de:ScalabilityConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Scalability ;
+    skos:broader o4de:PropertiesOfVariationCapacityConcept ;
+    skos:definition "The quality attribute of scalability."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.3.8" ;
+    skos:prefLabel "Scalability"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:ScalabilityIssuesConcept a skos:Concept ;
     skos:broader o4de:TechnicalProblemsConcept ;
@@ -1781,11 +2140,29 @@ o4de:ServicesConcept a skos:Concept ;
     skos:inScheme o4de:AssetClassificationTaxonomy ;
     skos:prefLabel "Services"@en .
 
+o4de:SoftwareProductLineConcept a skos:Concept ;
+    rdfs:seeAlso o4de:ProductFamily ;
+    skos:broader o4de:VariationAndVariantGenerationConcept ;
+    skos:definition "A family of software products developed from common assets."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "2.5.4" ;
+    skos:prefLabel "Software Product Line"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:SolutionProviderConcept a skos:Concept ;
     rdfs:seeAlso o4de:SolutionProvider ;
     skos:broader o4de:VendorSolutionsConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Solution Provider"@en .
+
+o4de:SpecificationConcept a skos:Concept ;
+    rdfs:seeAlso o4de:VariantSpecification ;
+    skos:broader o4de:VariantGenerationProcessConcept ;
+    skos:definition "The step in which the variant is specified."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.2.9.1" ;
+    skos:prefLabel "Specification"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:Sprint2024Q3 a owl:NamedIndividual,
         o4de:Sprint ;
@@ -1799,6 +2176,13 @@ o4de:StakeholderAnalysisConcept a skos:Concept ;
     skos:broader o4de:DomainAnalysisConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Stakeholder Analysis"@en .
+
+o4de:StakeholderReviewConcept a skos:Concept ;
+    rdfs:seeAlso o4de:DomainModelValidation ;
+    skos:broader o4de:DomainModelValidationMethodsConcept ;
+    skos:definition "Checking the model with the people who know the domain."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "Stakeholder Review"@en .
 
 o4de:StandardsConcept a skos:Concept ;
     skos:broader o4de:ProcessAssetsConcept ;
@@ -1834,6 +2218,15 @@ o4de:SubscriptionPricing a owl:NamedIndividual,
         o4de:PricingModel ;
     rdfs:label "Subscription Pricing"@en .
 
+o4de:SuitabilityConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Suitability ;
+    skos:broader o4de:PropertiesOfVariationCapacityConcept ;
+    skos:definition "The quality attribute of suitability."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.3.9" ;
+    skos:prefLabel "Suitability"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:SuppliersConcept a skos:Concept ;
     skos:broader o4de:SIPOCAnalysisConcept ;
     skos:inScheme o4de:StrategicAnalysisTaxonomy ;
@@ -1844,6 +2237,15 @@ o4de:SupplyChainDirector a owl:NamedIndividual,
     rdfs:label "Supply Chain Director"@en ;
     o4de:accountableFor o4de:OrderFulfillmentProcess ;
     o4de:hasName "Supply Chain Director" .
+
+o4de:SynthesisConcept a skos:Concept ;
+    rdfs:seeAlso o4de:VariantSynthesis ;
+    skos:broader o4de:VariantGenerationProcessConcept ;
+    skos:definition "The step in which the variant is put together."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.2.9.5" ;
+    skos:prefLabel "Synthesis"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:SystemCapabilitiesConcept a skos:Concept ;
     rdfs:seeAlso o4de:SystemCapabilities ;
@@ -1886,6 +2288,15 @@ o4de:SystemsAndTechnologyPartConcept a skos:Concept ;
     skos:definition "Concepts of applications, platforms, infrastructure and their integration."@en ;
     skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
     skos:prefLabel "Systems and technology"@en .
+
+o4de:TailorabilityConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Tailorability ;
+    skos:broader o4de:PropertiesOfVariationCapacityConcept ;
+    skos:definition "The quality attribute of tailorability."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.3.10" ;
+    skos:prefLabel "Tailorability"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:TeamLeaderPosition a owl:NamedIndividual,
         o4de:Position ;
@@ -1935,6 +2346,38 @@ o4de:TouchpointConcept a skos:Concept ;
     skos:broader o4de:CustomerExperienceConcept ;
     skos:inScheme o4de:CustomerManagementTaxonomy ;
     skos:prefLabel "Touchpoint"@en .
+
+o4de:TransformationConcept a skos:Concept ;
+    rdfs:seeAlso o4de:VariantTransformation ;
+    skos:broader o4de:VariantGenerationProcessConcept ;
+    skos:definition "The step in which the specification is transformed."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.2.9.3" ;
+    skos:prefLabel "Transformation"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:TurtleConcept a skos:Concept ;
+    rdfs:seeAlso o4de:DomainOntology ;
+    skos:broader o4de:OntologySerializationFormatsConcept ;
+    skos:definition "A compact text syntax for RDF graphs."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "Turtle"@en .
+
+o4de:UMLClassDiagramConcept a skos:Concept ;
+    rdfs:seeAlso o4de:DomainModel ;
+    skos:broader o4de:DomainModelRepresentationFormatsConcept ;
+    skos:definition "A diagram of classes, their attributes and their relationships."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:prefLabel "UML Class Diagram"@en .
+
+o4de:UpgradabilityConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Upgradability ;
+    skos:broader o4de:PropertiesOfVariationCapacityConcept ;
+    skos:definition "The quality attribute of upgradability."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:notation "3.1.3.11" ;
+    skos:prefLabel "Upgradability"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:UserManagement a owl:NamedIndividual,
         o4de:MandatoryFeature ;
@@ -2182,6 +2625,13 @@ o4de:OnlineStorefront a owl:NamedIndividual,
     o4de:usesChannel o4de:OnlineChannel ;
     o4de:usesPricingModel o4de:SubscriptionPricing .
 
+o4de:OntologyQueryLanguagesConcept a skos:Concept ;
+    skos:broader o4de:AIAssistedDomainEngineeringConcept ;
+    skos:definition "Languages for asking questions of an ontology."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:narrower o4de:SPARQLConcept ;
+    skos:prefLabel "Ontology Query Languages"@en .
+
 o4de:OrderFulfillmentOperation a owl:NamedIndividual,
         o4de:Operation ;
     rdfs:label "Order Fulfillment Operation"@en ;
@@ -2283,6 +2733,14 @@ o4de:InventoryManagementConcept a skos:Concept ;
     skos:narrower o4de:StockLevelConcept,
         o4de:StockManagementConcept ;
     skos:prefLabel "Inventory Management"@en .
+
+o4de:LanguageModelTechniquesConcept a skos:Concept ;
+    skos:broader o4de:AIAssistedDomainEngineeringConcept ;
+    skos:definition "Ways of using a large language model in domain engineering."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:narrower o4de:InformationExtractionConcept,
+        o4de:PromptEngineeringConcept ;
+    skos:prefLabel "Language Model Techniques"@en .
 
 o4de:OnlineChannel a owl:NamedIndividual,
         o4de:DigitalChannel ;
@@ -2391,6 +2849,16 @@ o4de:DomainEngineeringTeam a owl:NamedIndividual,
     o4de:partOfDepartment o4de:ITDepartment ;
     o4de:teamSize "8"^^xsd:int .
 
+o4de:DomainModelValidationMethodsConcept a skos:Concept ;
+    rdfs:seeAlso o4de:DomainModelValidation ;
+    skos:broader o4de:AIAssistedDomainEngineeringConcept ;
+    skos:definition "Ways of checking a domain model."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:narrower o4de:CompetencyQuestionsConcept,
+        o4de:ConsistencyCheckingConcept,
+        o4de:StakeholderReviewConcept ;
+    skos:prefLabel "Domain Model Validation Methods"@en .
+
 o4de:FinancialManagementConcept a skos:Concept ;
     rdfs:seeAlso o4de:FinancialManagement ;
     skos:broader o4de:CommercialManagementConcept ;
@@ -2423,6 +2891,15 @@ o4de:ITDepartment a owl:NamedIndividual,
     o4de:departmentSize "45"^^xsd:int ;
     o4de:managesInventory o4de:StorefrontInventory ;
     o4de:operatesChannel o4de:OnlineChannel .
+
+o4de:OntologySerializationFormatsConcept a skos:Concept ;
+    skos:broader o4de:AIAssistedDomainEngineeringConcept ;
+    skos:definition "Syntaxes in which an ontology can be written down."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:narrower o4de:JSONLDConcept,
+        o4de:RDFXMLConcept,
+        o4de:TurtleConcept ;
+    skos:prefLabel "Ontology Serialization Formats"@en .
 
 o4de:OrganizationalAgilityConcept a skos:Concept ;
     rdfs:seeAlso o4de:OrganizationalAgility ;
@@ -2465,6 +2942,30 @@ o4de:VariabilityConcept a skos:Concept ;
         o4de:VariabilityTypesConcept ;
     skos:prefLabel "Variability"@en ;
     skos:topConceptOf o4de:VariabilityTaxonomy .
+
+o4de:VariationAsAQualityAttributeConcept a skos:Concept ;
+    rdfs:seeAlso o4de:VariationCapacity ;
+    skos:broader o4de:VariationAndVariantGenerationConcept ;
+    skos:definition "Variation treated as a quality attribute of components and products."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:narrower o4de:PropertiesOfVariationCapacityConcept,
+        o4de:TypesOfVariationConcept,
+        o4de:VariationCapacityMetricConcept ;
+    skos:notation "3.1" ;
+    skos:prefLabel "Variation as a Quality Attribute"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:VariationCapacityMetricConcept a skos:Concept ;
+    rdfs:seeAlso o4de:VariationCapacityMetric ;
+    skos:broader o4de:VariationAsAQualityAttributeConcept ;
+    skos:definition "The measure of variation capacity and the effects that go into it."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:narrower o4de:EffectOfDependentElementsConcept,
+        o4de:EffectOfExclusiveElementsConcept,
+        o4de:EffectOfOptionalElementsConcept ;
+    skos:notation "3.1.4" ;
+    skos:prefLabel "Variation Capacity Metric"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:VendorSolutionsConcept a skos:Concept ;
     skos:broader o4de:DomainEngineeringConcept ;
@@ -2615,6 +3116,17 @@ o4de:DomainImplementationConcept a skos:Concept ;
         o4de:ToolDevelopmentConcept ;
     skos:prefLabel "Domain Implementation"@en .
 
+o4de:DomainModelRepresentationFormatsConcept a skos:Concept ;
+    rdfs:seeAlso o4de:DomainModel ;
+    skos:broader o4de:AIAssistedDomainEngineeringConcept ;
+    skos:definition "Forms in which a domain model can be represented."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:narrower o4de:DomainSpecificLanguageAIAssistedDomainEngineeringConcept,
+        o4de:EntityRelationshipDiagramConcept,
+        o4de:OWLOntologyConcept,
+        o4de:UMLClassDiagramConcept ;
+    skos:prefLabel "Domain Model Representation Formats"@en .
+
 o4de:ManagementProcessesConcept a skos:Concept ;
     skos:broader o4de:ProcessesConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
@@ -2641,6 +3153,27 @@ o4de:ModelAssetsConcept a skos:Concept ;
         o4de:FeatureModelsConcept,
         o4de:VariabilityModelsConcept ;
     skos:prefLabel "Model Assets"@en .
+
+o4de:NaturalLanguageProcessingTechniquesConcept a skos:Concept ;
+    skos:broader o4de:AIAssistedDomainEngineeringConcept ;
+    skos:definition "Techniques of language processing that support domain analysis."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:narrower o4de:DependencyParsingConcept,
+        o4de:KeyphraseExtractionConcept,
+        o4de:NamedEntityRecognitionConcept,
+        o4de:RelationExtractionConcept ;
+    skos:prefLabel "Natural Language Processing Techniques"@en .
+
+o4de:OWLReasonersConcept a skos:Concept ;
+    rdfs:seeAlso o4de:OWLReasoner ;
+    skos:broader o4de:AIAssistedDomainEngineeringConcept ;
+    skos:definition "Reasoning software for OWL ontologies."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:narrower o4de:ELKConcept,
+        o4de:FaCTConcept,
+        o4de:HermiTConcept,
+        o4de:PelletConcept ;
+    skos:prefLabel "OWL Reasoners"@en .
 
 o4de:OrganizationalStructureConcept a skos:Concept ;
     rdfs:seeAlso o4de:OrganizationalStructure ;
@@ -2716,6 +3249,19 @@ o4de:TechnicalProblemsConcept a skos:Concept ;
         o4de:SecurityIssuesConcept ;
     skos:prefLabel "Technical Problems"@en .
 
+o4de:TypesOfVariationConcept a skos:Concept ;
+    rdfs:seeAlso o4de:VariationKind ;
+    skos:broader o4de:VariationAsAQualityAttributeConcept ;
+    skos:definition "Kinds of variation by level and by aspect."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:narrower o4de:FunctionalVariationConcept,
+        o4de:NonFunctionalVariationConcept,
+        o4de:ProductFamilyLevelVariationConcept,
+        o4de:ProductLevelVariationConcept ;
+    skos:notation "3.1.2" ;
+    skos:prefLabel "Types of Variation"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:VariabilityMechanismsConcept a skos:Concept ;
     skos:broader o4de:VariabilityConcept ;
     skos:inScheme o4de:VariabilityTaxonomy ;
@@ -2733,6 +3279,16 @@ o4de:VariabilityTypesConcept a skos:Concept ;
         o4de:PlatformVariabilityConcept,
         o4de:QualityVariabilityConcept ;
     skos:prefLabel "Variability Types"@en .
+
+o4de:VariationAndVariantGenerationConcept a skos:Concept ;
+    skos:definition "The study of how software components and products can vary, how far they can vary, and how a variant is generated."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:narrower o4de:ComponentBasedSoftwareDevelopmentProcessesConcept,
+        o4de:SoftwareProductLineConcept,
+        o4de:VariantGenerationProcessConcept,
+        o4de:VariationAsAQualityAttributeConcept ;
+    skos:prefLabel "Variation and Variant Generation"@en ;
+    skos:topConceptOf o4de:VariationAndVariantGenerationTaxonomy .
 
 o4de:BusinessRuleClassificationTaxonomy a skos:ConceptScheme ;
     dc:description "Classification of business rules by type and scope"@en ;
@@ -2811,6 +3367,20 @@ o4de:SupportingProcessesBPConcept a skos:Concept ;
         o4de:ITSupportConcept ;
     skos:prefLabel "Supporting Processes"@en .
 
+o4de:VariantGenerationProcessConcept a skos:Concept ;
+    rdfs:seeAlso o4de:VariantGenerationProcess ;
+    skos:broader o4de:VariationAndVariantGenerationConcept ;
+    skos:definition "The process by which a variant is generated."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:narrower o4de:AnalysisConcept,
+        o4de:ApplicationConcept,
+        o4de:SpecificationConcept,
+        o4de:SynthesisConcept,
+        o4de:TransformationConcept ;
+    skos:notation "3.2.9" ;
+    skos:prefLabel "Variant Generation Process"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:DomainAssetsConcept a skos:Concept ;
     skos:broader o4de:DomainEngineeringConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
@@ -2837,6 +3407,35 @@ o4de:ProcessMaturityTaxonomy a skos:ConceptScheme ;
     dc:description "Classification of process maturity levels"@en ;
     dc:title "Process Maturity Taxonomy"@en ;
     skos:hasTopConcept o4de:ProcessMaturityConcept .
+
+o4de:AIAssistedDomainEngineeringConcept a skos:Concept ;
+    skos:definition "The use of language models, natural language processing and ontology tooling in the analysis and modelling of a domain."@en ;
+    skos:inScheme o4de:AiAssistedDomainEngineeringTaxonomy ;
+    skos:narrower o4de:DomainModelRepresentationFormatsConcept,
+        o4de:DomainModelValidationMethodsConcept,
+        o4de:LanguageModelTechniquesConcept,
+        o4de:NaturalLanguageProcessingTechniquesConcept,
+        o4de:OWLReasonersConcept,
+        o4de:OntologyQueryLanguagesConcept,
+        o4de:OntologySerializationFormatsConcept ;
+    skos:prefLabel "AI-Assisted Domain Engineering"@en ;
+    skos:topConceptOf o4de:AiAssistedDomainEngineeringTaxonomy .
+
+o4de:ComponentBasedSoftwareDevelopmentProcessesConcept a skos:Concept ;
+    skos:broader o4de:VariationAndVariantGenerationConcept ;
+    skos:definition "The processes by which software is developed from components."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:narrower o4de:AnalysisVariationAndVariantGenerationConcept,
+        o4de:ComponentBasedArchitectureConcept,
+        o4de:ComponentBasedDesignConcept,
+        o4de:EstimationConcept,
+        o4de:EvaluationConcept,
+        o4de:FractalStructureConcept,
+        o4de:ProjectManagementVariationAndVariantGenerationConcept,
+        o4de:RequirementsIdentificationConcept ;
+    skos:notation "2.4.5" ;
+    skos:prefLabel "Component-Based Software Development Processes"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:DomainEngineeringConcept a skos:Concept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
@@ -2865,6 +3464,26 @@ o4de:BusinessContextConcept a skos:Concept ;
         o4de:ProblemDescriptionConcept,
         o4de:SystemCapabilitiesConcept ;
     skos:prefLabel "Business Context"@en .
+
+o4de:PropertiesOfVariationCapacityConcept a skos:Concept ;
+    rdfs:seeAlso o4de:VariationCapacityProperty ;
+    skos:broader o4de:VariationAsAQualityAttributeConcept ;
+    skos:definition "Quality attributes that make up variation capacity."@en ;
+    skos:inScheme o4de:VariationAndVariantGenerationTaxonomy ;
+    skos:narrower o4de:AdaptabilityVariationAndVariantGenerationConcept,
+        o4de:ConfigurabilityConcept,
+        o4de:CustomisabilityConcept,
+        o4de:EvolvabilityConcept,
+        o4de:ExtensibilityConcept,
+        o4de:ModifiabilityConcept,
+        o4de:PortabilityConcept,
+        o4de:ScalabilityConcept,
+        o4de:SuitabilityConcept,
+        o4de:TailorabilityConcept,
+        o4de:UpgradabilityConcept ;
+    skos:notation "3.1.3" ;
+    skos:prefLabel "Properties of Variation Capacity"@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:BusinessProcessTaxonomy a skos:ConceptScheme ;
     dc:description "Categorization of business processes into core and supporting processes (examples)"@en ;
@@ -2940,6 +3559,16 @@ o4de:AssetClassificationTaxonomy a skos:ConceptScheme ;
     dc:description "Hierarchical classification of domain assets by type and characteristics"@en ;
     dc:title "Domain Asset Classification Taxonomy"@en ;
     skos:hasTopConcept o4de:AssetTypesConcept .
+
+o4de:AiAssistedDomainEngineeringTaxonomy a skos:ConceptScheme ;
+    dc:description "Techniques, formats and tools that are used when language models and ontologies are combined in domain engineering"@en ;
+    dc:title "AI-Assisted Domain Engineering Taxonomy"@en ;
+    skos:hasTopConcept o4de:AIAssistedDomainEngineeringConcept .
+
+o4de:VariationAndVariantGenerationTaxonomy a skos:ConceptScheme ;
+    dc:description "Concepts of variation, variation capacity and variant generation, in the order of the headings of the owner's 2013 thesis"@en ;
+    dc:title "Variation and Variant Generation Taxonomy"@en ;
+    skos:hasTopConcept o4de:VariationAndVariantGenerationConcept .
 
 o4de:DomainEngineeringTaxonomy a skos:ConceptScheme ;
     dc:description "Hierarchical classification of domain engineering concepts"@en ;

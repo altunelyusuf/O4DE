@@ -1,5 +1,5 @@
 # O4DE: Ontology for Domain Engineering - T-Box
-# Version 1.1.0 (2026-10-13). Copyright 2026 Yusuf Altunel. Licensed under the Apache License, Version 2.0.
+# Version 1.2.0 (2026-10-13). Copyright 2026 Yusuf Altunel. Licensed under the Apache License, Version 2.0.
 # Role: T-Box. Classes, properties and axioms only; no individuals.
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -13,6 +13,14 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<http://ai4se.org/ontology/v4#DomainEngineeringModule> rdfs:label "AI4SE Domain Engineering module, taken over as a module"@en ;
+    dc:creator "AI4SE Research Team" ;
+    dcterms:created "2025-11-17"^^xsd:date ;
+    dcterms:identifier "ai4se-domain-engineering-module" ;
+    dcterms:isPartOf <http://www.zt4swe.io/o4de> ;
+    rdfs:comment "Provenance of the classes taken over in version 1.2.0 from the Domain Engineering module of the AI4SE ontology package. The received file had a syntax error and was repaired in a copy; the received file is unchanged. The performance claims it carried (accuracy ranges, time savings) were not taken over because nothing in the file supports them."@en ;
+    owl:versionInfo "1.0" .
+
 <http://domainengineering.org/ontology> rdfs:label "Domain Engineering Ontology, module of the enterprise domain structure"@en ;
     dc:creator "Domain Engineering Consortium" ;
     dcterms:created "2025-01-09"^^xsd:date ;
@@ -21,6 +29,13 @@
     dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
     rdfs:comment "Provenance of the classes, properties and axioms taken over in version 1.1.0 of this package. The creator and the earlier licence statement are kept as recorded in the received file; the module is licensed with the rest of the package. Every term taken from it links to its original through rdfs:seeAlso."@en ;
     owl:versionInfo "5.2.0" .
+
+o4de:Adaptability a owl:Class ;
+    rdfs:label "Adaptability"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationCapacityProperty ;
+    skos:definition "The quality attribute of how easily a system can be changed to suit another environment or need."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:AlternativeSolution a owl:Class ;
     rdfs:label "Alternative Solution"@en ;
@@ -33,6 +48,12 @@ o4de:BusinessRequirement a owl:Class ;
     rdfs:subClassOf o4de:Requirement ;
     skos:definition "A requirement stated in terms of what the business needs to achieve, not how a system will do it."@en .
 
+o4de:CompetencyQuestionValidation a owl:Class ;
+    rdfs:label "Competency Question Validation"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:DomainModelValidation ;
+    skos:definition "Validation of a domain model by checking that it can answer its competency questions, for example by running them as SPARQL queries."@en .
+
 o4de:ComplianceRequirement a owl:Class ;
     rdfs:label "Compliance Requirement"@en ;
     rdfs:seeAlso de52:ComplianceRequirement ;
@@ -42,17 +63,43 @@ o4de:ComplianceRequirement a owl:Class ;
         o4de:Requirement ;
     skos:definition "A requirement that arises from a law, regulation, standard or contract."@en .
 
+o4de:ConceptExtraction a owl:Class ;
+    rdfs:label "Concept Extraction"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:DomainAnalysisTechnique ;
+    skos:definition "The technique of identifying the concepts of a domain in source text, for example by named entity recognition or keyphrase extraction."@en .
+
+o4de:ConceptExtractionPrompt a owl:Class ;
+    rdfs:label "Concept Extraction Prompt"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:DomainEngineeringPrompt ;
+    skos:definition "A prompt template that asks a language model to extract the concepts of a domain from a text."@en .
+
 o4de:Conceptualization a owl:Class ;
     rdfs:label "Conceptualization"@en ;
     rdfs:seeAlso de52:Conceptualization ;
     rdfs:subClassOf o4de:DevelopmentPhase ;
     skos:definition "Phase of creating conceptual model"@en .
 
+o4de:Configurability a owl:Class ;
+    rdfs:label "Configurability"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationCapacityProperty ;
+    skos:definition "The quality attribute of how far a system can be set up for a purpose by choosing among options, without changing its code."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:CustomerServiceDomain a owl:Class ;
     rdfs:label "Customer Service Domain"@en ;
     rdfs:seeAlso de52:CustomerServiceDomain ;
     rdfs:subClassOf o4de:CorporateFunctionDomain ;
     skos:definition "The corporate function domain of supporting customers with enquiries, complaints and aftercare."@en .
+
+o4de:Customisability a owl:Class ;
+    rdfs:label "Customisability"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationCapacityProperty ;
+    skos:definition "The quality attribute of how far a system can be made to fit the needs of one customer or user."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:CycleTime a owl:Class ;
     rdfs:label "Cycle Time"@en ;
@@ -105,22 +152,62 @@ o4de:DataRelationship a owl:Class ;
     rdfs:seeAlso de52:DataRelationship ;
     skos:definition "A link between two data entities, with its meaning and cardinality."@en .
 
+o4de:DependentElement a owl:Class ;
+    rdfs:label "Dependent Element"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationElement ;
+    skos:definition "A variation element that can be present in a variant only if another element is present."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:DigitalAssetPortfolio a owl:Class ;
     rdfs:label "Digital Asset Portfolio"@en ;
     rdfs:seeAlso de52:DigitalAssetPortfolio ;
     rdfs:subClassOf o4de:AssetPortfolio ;
     skos:definition "An asset portfolio made up of digital assets such as software, data and models."@en .
 
+o4de:DomainConceptualization a owl:Class ;
+    rdfs:label "Domain Conceptualization"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:DomainEngineeringActivity ;
+    skos:definition "The activity of forming an abstract understanding of the structure of a domain, what exists in it and how things relate, before any implementation choice is made."@en .
+
 o4de:DomainDeveloper a owl:Class ;
     rdfs:label "Domain Developer"@en ;
     rdfs:subClassOf o4de:Role ;
     skos:definition "A role responsible for building and testing reusable domain assets."@en .
+
+o4de:DomainKnowledgeGraph a owl:Class ;
+    rdfs:label "Domain Knowledge Graph"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:DomainModel ;
+    skos:definition "A graph of facts about the individuals of a domain that conforms to a domain ontology and can be queried."@en .
 
 o4de:ErrorReduction a owl:Class ;
     rdfs:label "Error Reduction"@en ;
     rdfs:seeAlso de52:ErrorReduction ;
     rdfs:subClassOf o4de:AutomationBenefit ;
     skos:definition "An automation benefit measured as a fall in the number of errors."@en .
+
+o4de:Evolvability a owl:Class ;
+    rdfs:label "Evolvability"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationCapacityProperty ;
+    skos:definition "The quality attribute of how well a system can change over time as its needs change."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:ExclusiveElement a owl:Class ;
+    rdfs:label "Exclusive Element"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationElement ;
+    skos:definition "A variation element that cannot be present in a variant together with another named element."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:Extensibility a owl:Class ;
+    rdfs:label "Extensibility"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationCapacityProperty ;
+    skos:definition "The quality attribute of how easily new capabilities can be added with little change to what exists."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:FODA a owl:Class ;
     rdfs:label "Feature-Oriented Domain Analysis"@en ;
@@ -132,6 +219,13 @@ o4de:Formalization a owl:Class ;
     rdfs:seeAlso de52:Formalization ;
     rdfs:subClassOf o4de:DevelopmentPhase ;
     skos:definition "Phase of formalizing model in ontology language"@en .
+
+o4de:FunctionalVariation a owl:Class ;
+    rdfs:label "Functional Variation"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationKind ;
+    skos:definition "Variation in what a component or product does."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:ImpactAnalysis a owl:Class ;
     rdfs:label "Impact Analysis"@en ;
@@ -150,6 +244,12 @@ o4de:IntegratedAssetPortfolio a owl:Class ;
     rdfs:subClassOf o4de:AssetPortfolio ;
     skos:definition "An asset portfolio that joins physical and digital assets under one plan."@en .
 
+o4de:LLMDomainDiscovery a owl:Class ;
+    rdfs:label "LLM-Powered Domain Discovery"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:DomainEngineeringProcess ;
+    skos:definition "A domain engineering process in which large language models extract domain concepts and relationships from unstructured text and draft an initial domain model for experts to validate."@en .
+
 o4de:LeadTime a owl:Class ;
     rdfs:label "Lead Time"@en ;
     rdfs:seeAlso de52:LeadTime ;
@@ -167,6 +267,40 @@ o4de:MessageFlow a owl:Class ;
     rdfs:seeAlso de52:MessageFlow ;
     skos:definition "The movement of messages between parties or systems, with their order and content."@en .
 
+o4de:Modifiability a owl:Class ;
+    rdfs:label "Modifiability"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationCapacityProperty ;
+    skos:definition "The quality attribute of how easily a system can be changed."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:MultiAgentDomainEngineering a owl:Class ;
+    rdfs:label "Multi-Agent Domain Engineering"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:DomainEngineeringProcess ;
+    skos:definition "A domain engineering process in which several specialised language-model agents, for instance one for concepts and one for relationships, work together under coordination."@en .
+
+o4de:NonFunctionalVariation a owl:Class ;
+    rdfs:label "Non-Functional Variation"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationKind ;
+    skos:definition "Variation in how well a component or product does what it does, such as its performance or security."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:OWLReasoner a owl:Class ;
+    rdfs:label "OWL Reasoner"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:DomainEngineeringTool,
+        o4de:Reasoner ;
+    skos:definition "A reasoner for OWL ontologies, such as HermiT, Pellet, FaCT++ or ELK."@en .
+
+o4de:OptionalElement a owl:Class ;
+    rdfs:label "Optional Element"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationElement ;
+    skos:definition "A variation element that may be included in a variant or left out of it."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:PerformanceRequirement a owl:Class ;
     rdfs:label "Performance Requirement"@en ;
     rdfs:seeAlso de52:PerformanceRequirement ;
@@ -179,6 +313,13 @@ o4de:PhysicalAssetPortfolio a owl:Class ;
     rdfs:subClassOf o4de:AssetPortfolio ;
     skos:definition "An asset portfolio made up of physical assets."@en .
 
+o4de:Portability a owl:Class ;
+    rdfs:label "Portability"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationCapacityProperty ;
+    skos:definition "The quality attribute of how easily a system can be moved to another environment."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:ProcessMetric a owl:Class ;
     rdfs:label "Process Metric"@en ;
     rdfs:subClassOf o4de:Metric ;
@@ -190,6 +331,20 @@ o4de:ProcessTime a owl:Class ;
     rdfs:subClassOf o4de:ProcessPerformanceMetric ;
     skos:definition "The time spent actually working on a unit of work, excluding waiting, used as a process performance metric."@en .
 
+o4de:ProductFamilyLevelVariation a owl:Class ;
+    rdfs:label "Product-Family-Level Variation"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationKind ;
+    skos:definition "Variation among the products of a product family, as against variation inside one product."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:ProductLevelVariation a owl:Class ;
+    rdfs:label "Product-Level Variation"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationKind ;
+    skos:definition "Variation among the individual products, for instance between the variants of one product."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:ProductLineEngineering a owl:Class ;
     rdfs:label "Product Line Engineering"@en ;
     rdfs:subClassOf o4de:Method ;
@@ -199,6 +354,12 @@ o4de:ProductQualityManagement a owl:Class ;
     rdfs:label "Product Quality Management"@en ;
     rdfs:subClassOf o4de:QualityManagement ;
     skos:definition "Management of quality standards, controls and improvements for products"@en .
+
+o4de:RelationshipMapping a owl:Class ;
+    rdfs:label "Relationship Mapping"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:DomainAnalysisTechnique ;
+    skos:definition "The technique of identifying how the concepts of a domain relate to each other in source text, for example by dependency parsing or relation extraction."@en .
 
 o4de:ReliabilityRequirement a owl:Class ;
     rdfs:label "Reliability Requirement"@en ;
@@ -255,11 +416,31 @@ o4de:ServicePortfolio a owl:Class ;
     rdfs:subClassOf o4de:PortfolioManagement ;
     skos:definition "A collection of services offered by the organization"@en .
 
+o4de:SingleAgentDomainEngineering a owl:Class ;
+    rdfs:label "Single-Agent Domain Engineering"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:DomainEngineeringProcess ;
+    skos:definition "A domain engineering process in which one language-model agent carries out the whole analysis, from concept extraction to a draft ontology."@en .
+
 o4de:StakeholderRequirement a owl:Class ;
     rdfs:label "Stakeholder Requirement"@en ;
     rdfs:seeAlso de52:StakeholderRequirement ;
     rdfs:subClassOf o4de:Requirement ;
     skos:definition "A requirement that expresses the need of a particular stakeholder."@en .
+
+o4de:Suitability a owl:Class ;
+    rdfs:label "Suitability"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationCapacityProperty ;
+    skos:definition "The quality attribute of how well a system fits a given purpose or context."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:Tailorability a owl:Class ;
+    rdfs:label "Tailorability"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationCapacityProperty ;
+    skos:definition "The quality attribute of how far a system can be tailored to specific needs by those who use or maintain it."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:Testing a owl:Class ;
     rdfs:label "Testing"@en ;
@@ -273,6 +454,13 @@ o4de:Throughput a owl:Class ;
     rdfs:subClassOf o4de:ProcessPerformanceMetric ;
     skos:definition "The number of units of work a process completes in a given period, used as a process performance metric."@en .
 
+o4de:Upgradability a owl:Class ;
+    rdfs:label "Upgradability"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariationCapacityProperty ;
+    skos:definition "The quality attribute of how easily a system can be replaced by a newer version."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:UsabilityRequirement a owl:Class ;
     rdfs:label "Usability Requirement"@en ;
     rdfs:seeAlso de52:UsabilityRequirement ;
@@ -284,6 +472,61 @@ o4de:VariabilityModel a owl:Class ;
     rdfs:seeAlso de52:VariabilityModel ;
     rdfs:subClassOf o4de:DomainAsset ;
     skos:definition "A domain asset that describes the features of a product family and how they may vary."@en .
+
+o4de:VariantAnalysis a owl:Class ;
+    rdfs:label "Variant Analysis"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariantGenerationStep ;
+    skos:definition "The step of the variant generation process in which the specification is analysed."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:VariantApplication a owl:Class ;
+    rdfs:label "Variant Application"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariantGenerationStep ;
+    skos:definition "The step of the variant generation process in which the transformation is applied."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:VariantGenerationProcess a owl:Class ;
+    rdfs:label "Variant Generation Process"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:Process ;
+    skos:definition "The process by which a variant of a component or product is produced from a description of what is wanted."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:VariantSpecification a owl:Class ;
+    rdfs:label "Variant Specification"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariantGenerationStep ;
+    skos:definition "The step of the variant generation process in which the variant to be produced is specified."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:VariantSynthesis a owl:Class ;
+    rdfs:label "Variant Synthesis"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariantGenerationStep ;
+    skos:definition "The step of the variant generation process in which the variant is put together."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:VariantTransformation a owl:Class ;
+    rdfs:label "Variant Transformation"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:VariantGenerationStep ;
+    skos:definition "The step of the variant generation process in which the analysed specification is transformed towards the variant."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:VariationCapacity a owl:Class ;
+    rdfs:label "Variation Capacity"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    skos:definition "The extent to which a component, a product or a product family can be varied to give different variants."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
+o4de:VariationCapacityMetric a owl:Class ;
+    rdfs:label "Variation Capacity Metric"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:Metric ;
+    skos:definition "A metric that quantifies the variation capacity of a component, a product or a product family."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:WaitTime a owl:Class ;
     rdfs:label "Wait Time"@en ;
@@ -2878,6 +3121,13 @@ o4de:isAutomated a owl:DatatypeProperty ;
     rdfs:range xsd:boolean ;
     skos:definition "States whether an activity is carried out by software without manual work."@en .
 
+o4de:isBasisForOntology a owl:ObjectProperty ;
+    rdfs:label "is basis for ontology"@en ;
+    dcterms:source "Owner's UAISE draft, section 2.1 (extract)" ;
+    rdfs:domain o4de:ConceptualERD ;
+    rdfs:range o4de:DomainOntology ;
+    skos:definition "Links a conceptual entity-relationship diagram to a domain ontology that is formally mapped from it or built on it."@en .
+
 o4de:isConfigurable a owl:DatatypeProperty ;
     rdfs:label "is configurable"@en ;
     rdfs:domain o4de:DomainAsset ;
@@ -5295,30 +5545,6 @@ o4de:workflowAutomationOf a owl:ObjectProperty ;
     owl:inverseOf o4de:workflowAutomation ;
     skos:definition "Links a workflow automation to a process; the inverse of the relation 'workflowautomation'."@en .
 
-<http://www.zt4swe.io/o4de> a owl:Ontology ;
-    dc:title "O4DE: Ontology for Domain Engineering (T-Box)"@en ;
-    dcterms:coverage "Enterprise domain engineering" ;
-    dcterms:created "2026-10-13"^^xsd:date ;
-    dcterms:creator "Yusuf Altunel" ;
-    dcterms:description "Classes, properties and axioms of the Ontology for Domain Engineering."@en ;
-    dcterms:license <http://www.apache.org/licenses/LICENSE-2.0> ;
-    dcterms:modified "2026-10-13"^^xsd:date ;
-    dcterms:rights "Copyright 2026 Yusuf Altunel" ;
-    dcterms:subject "Agile Methodologies",
-        "Business Analysis",
-        "Customer Management",
-        "Domain Engineering",
-        "Operations Management",
-        "Organizational Management",
-        "Process Improvement",
-        "Product Management",
-        "Quality Management",
-        "Strategic Planning" ;
-    dcterms:title "O4DE: Ontology for Domain Engineering (T-Box)"@en ;
-    rdfs:comment "O4DE is a formal ontology of domain engineering for enterprise use. It defines the activities, assets, features and variability of domain engineering, the processes, roles, rules and metrics that govern it, the business context it works in (customers, products, channels, vendors, organization and agility), and the structure of the enterprise domain itself: domain foundations, organizational taxonomy, governance, capabilities, work structure, requirements, data and technology architecture, assets, change and knowledge. Its purpose is to give analysts and architects one shared, machine-checkable vocabulary for documenting a business domain. The class, property and taxonomy counts are reproduced by the gate script in 05-gates."@en ;
-    owl:versionIRI <http://www.zt4swe.io/o4de/1.1.0> ;
-    owl:versionInfo "1.1.0" .
-
 o4de:AcceptanceCriteria a owl:Class ;
     rdfs:label "Acceptance Criteria"@en ;
     rdfs:seeAlso de52:AcceptanceCriteria ;
@@ -5333,6 +5559,30 @@ o4de:Bottleneck a owl:Class ;
     rdfs:label "Bottleneck"@en ;
     rdfs:seeAlso de52:Bottleneck ;
     skos:definition "A step in a process whose limited capacity holds back the throughput of the whole process."@en .
+
+o4de:BusinessAnalysis a owl:Class ;
+    rdfs:label "Business Analysis"@en ;
+    dcterms:source "Owner's UAISE draft, section 2.1 (extract)" ;
+    rdfs:subClassOf o4de:DomainEngineeringProcess ;
+    skos:definition "The process of studying a business, its needs and its problems in order to define what has to change."@en .
+
+o4de:BusinessArchitecture a owl:Class ;
+    rdfs:label "Business Architecture"@en ;
+    dcterms:source "Owner's UAISE draft, section 2.1 (extract)" ;
+    rdfs:subClassOf o4de:DomainModel ;
+    skos:definition "A model of how the strategy, organization, functions and processes of a business are structured and interact."@en .
+
+o4de:BusinessProcessModel a owl:Class ;
+    rdfs:label "Business Process Model"@en ;
+    dcterms:source "Owner's UAISE draft, section 2.1 (extract)" ;
+    rdfs:subClassOf o4de:DomainModel ;
+    skos:definition "A formal representation of a business workflow, often drawn in a standard notation such as BPMN 2.0."@en .
+
+o4de:BusinessProcessModeling a owl:Class ;
+    rdfs:label "Business Process Modeling"@en ;
+    dcterms:source "Owner's UAISE draft, section 2.1 (extract)" ;
+    rdfs:subClassOf o4de:DomainEngineeringProcess ;
+    skos:definition "The process of describing the workflows of a business as formal models."@en .
 
 o4de:CRM a owl:Class ;
     rdfs:label "Customer Relationship Management"@en ;
@@ -5360,6 +5610,12 @@ o4de:CompletenessTest a owl:Class ;
     rdfs:seeAlso de52:CompletenessTest ;
     rdfs:subClassOf o4de:TestType ;
     skos:definition "Validates coverage and completeness of ontology elements"@en .
+
+o4de:ConceptualModel a owl:Class ;
+    rdfs:label "Conceptual Model"@en ;
+    dcterms:source "Owner's UAISE draft, section 2.1 (extract)" ;
+    rdfs:subClassOf o4de:DomainModel ;
+    skos:definition "A high-level model that captures the main concepts of a domain and how they relate, without implementation detail."@en .
 
 o4de:ConsistencyTest a owl:Class ;
     rdfs:label "Consistency Test"@en ;
@@ -5443,11 +5699,23 @@ o4de:DomainCorpus a owl:Class ;
     rdfs:subClassOf o4de:KnowledgeSource ;
     skos:definition "A body of texts about a domain that serves as a source of knowledge for building an ontology."@en .
 
+o4de:DomainEngineeringPrompt a owl:Class ;
+    rdfs:label "Domain Engineering Prompt Template"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:DomainAsset ;
+    skos:definition "A reusable instruction template for a language model that carries out a domain engineering task."@en .
+
 o4de:DomainLiterature a owl:Class ;
     rdfs:label "Domain Literature"@en ;
     rdfs:seeAlso de52:DomainLiterature ;
     rdfs:subClassOf o4de:KnowledgeSource ;
     skos:definition "A knowledge source made up of books, papers and standards about the domain."@en .
+
+o4de:DomainModelValidation a owl:Class ;
+    rdfs:label "Domain Model Validation"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:DomainAnalysisTechnique ;
+    skos:definition "The technique of checking a domain model against its purpose, by competency questions, consistency checking and review by stakeholders; it is done repeatedly during domain engineering and not only at the end."@en .
 
 o4de:EnablingCapability a owl:Class ;
     rdfs:label "Enabling Capability"@en ;
@@ -8492,6 +8760,30 @@ o4de:workflowAutomation a owl:ObjectProperty ;
     rdfs:seeAlso de52:workflowAutomation ;
     skos:definition "Links a process to a workflow automation; the inverse of the relation 'workflowautomationof'."@en .
 
+<http://www.zt4swe.io/o4de> a owl:Ontology ;
+    dc:title "O4DE: Ontology for Domain Engineering (T-Box)"@en ;
+    dcterms:coverage "Enterprise domain engineering" ;
+    dcterms:created "2026-10-13"^^xsd:date ;
+    dcterms:creator "Yusuf Altunel" ;
+    dcterms:description "Classes, properties and axioms of the Ontology for Domain Engineering."@en ;
+    dcterms:license <http://www.apache.org/licenses/LICENSE-2.0> ;
+    dcterms:modified "2026-10-13"^^xsd:date ;
+    dcterms:rights "Copyright 2026 Yusuf Altunel" ;
+    dcterms:subject "Agile Methodologies",
+        "Business Analysis",
+        "Customer Management",
+        "Domain Engineering",
+        "Operations Management",
+        "Organizational Management",
+        "Process Improvement",
+        "Product Management",
+        "Quality Management",
+        "Strategic Planning" ;
+    dcterms:title "O4DE: Ontology for Domain Engineering (T-Box)"@en ;
+    rdfs:comment "O4DE is a formal ontology of domain engineering for enterprise use. It defines the activities, assets, features and variability of domain engineering, the processes, roles, rules and metrics that govern it, the business context it works in (customers, products, channels, vendors, organization and agility), and the structure of the enterprise domain itself: domain foundations, organizational taxonomy, governance, capabilities, work structure, requirements, data and technology architecture, assets, change and knowledge. It also covers the AI-assisted practice of domain engineering, the business-analysis phase that precedes technical work, and the variation of components and products. Its purpose is to give analysts and architects one shared, machine-checkable vocabulary for documenting a business domain. The class, property and taxonomy counts are reproduced by the gate script in 05-gates."@en ;
+    owl:versionIRI <http://www.zt4swe.io/o4de/1.2.0> ;
+    owl:versionInfo "1.2.0" .
+
 o4de:APIDiscovery a owl:Class ;
     rdfs:label "API Discovery"@en ;
     rdfs:seeAlso de52:APIDiscovery ;
@@ -8606,13 +8898,6 @@ o4de:BlockchainGovernance a owl:Class ;
     rdfs:subClassOf o4de:GovernanceFramework ;
     skos:definition "A governance framework in which rules and decisions are carried out or recorded on a distributed ledger."@en .
 
-o4de:BusinessDomain a owl:Class ;
-    rdfs:label "Business Domain"@en ;
-    rdfs:seeAlso de52:BusinessDomain ;
-    rdfs:subClassOf o4de:Domain,
-        o4de:DomainType ;
-    skos:definition "A domain made up of business activity, such as sales or logistics, as opposed to technical work."@en .
-
 o4de:BusinessEnvironment a owl:Class ;
     rdfs:label "Business Environment"@en ;
     rdfs:subClassOf o4de:BusinessContext ;
@@ -8711,6 +8996,12 @@ o4de:Conception a owl:Class ;
     rdfs:seeAlso de52:Conception ;
     rdfs:subClassOf o4de:OrganizationalLifecyclePhase ;
     skos:definition "The organizational lifecycle phase in which the idea for an organization is formed, before it is set up."@en .
+
+o4de:ConceptualERD a owl:Class ;
+    rdfs:label "Conceptual Entity-Relationship Diagram"@en ;
+    dcterms:source "Owner's UAISE draft, section 2.1 (extract)" ;
+    rdfs:subClassOf o4de:ConceptualModel ;
+    skos:definition "A high-level entity-relationship diagram that defines the main entities of a domain and their relationships, without attributes or primary keys."@en .
 
 o4de:ConstructionDomain a owl:Class ;
     rdfs:label "Construction Domain"@en ;
@@ -8929,6 +9220,34 @@ o4de:DomainEngineer a owl:Class ;
     rdfs:subClassOf o4de:DomainEngineeringRole ;
     skos:definition "The domain engineering role that analyses a domain and builds its reusable models and assets."@en .
 
+o4de:DomainEngineeringPhase a owl:Class ;
+    rdfs:label "Domain Engineering Phase"@en,
+        "İş Alanı Mühendisliği"@tr ;
+    dcterms:source "Owner's UAISE draft, section 2.1 (extract)" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty o4de:producesArtifact ;
+            owl:someValuesFrom o4de:BusinessDomain ],
+        [ a owl:Restriction ;
+            owl:onProperty o4de:hasKeyProcess ;
+            owl:someValuesFrom o4de:BusinessAnalysis ],
+        [ a owl:Restriction ;
+            owl:onProperty o4de:hasKeyProcess ;
+            owl:someValuesFrom o4de:BusinessProcessModeling ],
+        [ a owl:Restriction ;
+            owl:onProperty o4de:producesArtifact ;
+            owl:someValuesFrom o4de:DomainOntology ],
+        [ a owl:Restriction ;
+            owl:onProperty o4de:producesArtifact ;
+            owl:someValuesFrom o4de:BusinessProcessModel ],
+        [ a owl:Restriction ;
+            owl:onProperty o4de:producesArtifact ;
+            owl:someValuesFrom o4de:BusinessArchitecture ],
+        [ a owl:Restriction ;
+            owl:onProperty o4de:producesArtifact ;
+            owl:someValuesFrom o4de:ConceptualERD ],
+        o4de:ProcessPhase ;
+    skos:definition "The initial phase of a software process, in which the business context is understood and modelled at a high level before the technical phases begin."@en .
+
 o4de:DomainExpert a owl:Class ;
     rdfs:label "Domain Expert"@en ;
     rdfs:seeAlso de52:DomainExpert ;
@@ -8946,6 +9265,12 @@ o4de:DomainModelingTool a owl:Class ;
     rdfs:seeAlso de52:DomainModelingTool ;
     rdfs:subClassOf o4de:Tool ;
     skos:definition "A tool used to build, edit and check models of a domain."@en .
+
+o4de:DomainOntology a owl:Class ;
+    rdfs:label "Domain Ontology"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:Ontology ;
+    skos:definition "An ontology that specifies the concepts of one business or technical domain and the relations between them."@en .
 
 o4de:DomainScope a owl:Class ;
     rdfs:label "Domain Scope"@en ;
@@ -9465,7 +9790,8 @@ o4de:Office a owl:Class ;
 o4de:OntologyEditor a owl:Class ;
     rdfs:label "Ontology Editor"@en ;
     rdfs:seeAlso de52:OntologyEditor ;
-    rdfs:subClassOf o4de:Tool ;
+    rdfs:subClassOf o4de:DomainEngineeringTool,
+        o4de:Tool ;
     skos:definition "A tool for creating and editing ontologies."@en .
 
 o4de:OperatingModel a owl:Class ;
@@ -9566,6 +9892,11 @@ o4de:ProcessOwner a owl:Class ;
         o4de:Role ;
     skos:definition "A role accountable for the design and results of a process from end to end."@en .
 
+o4de:ProcessPhase a owl:Class ;
+    rdfs:label "Process Phase"@en ;
+    dcterms:source "Owner's UAISE draft, section 2.1 (extract)" ;
+    skos:definition "A stage of a software or business process, taken as a whole with its own purpose and products."@en .
+
 o4de:ProcessReengineering a owl:Class ;
     rdfs:label "Process Reengineering"@en ;
     rdfs:seeAlso de52:ProcessReengineering ;
@@ -9636,11 +9967,6 @@ o4de:RealEstateDomain a owl:Class ;
     rdfs:subClassOf o4de:IndustryDomain ;
     skos:definition "The industry domain of buying, selling, leasing and managing land and buildings."@en .
 
-o4de:Reasoner a owl:Class ;
-    rdfs:label "Reasoner"@en ;
-    rdfs:seeAlso de52:Reasoner ;
-    skos:definition "A tool that infers new facts from an ontology and checks it for contradictions."@en .
-
 o4de:ReferenceData a owl:Class ;
     rdfs:label "Reference Data"@en ;
     rdfs:seeAlso de52:ReferenceData ;
@@ -9697,7 +10023,8 @@ o4de:SalesDomain a owl:Class ;
 o4de:Scalability a owl:Class ;
     rdfs:label "Scalability"@en ;
     rdfs:seeAlso de52:Scalability ;
-    rdfs:subClassOf o4de:QualityAttribute ;
+    rdfs:subClassOf o4de:QualityAttribute,
+        o4de:VariationCapacityProperty ;
     skos:definition "The quality attribute of how well a system copes with growing load by adding resources."@en .
 
 o4de:ScalabilityImprovement a owl:Class ;
@@ -10205,6 +10532,13 @@ o4de:hasFeature a owl:ObjectProperty ;
     rdfs:range o4de:Feature ;
     skos:definition "Links a feature model to a feature it contains."@en .
 
+o4de:hasKeyProcess a owl:ObjectProperty ;
+    rdfs:label "has key process"@en ;
+    dcterms:source "Owner's UAISE draft, section 2.1 (extract)" ;
+    rdfs:domain o4de:DomainEngineeringPhase ;
+    rdfs:range o4de:Process ;
+    skos:definition "Links a phase to a process that is key within it."@en .
+
 o4de:hasLifecycleStage a owl:ObjectProperty ;
     rdfs:label "has lifecycle stage"@en ;
     rdfs:domain o4de:DomainAsset ;
@@ -10671,6 +11005,18 @@ o4de:DomainAnalysis a owl:Class ;
         o4de:DomainEngineeringProcess ;
     skos:definition "Identification and understanding of the problem space: stakeholder needs, constraints, common requirements and variability"@en .
 
+o4de:DomainAnalysisTechnique a owl:Class ;
+    rdfs:label "Domain Analysis Technique"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:DiscoveryMethod ;
+    skos:definition "A technique used in analysing a domain, such as extracting its concepts, mapping its relationships or validating the model built from them."@en .
+
+o4de:DomainEngineeringTool a owl:Class ;
+    rdfs:label "Domain Engineering Tool"@en ;
+    dcterms:source "AI4SE ontology package, Domain Engineering module (repaired copy of the received file)" ;
+    rdfs:subClassOf o4de:Tool ;
+    skos:definition "A tool that supports the work of domain engineering, such as an ontology editor or a reasoner."@en .
+
 o4de:DomainEvolution a owl:Class ;
     rdfs:label "Domain Evolution"@en ;
     rdfs:seeAlso de52:DomainEvolution ;
@@ -11005,6 +11351,12 @@ o4de:RealTimeIntegration a owl:Class ;
     rdfs:seeAlso de52:RealTimeIntegration ;
     skos:definition "An integration pattern in which systems exchange data as events occur, without delay."@en .
 
+o4de:Reasoner a owl:Class ;
+    rdfs:label "Reasoner"@en ;
+    rdfs:seeAlso de52:Reasoner ;
+    rdfs:subClassOf o4de:DomainEngineeringTool ;
+    skos:definition "A tool that infers new facts from an ontology and checks it for contradictions."@en .
+
 o4de:ReferenceArchitecture a owl:Class ;
     rdfs:label "Reference Architecture"@en ;
     rdfs:seeAlso de52:ReferenceArchitecture ;
@@ -11122,6 +11474,12 @@ o4de:UnderReview a owl:Class ;
     rdfs:subClassOf o4de:AssetLifecycleStage ;
     skos:definition "The asset lifecycle stage of an asset that is being checked before release or further use."@en .
 
+o4de:VariationElement a owl:Class ;
+    rdfs:label "Variation Element"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    skos:definition "An element of a component or product whose presence in a variant depends on a choice."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:Vendor a owl:Class ;
     rdfs:label "Vendor"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -11205,6 +11563,13 @@ o4de:BusinessAnalyst a owl:Class ;
     rdfs:seeAlso de52:BusinessAnalyst ;
     rdfs:subClassOf o4de:Role ;
     skos:definition "A role that studies business needs, elicits requirements and describes processes and rules."@en .
+
+o4de:BusinessDomain a owl:Class ;
+    rdfs:label "Business Domain"@en ;
+    rdfs:seeAlso de52:BusinessDomain ;
+    rdfs:subClassOf o4de:Domain,
+        o4de:DomainType ;
+    skos:definition "A domain made up of business activity, such as sales or logistics, as opposed to technical work."@en .
 
 o4de:BusinessEvent a owl:Class ;
     rdfs:label "Business Event"@en ;
@@ -11443,6 +11808,12 @@ o4de:VariabilityMechanism a owl:Class ;
     rdfs:seeAlso de52:VariabilityMechanism ;
     skos:definition "A technique that implements variation at a variation point"@en .
 
+o4de:VariationKind a owl:Class ;
+    rdfs:label "Variation Kind"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    skos:definition "A classification of variation by the level or the aspect at which it occurs."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:Weakness a owl:Class ;
     rdfs:label "Weakness"@en ;
     rdfs:subClassOf o4de:StrategicAnalysis ;
@@ -11518,12 +11889,6 @@ o4de:DomainMaturity a owl:Class ;
     rdfs:label "Domain Maturity"@en ;
     rdfs:seeAlso de52:DomainMaturity ;
     skos:definition "A classification of how developed and well understood a domain is."@en .
-
-o4de:DomainModel a owl:Class ;
-    rdfs:label "Domain Model"@en ;
-    rdfs:seeAlso de52:DomainModel ;
-    rdfs:subClassOf o4de:DomainAsset ;
-    skos:definition "A model of the key concepts, relationships and constraints within the application domain"@en .
 
 o4de:Facility a owl:Class ;
     rdfs:label "Facility"@en ;
@@ -11645,10 +12010,25 @@ o4de:TestType a owl:Class ;
     rdfs:seeAlso de52:TestType ;
     skos:definition "Category of testing methodology"@en .
 
+o4de:VariantGenerationStep a owl:Class ;
+    rdfs:label "Variant Generation Step"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:ProcessPhase ;
+    skos:definition "A step of the variant generation process."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
+
 o4de:VotingMechanism a owl:Class ;
     rdfs:label "Voting Mechanism"@en ;
     rdfs:seeAlso de52:VotingMechanism ;
     skos:definition "The method by which members of a governing body express their choice and a result is determined."@en .
+
+o4de:producesArtifact a owl:ObjectProperty ;
+    rdfs:label "produces artifact"@en ;
+    dcterms:source "Owner's UAISE draft, section 2.1 (extract)" ;
+    rdfs:domain o4de:DomainEngineeringPhase ;
+    rdfs:range [ a owl:Class ;
+            owl:unionOf ( o4de:BusinessDomain o4de:DomainModel ) ] ;
+    skos:definition "Links a phase to a business domain or a model that the phase produces."@en .
 
 o4de:AssetCondition a owl:Class ;
     rdfs:label "Asset Condition"@en ;
@@ -11735,17 +12115,6 @@ o4de:AutomationTechnique a owl:Class ;
     rdfs:seeAlso de52:AutomationTechnique ;
     skos:definition "A way of automating work, such as data, decision, integration or robotic automation."@en .
 
-o4de:DomainEngineeringProcess a owl:Class ;
-    rdfs:label "Domain Engineering Process"@en ;
-    rdfs:seeAlso de52:DomainEngineeringProcess ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:int ;
-                    owl:withRestrictions ( [ xsd:minInclusive "1"^^xsd:int ] [ xsd:maxInclusive "5"^^xsd:int ] ) ] ;
-            owl:onProperty o4de:hasMaturityLevel ],
-        o4de:Process ;
-    skos:definition "A structured set of activities, roles and controls that produces and maintains domain assets"@en .
-
 o4de:OrganizationSize a owl:Class ;
     rdfs:label "Organization Size"@en ;
     rdfs:seeAlso de52:OrganizationSize ;
@@ -11784,11 +12153,6 @@ o4de:TestSuite a owl:Class ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty o4de:hasTestCase ] ;
     skos:definition "Collection of test cases for ontology validation"@en .
-
-o4de:Tool a owl:Class ;
-    rdfs:label "Tool"@en ;
-    rdfs:seeAlso de52:Tool ;
-    skos:definition "A software tool that supports domain engineering activities"@en .
 
 o4de:Workflow a owl:Class ;
     rdfs:label "Workflow"@en ;
@@ -11859,6 +12223,11 @@ o4de:ProductLifecycleStage a owl:Class ;
     rdfs:label "Product Lifecycle Stage"@en ;
     skos:definition "A distinct phase in a product's lifecycle"@en .
 
+o4de:Tool a owl:Class ;
+    rdfs:label "Tool"@en ;
+    rdfs:seeAlso de52:Tool ;
+    skos:definition "A software tool that supports domain engineering activities"@en .
+
 o4de:BusinessCapability a owl:Class ;
     rdfs:label "Business Capability"@en ;
     rdfs:seeAlso de52:BusinessCapability ;
@@ -11897,10 +12266,11 @@ o4de:Deployment a owl:Class ;
     skos:definition "Deployment configuration of the ontology in a runtime environment"@en,
         "Phase of deploying to production"@en .
 
-o4de:DiscoveryMethod a owl:Class ;
-    rdfs:label "Discovery Method"@en ;
-    rdfs:seeAlso de52:DiscoveryMethod ;
-    skos:definition "A systematic way of finding out how a domain works, such as interviews, code mining or data profiling."@en .
+o4de:DomainModel a owl:Class ;
+    rdfs:label "Domain Model"@en ;
+    rdfs:seeAlso de52:DomainModel ;
+    rdfs:subClassOf o4de:DomainAsset ;
+    skos:definition "A model of the key concepts, relationships and constraints within the application domain"@en .
 
 o4de:Stakeholder a owl:Class ;
     rdfs:label "Stakeholder"@en ;
@@ -11932,12 +12302,10 @@ o4de:DevelopmentPhase a owl:Class ;
     rdfs:seeAlso de52:DevelopmentPhase ;
     skos:definition "Phase in ontology development lifecycle"@en .
 
-o4de:DomainEngineeringActivity a owl:Class ;
-    rdfs:label "Domain Engineering Activity"@en ;
-    rdfs:subClassOf o4de:ProcessActivity ;
-    skos:definition "A systematic activity that contributes to the creation, analysis, design, implementation or evolution of domain assets"@en ;
-    skos:example "Domain analysis, feature modeling, component design, asset testing"@en ;
-    skos:scopeNote "Domain engineering activities are the fundamental building blocks of the domain engineering process"@en .
+o4de:DiscoveryMethod a owl:Class ;
+    rdfs:label "Discovery Method"@en ;
+    rdfs:seeAlso de52:DiscoveryMethod ;
+    skos:definition "A systematic way of finding out how a domain works, such as interviews, code mining or data profiling."@en .
 
 o4de:ProcessActivity a owl:Class ;
     rdfs:label "Process Activity"@en ;
@@ -11946,13 +12314,12 @@ o4de:ProcessActivity a owl:Class ;
             owl:onProperty o4de:hasDuration ] ;
     skos:definition "A unit of work performed within a process, with a duration, effort and responsible roles"@en .
 
-o4de:QualityAttribute a owl:Class ;
-    rdfs:label "Quality Attribute"@en ;
-    rdfs:seeAlso de52:QualityAttribute ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty o4de:measuredBy ] ;
-    skos:definition "A measurable property of a system or asset such as security, performance or reusability"@en .
+o4de:VariationCapacityProperty a owl:Class ;
+    rdfs:label "Variation Capacity Property"@en ;
+    dcterms:source "Owner's 2013 thesis (section headings only)" ;
+    rdfs:subClassOf o4de:QualityAttribute ;
+    skos:definition "A quality attribute that contributes to how far a component or product can be varied, such as adaptability or configurability."@en ;
+    skos:scopeNote "Named in the headings of the owner's 2013 thesis; the definition is a general reading of the term and is to be confirmed against the thesis text."@en .
 
 o4de:VariationPoint a owl:Class ;
     rdfs:label "Variation Point"@en ;
@@ -11989,6 +12356,24 @@ o4de:Channel a owl:Class ;
     rdfs:subClassOf o4de:ChannelManagement ;
     skos:definition "A medium or pathway through which products, services or information reach customers"@en .
 
+o4de:DomainEngineeringActivity a owl:Class ;
+    rdfs:label "Domain Engineering Activity"@en ;
+    rdfs:subClassOf o4de:ProcessActivity ;
+    skos:definition "A systematic activity that contributes to the creation, analysis, design, implementation or evolution of domain assets"@en ;
+    skos:example "Domain analysis, feature modeling, component design, asset testing"@en ;
+    skos:scopeNote "Domain engineering activities are the fundamental building blocks of the domain engineering process"@en .
+
+o4de:DomainEngineeringProcess a owl:Class ;
+    rdfs:label "Domain Engineering Process"@en ;
+    rdfs:seeAlso de52:DomainEngineeringProcess ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:int ;
+                    owl:withRestrictions ( [ xsd:minInclusive "1"^^xsd:int ] [ xsd:maxInclusive "5"^^xsd:int ] ) ] ;
+            owl:onProperty o4de:hasMaturityLevel ],
+        o4de:Process ;
+    skos:definition "A structured set of activities, roles and controls that produces and maintains domain assets"@en .
+
 o4de:GovernanceFramework a owl:Class ;
     rdfs:label "Governance Framework"@en ;
     rdfs:seeAlso de52:GovernanceFramework ;
@@ -12005,11 +12390,13 @@ o4de:MarketingCampaign a owl:Class ;
         o4de:CampaignManagement ;
     skos:definition "A coordinated series of marketing activities designed to achieve specific objectives"@en .
 
-o4de:Ontology a owl:Class ;
-    rdfs:label "Ontology"@en ;
-    rdfs:seeAlso de52:Ontology ;
-    rdfs:subClassOf o4de:DomainModel ;
-    skos:definition "A domain model that defines the concepts of a domain and their relations in a formal, machine-readable way."@en .
+o4de:QualityAttribute a owl:Class ;
+    rdfs:label "Quality Attribute"@en ;
+    rdfs:seeAlso de52:QualityAttribute ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty o4de:measuredBy ] ;
+    skos:definition "A measurable property of a system or asset such as security, performance or reusability"@en .
 
 o4de:Version a owl:Class ;
     rdfs:label "Version"@en ;
@@ -12030,10 +12417,11 @@ o4de:CorporateFunctionDomain a owl:Class ;
         o4de:DomainType ;
     skos:definition "A domain made of a function that most organizations need, such as finance, legal or human resources."@en .
 
-o4de:Metric a owl:Class ;
-    rdfs:label "Metric"@en ;
-    rdfs:seeAlso de52:Metric ;
-    skos:definition "A defined measure used to quantify a quality attribute or process performance"@en .
+o4de:Ontology a owl:Class ;
+    rdfs:label "Ontology"@en ;
+    rdfs:seeAlso de52:Ontology ;
+    rdfs:subClassOf o4de:DomainModel ;
+    skos:definition "A domain model that defines the concepts of a domain and their relations in a formal, machine-readable way."@en .
 
 o4de:VendorSolution a owl:Class ;
     rdfs:label "Vendor Solution"@en ;
@@ -12052,6 +12440,11 @@ o4de:Feature a owl:Class ;
     rdfs:label "Feature"@en ;
     rdfs:seeAlso de52:Feature ;
     skos:definition "A distinguishable characteristic of a system that is relevant to a stakeholder"@en .
+
+o4de:Metric a owl:Class ;
+    rdfs:label "Metric"@en ;
+    rdfs:seeAlso de52:Metric ;
+    skos:definition "A defined measure used to quantify a quality attribute or process performance"@en .
 
 o4de:DomainAnalyst a owl:Class ;
     rdfs:label "Domain Analyst"@en ;
