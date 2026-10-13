@@ -1,0 +1,18 @@
+path	bytes	sha256	turtle status
+01-framework-and-documentation/01_Domain_Engineering_Documentation_Template.md	56033	38b69845ce7153798c2acc7b0e4cb4b25386dbfee02b8ca4e27da9bf518e268b	
+01-framework-and-documentation/02_Domain_Engineering_Ontology.ttl	137842	54df79fd2a819c38934d5d8781481f4b87d935b46606d3599dcdc81a3cec1bb0	parses; 138 classes, 3380 triples
+01-framework-and-documentation/03_Competency_Questions.md	6193	0037db0ef138d165f6d943eeacf8712fd7f59222dad7711608886cd101df9197	
+01-framework-and-documentation/README.md	3384	047b7b6196c8eed5c9434588d5560dc0b2eafd8d41fcbae211e46ad63a328736	
+01-framework-and-documentation/reference/Metadefinition_of_Ontology_and_Taxonomy_ClaudeSonnet_Extended_docx.txt	18121	5ebd423b810098d9f3c9d6b8512895bc84a826296eb13025f6360533dc54f908	
+02-ontology-v5.2/Deliverables_Summary_v5_2.md	15992	1aadf2165b94472345be108675db603f136bbe4049cf27297567057b636ecc78	
+02-ontology-v5.2/Domain_Engineering_Ontology_v5_2_Enhanced.ttl	296476	3f948308a8d534c55bd03ece7e1ca1e78e7f5a088e0cc950da34d72505142786	parses; 206 classes, 6678 triples
+02-ontology-v5.2/Enhancement_Summary_v5_2.md	25642	126b5126172637e8fc5dde98408bcb0841f337117e0574e5fa60c4ce71eff239	
+02-ontology-v5.2/SUCCESS_CONFIRMATION.md	11521	73102108bcacc4d88fc7acea8e4cfb11b4cb56aba9eccfd2fcb8536e65a0a05b	
+02-ontology-v5.2/Validation_Checklist_v5_2.md	15374	03a87a47b87288a1f54ce65409cf6dc23938531c9094fe3616949ed90253aac8	
+03-ai4se-material/Book2_Chapter2_SDLC_AI4SE_FINAL_ACADEMIC.md	268121	f08f13267d3240355d53f9be73d9be6fa7f6ada824f66994d196a22e22b5d0a4	
+03-ai4se-material/Ontology_Comparison_Enterprise_vs_Ours.md	15507	647361f9a312c3d75a23bfb26622029b96cc203ebb5cae47f7c1d721e31ac5a3	
+03-ai4se-material/Ontology_Module_DomainEngineering.ttl	23607	f15b52c2d098f3c3379e06cb69d1769b1d023c08cae04775f033046450c72a2d	does not parse (at line 167 of <>: Bad syntax (expected '.' or '}' or ']' at end of st)
+03-ai4se-material/enterprise-edition-v4.5/AI4SE_Ontology_v4_5_ENTERPRISE_EDITION.ttl	1735260	e3fd2116d823b09f4a0e4824fcca482d7cbd2a10fbd964b3d3a3191180cdc153	does not parse (at line 14 of <>: Bad syntax (newline found in string literal) at ^ in)
+03-ai4se-material/enterprise-edition-v4.5/AI4SE_v4_5_RELEASE_NOTES.md	18558	676fbaf412ec6c3d4e16d9ee1d3238b520652c198c8a075f294a7b6cd505c78e	
+04-owner-extracts/Thesis_headings_extract.md	2347	5babffc3339ff59bc0f3a3ac52c51ffae2dbe5bcec41792b187302a1119fb91c	
+04-owner-extracts/UAISE_section_2_1_Domain_Engineering.md	2000	708736ba0cc1ce19f6af55a3f27e004dbc1e35f85cc53a5e5aa4ed8c0d45e324	 

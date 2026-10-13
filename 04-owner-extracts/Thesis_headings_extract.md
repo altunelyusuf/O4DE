@@ -1,0 +1,65 @@
+# Thesis headings (extract)
+
+Altunel, Y. (2013), "An Algebraic Approach for Generation of Software Component Variants", PhD thesis, Istanbul University. Section headings only, English numbering (the Turkish original numbers its chapters one lower); body text is not included. The thesis names domain engineering and application engineering as concepts but does not use them as headings.
+
+- 2.4.5 Component-Based Software Development Processes
+- 2.4.5.1 Fractal Structure
+- 2.4.5.2 Requirements Identification
+- 2.4.5.3 Analysis
+- 2.4.5.4 Evaluation
+- 2.4.5.5 Component-Based Architecture
+- 2.4.5.6 Component-Based Design
+- 2.4.5.7 Project Management
+- 2.4.5.8 Estimation
+- 2.5.4 Software Product Line
+- 3.1 VARIATION AS A QUALITY ATTRIBUTE
+- 3.1.1 Variant, Variation, Differentiation
+- 3.1.2 Types of Variation
+- 3.1.2.1 Product-Level Variation
+- 3.1.2.2 Product-Family-Level Variation
+- 3.1.2.3 Functional Variation
+- 3.1.2.4 Non-Functional Variation
+- 3.1.3 Properties of Variation Capacity
+- 3.1.3.1 Adaptability
+- 3.1.3.2 Configurability
+- 3.1.3.3 Customisability
+- 3.1.3.4 Evolvability
+- 3.1.3.5 Extensibility
+- 3.1.3.6 Modifiability
+- 3.1.3.7 Portability
+- 3.1.3.8 Scalability
+- 3.1.3.9 Suitability
+- 3.1.3.10 Tailorability
+- 3.1.3.11 Upgradability
+- 3.1.4 Variation Capacity Metric
+- 3.1.4.1 Effect of Optional Elements
+- 3.1.4.2 Effect of Exclusive Elements
+- 3.1.4.3 Effect of Dependent Elements
+- 3.1.4.4 General Formula
+- 3.1.5 Other Approaches to Variation
+- 3.2.9 Variant Generation Process
+- 3.2.9.1 Specification
+- 3.2.9.2 Analysis
+- 3.2.9.3 Transformation
+- 3.2.9.4 Application
+- 3.2.9.5 Synthesis
+- 3.3 SYSTEM ANALYSIS WORK
+- 3.3.1 Functional Requirements
+- 3.3.1.1 Entity Management
+- 3.3.1.2 Variant Template Construction
+- 3.3.2 Use Case Diagrams
+- 3.3.2.1 Management of Entity Information
+- 3.3.2.2 Editing of Relationships
+- 3.3.2.3 Management of Variants
+- 3.3.2.4 Programming Language Management and Automatic Code Generation
+- 3.3.3 Class Diagrams at the Analysis Level
+- 3.3.4 Conceptual Entity-Relationship Diagrams
+- 3.3.5 Logical Entity-Relationship Diagrams
+- 3.4 DESIGN WORK
+- 3.4.1 Architectural Design
+- 3.4.1.1 Layered Architecture and Main Layers
+- 3.4.1.2 Package Diagrams
+- 3.4.1.3 Classes in the entity Package
+- 3.4.1.4 Classes in the sets Package
+- 3.4.1.5 symbolicProcessor Package
+- 3.4.2 Database Design
