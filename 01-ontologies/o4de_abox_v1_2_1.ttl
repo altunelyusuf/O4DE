@@ -1,5 +1,5 @@
 # O4DE: Ontology for Domain Engineering - A-Box
-# Version 1.2.0 (2026-10-13). Copyright 2026 Yusuf Altunel. Licensed under the Apache License, Version 2.0.
+# Version 1.2.1 (2026-10-13). Copyright 2026 Yusuf Altunel. Licensed under the Creative Commons Attribution 4.0 International licence (CC BY 4.0).
 # Role: A-Box. Taxonomies and example individuals only; no class or property declarations.
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -261,14 +261,15 @@ o4de:WarehousePickingOptimization a owl:NamedIndividual,
     dcterms:created "2026-10-13"^^xsd:date ;
     dcterms:creator "Yusuf Altunel" ;
     dcterms:description "Fifteen SKOS taxonomies and illustrative example individuals for the Ontology for Domain Engineering."@en ;
-    dcterms:license <http://www.apache.org/licenses/LICENSE-2.0> ;
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
     dcterms:modified "2026-10-13"^^xsd:date ;
     dcterms:rights "Copyright 2026 Yusuf Altunel" ;
     dcterms:title "O4DE: Ontology for Domain Engineering (A-Box)"@en ;
     rdfs:comment "This file holds the individuals of O4DE: the fifteen SKOS taxonomies that classify domain engineering and business concepts, and a small set of illustrative example individuals, among them the Fashion Retail case, that show how the T-Box is used. Examples are invented for teaching and are not sourced facts. Counts are reproduced by the gate script in 05-gates."@en ;
     owl:imports <http://www.zt4swe.io/o4de> ;
-    owl:versionIRI <http://www.zt4swe.io/o4de-abox/1.2.0> ;
-    owl:versionInfo "1.2.0" .
+    owl:priorVersion <http://www.zt4swe.io/o4de-abox/1.2.0> ;
+    owl:versionIRI <http://www.zt4swe.io/o4de-abox/1.2.1> ;
+    owl:versionInfo "1.2.1" .
 
 o4de:AIIntegration a owl:NamedIndividual,
         o4de:Opportunity ;

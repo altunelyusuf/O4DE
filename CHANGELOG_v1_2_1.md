@@ -1,5 +1,16 @@
 # O4DE change history
 
+## 1.2.1 (2026-10-13), licence aligned with the owner's other public repositories
+
+Predecessor: 1.2.0. No class, property, individual or shape changed. The owner asked that O4DE use the same licences as the other public repositories. Measured: AI4SWE (`ai4se/LICENSE.md`), the OE Method (`oe-method/LICENSE.md`) and the Backlog and Roadmap Framework (`LICENSE`) state CC BY 4.0 for ontologies, shapes and documentation; AI4SWE and the OE Method add Apache-2.0 for tooling; O4SWE's own files carry CC BY 4.0 statements. O4DE had Apache-2.0 for everything.
+
+Changed:
+- `LICENSE` (Apache-2.0 text) replaced by `LICENSE.md` with the terms per component and the attribution line.
+- The three ontology files carry `dcterms:license` CC BY 4.0 and the matching header line; each header now names its predecessor (`owl:priorVersion`).
+- The two tools carry an Apache-2.0 statement in their header.
+- New gate step 7 checks the licence arrangement and shows it can fail (Apache on an ontology, a tool without its statement, a missing `LICENSE.md` are each refused).
+- Version of the changed files is 1.2.1; the entries below are kept as written (they record earlier releases, including "Licence set to Apache License 2.0" of 1.2.0).
+
 ## 1.2.0 (2026-10-13), AI-assisted practice, business analysis and variation
 
 Predecessor: 1.1.0. The remaining received material that bears on domain engineering is taken over: the Domain Engineering module of the AI4SE ontology package, section 2.1 of the owner's UAISE draft, and the concepts named in the headings of the owner's 2013 thesis. The decisions are in `04-documentation/O4DE_Consolidation_Record_AI4SE_UAISE_Thesis_v1_2_0.md`.

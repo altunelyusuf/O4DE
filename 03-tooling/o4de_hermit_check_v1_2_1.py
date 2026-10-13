@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""o4de_hermit_check_v1_2_0.py -- OWL consistency check of O4DE with the HermiT reasoner.
+# Copyright 2026 Yusuf Altunel. Licensed under the Apache License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0).
+"""o4de_hermit_check_v1_2_1.py -- OWL consistency check of O4DE with the HermiT reasoner.
 
-  python3 03-tooling/o4de_hermit_check_v1_2_0.py <package-root> [--with <extra-turtle-file>]
+  python3 03-tooling/o4de_hermit_check_v1_2_1.py <package-root> [--with <extra-turtle-file>]
 
 Needs: rdflib, owlready2 and a Java runtime. HermiT implements the OWL 2 datatype map, which has no xsd:date and no
 xsd:duration, so the check runs on a COPY of the T-Box and A-Box in which those two datatypes are replaced by xsd:string.

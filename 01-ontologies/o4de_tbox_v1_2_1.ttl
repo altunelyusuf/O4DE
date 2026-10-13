@@ -1,5 +1,5 @@
 # O4DE: Ontology for Domain Engineering - T-Box
-# Version 1.2.0 (2026-10-13). Copyright 2026 Yusuf Altunel. Licensed under the Apache License, Version 2.0.
+# Version 1.2.1 (2026-10-13). Copyright 2026 Yusuf Altunel. Licensed under the Creative Commons Attribution 4.0 International licence (CC BY 4.0).
 # Role: T-Box. Classes, properties and axioms only; no individuals.
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -8766,7 +8766,7 @@ o4de:workflowAutomation a owl:ObjectProperty ;
     dcterms:created "2026-10-13"^^xsd:date ;
     dcterms:creator "Yusuf Altunel" ;
     dcterms:description "Classes, properties and axioms of the Ontology for Domain Engineering."@en ;
-    dcterms:license <http://www.apache.org/licenses/LICENSE-2.0> ;
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
     dcterms:modified "2026-10-13"^^xsd:date ;
     dcterms:rights "Copyright 2026 Yusuf Altunel" ;
     dcterms:subject "Agile Methodologies",
@@ -8781,8 +8781,9 @@ o4de:workflowAutomation a owl:ObjectProperty ;
         "Strategic Planning" ;
     dcterms:title "O4DE: Ontology for Domain Engineering (T-Box)"@en ;
     rdfs:comment "O4DE is a formal ontology of domain engineering for enterprise use. It defines the activities, assets, features and variability of domain engineering, the processes, roles, rules and metrics that govern it, the business context it works in (customers, products, channels, vendors, organization and agility), and the structure of the enterprise domain itself: domain foundations, organizational taxonomy, governance, capabilities, work structure, requirements, data and technology architecture, assets, change and knowledge. It also covers the AI-assisted practice of domain engineering, the business-analysis phase that precedes technical work, and the variation of components and products. Its purpose is to give analysts and architects one shared, machine-checkable vocabulary for documenting a business domain. The class, property and taxonomy counts are reproduced by the gate script in 05-gates."@en ;
-    owl:versionIRI <http://www.zt4swe.io/o4de/1.2.0> ;
-    owl:versionInfo "1.2.0" .
+    owl:priorVersion <http://www.zt4swe.io/o4de/1.2.0> ;
+    owl:versionIRI <http://www.zt4swe.io/o4de/1.2.1> ;
+    owl:versionInfo "1.2.1" .
 
 o4de:APIDiscovery a owl:Class ;
     rdfs:label "API Discovery"@en ;

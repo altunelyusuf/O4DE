@@ -1,5 +1,5 @@
 # O4DE: Ontology for Domain Engineering - SHACL shapes
-# Version 1.2.0 (2026-10-13). Copyright 2026 Yusuf Altunel. Licensed under the Apache License, Version 2.0.
+# Version 1.2.1 (2026-10-13). Copyright 2026 Yusuf Altunel. Licensed under the Creative Commons Attribution 4.0 International licence (CC BY 4.0).
 # Role: SHACL. Shapes only. Validate the T-Box and A-Box together with SHACL advanced features on.
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -341,13 +341,14 @@ o4de:VendorSolutionRestrictionShape a sh:NodeShape ;
     dc:title "O4DE: Ontology for Domain Engineering (SHACL shapes)"@en ;
     dcterms:created "2026-10-13"^^xsd:date ;
     dcterms:creator "Yusuf Altunel" ;
-    dcterms:license <http://www.apache.org/licenses/LICENSE-2.0> ;
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
     dcterms:modified "2026-10-13"^^xsd:date ;
     dcterms:rights "Copyright 2026 Yusuf Altunel" ;
     dcterms:title "O4DE: Ontology for Domain Engineering (SHACL shapes)"@en ;
     rdfs:comment "These shapes check that the O4DE T-Box and A-Box are documented and well formed, and that example and user data follow the T-Box in a closed-world way: every term has a label and a definition, every property has a domain and range, taxonomies are connected trees, and individuals obey the domain, range, cardinality and value restrictions that the T-Box states for OWL reasoners. Validate the T-Box and A-Box together as one data graph with SHACL advanced features switched on; the gate script in 05-gates shows how."@en ;
-    owl:versionIRI <http://www.zt4swe.io/o4de-shapes/1.2.0> ;
-    owl:versionInfo "1.2.0" ;
+    owl:priorVersion <http://www.zt4swe.io/o4de-shapes/1.2.0> ;
+    owl:versionIRI <http://www.zt4swe.io/o4de-shapes/1.2.1> ;
+    owl:versionInfo "1.2.1" ;
     sh:declare [ sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
             sh:prefix "rdfs" ],
         [ sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ;

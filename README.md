@@ -2,18 +2,18 @@
 
 O4DE is a formal ontology that gives analysts and architects one shared, machine-checkable vocabulary for **domain engineering**: the activities, assets, features and variability of the discipline, the processes, roles, rules and metrics that govern it, and the business context it works in (customers, products, channels, vendors, organization and agility), and the structure of the enterprise domain itself: foundations, organization, governance, capabilities, work, requirements, data and technology, assets, change and knowledge; also the AI-assisted practice of domain engineering, the business-analysis phase and the variation of components and products.
 
-Current version: **1.2.0** (2026-10-13). Licence: Apache License 2.0 (`LICENSE`). Owner: Yusuf Altunel.
+Current version: **1.2.1** (2026-10-13). Licence: CC BY 4.0 for the ontologies, shapes and documentation, Apache License 2.0 for the tooling and gates (`LICENSE.md`). Owner: Yusuf Altunel.
 
 ## What is in the package
 
 | Folder or file | What it is |
 |---|---|
-| `01-ontologies/o4de_tbox_v1_2_0.ttl` | The T-Box: every class, property and axiom, each with a label and a definition. |
-| `01-ontologies/o4de_abox_v1_2_0.ttl` | The A-Box: fifteen SKOS taxonomies (twelve mirror the class hierarchies, one divides the enterprise domain structure into its parts, one lists the techniques of AI-assisted domain engineering and one the concepts of variation and variant generation), and illustrative example individuals (invented, not sourced facts). |
-| `02-shacl-safeguards/o4de_shacl_v1_2_0.ttl` | The shapes: they check documentation, taxonomy structure, domain, range, cardinality and value restrictions on data written with the T-Box. |
-| `03-tooling/o4de_hermit_check_v1_2_0.py` | Consistency check with the HermiT reasoner. |
-| `04-documentation/` | The documentation template, the 47 competency questions with SPARQL, the measured comparison with Domain Engineering Ontology v5.2, the records of the two consolidations, the text of the meta-definition the ontology follows, and the validation record (`O4DE_Validation_Record_v1_2_0.md`). |
-| `05-gates/o4de_gate_v1_2_0.py` | The release gate: runs every check below and exits non-zero if one fails. |
+| `01-ontologies/o4de_tbox_v1_2_1.ttl` | The T-Box: every class, property and axiom, each with a label and a definition. |
+| `01-ontologies/o4de_abox_v1_2_1.ttl` | The A-Box: fifteen SKOS taxonomies (twelve mirror the class hierarchies, one divides the enterprise domain structure into its parts, one lists the techniques of AI-assisted domain engineering and one the concepts of variation and variant generation), and illustrative example individuals (invented, not sourced facts). |
+| `02-shacl-safeguards/o4de_shacl_v1_2_1.ttl` | The shapes: they check documentation, taxonomy structure, domain, range, cardinality and value restrictions on data written with the T-Box. |
+| `03-tooling/o4de_hermit_check_v1_2_1.py` | Consistency check with the HermiT reasoner. |
+| `04-documentation/` | The documentation template, the 47 competency questions with SPARQL, the measured comparison with Domain Engineering Ontology v5.2, the records of the two consolidations, the text of the meta-definition the ontology follows, and the validation record (`O4DE_Validation_Record_v1_2_1.md`). |
+| `05-gates/o4de_gate_v1_2_1.py` | The release gate: runs every check below and exits non-zero if one fails. |
 | `vendored-received/` | The domain engineering material that reached this repository before the package was built, kept byte for byte (see its `RECEIPT_NOTE_v1_0_0.md`): the first framework files, Domain Engineering Ontology v5.2, the AI4SE material and two extracts from the owner's writing. |
 | `fixtures/` | Deliberately wrong inputs. The gate must refuse each one; a gate that cannot fail verifies nothing. |
 
@@ -25,10 +25,10 @@ The package follows the OE Operating Discipline rule of **one T-Box, one A-Box a
 
 ```
 pip install rdflib pyshacl
-python3 05-gates/o4de_gate_v1_2_0.py .
+python3 05-gates/o4de_gate_v1_2_1.py .
 ```
 
-## Checks run on 1.2.0
+## Checks run on 1.2.1
 
 - The gate passes: one file per role, no mixing of roles, every term used is declared, the shapes accept the T-Box and A-Box together, all 47 competency questions return rows, and all 9 negative fixtures are refused.
 - HermiT finds the ontology consistent with no unsatisfiable class, and finds a deliberately contradictory input inconsistent (`pip install owlready2`, Java needed). HermiT has no `xsd:date` or `xsd:duration` in its datatype map, so it runs on a copy in which those two are replaced by `xsd:string`; the shipped files keep the real datatypes.
@@ -37,7 +37,7 @@ python3 05-gates/o4de_gate_v1_2_0.py .
 
 O4DE 1.0.0 formalised the domain engineering framework worked out in a series of working sessions. Version 1.1.0 consolidates the earlier **Domain Engineering Ontology v5.2** into it: 489 more classes and 967 more properties, grouped in nineteen parts, with every taken-over term linking to its original through `rdfs:seeAlso`. What was decided on the way, and what was left out, is in `04-documentation/O4DE_Consolidation_Record_Domain_Engineering_Ontology_v5_2_v1_1_0.md`.
 
-Version 1.2.0 takes over the rest of the received material that bears on domain engineering: the Domain Engineering module of the AI4SE package (repaired, 15 classes), section 2.1 of the UAISE draft (8 classes) and the concepts named in the headings of the owner's 2013 thesis (29 classes, with general definitions marked for confirmation against the thesis text); see `04-documentation/O4DE_Consolidation_Record_AI4SE_UAISE_Thesis_v1_2_0.md`. The AI4SE Enterprise Edition v4.5 in `vendored-received/` is outside the scope of this package. The provenance of v5.2 and of the AI4SE module (creator lines, earlier licence statement) is kept on module resources; the modules are licensed with the package, and the owner can correct that reading.
+Version 1.2.0 takes over the rest of the received material that bears on domain engineering: the Domain Engineering module of the AI4SE package (repaired, 15 classes), section 2.1 of the UAISE draft (8 classes) and the concepts named in the headings of the owner's 2013 thesis (29 classes, with general definitions marked for confirmation against the thesis text); see `04-documentation/O4DE_Consolidation_Record_AI4SE_UAISE_Thesis_v1_2_1.md`. The AI4SE Enterprise Edition v4.5 in `vendored-received/` is outside the scope of this package. The provenance of v5.2 and of the AI4SE module (creator lines, earlier licence statement) is kept on module resources; the modules are licensed with the package, and the owner can correct that reading.
 
 ## Using it
 

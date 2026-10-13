@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""o4de_gate_v1_2_0.py -- the release gate of the O4DE package.
+# Copyright 2026 Yusuf Altunel. Licensed under the Apache License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0).
+"""o4de_gate_v1_2_1.py -- the release gate of the O4DE package.
 
-Run from the package root:   python3 05-gates/o4de_gate_v1_2_0.py .
+Run from the package root:   python3 05-gates/o4de_gate_v1_2_1.py .
 
 It reads the package, never trusts a count written in a document, and fails with exit 1 on the first broken property:
   1. file structure: exactly one T-Box, one A-Box and one SHACL file (highest version of each), named <name>_<role>_v<M>_<m>_<p>.ttl
@@ -122,6 +123,31 @@ for f in fx:
     ok, msgs = run_shapes(data)
     hit = bool(m) and any(m.group(1) in x for x in msgs)
     check(f"{os.path.basename(f)} is refused", (not ok) and hit, f"expected '{m.group(1) if m else '?'}'")
+
+# 7 licence (BP-D24; the same arrangement as the OE Method and the other public repositories of the owner)
+print("7. licence: CC BY 4.0 for ontologies, shapes and documentation; Apache-2.0 for tooling and gates")
+CCURL = "http://creativecommons.org/licenses/by/4.0/"
+def licence_problems(onto_licences, onto_banners, tool_texts, licence_md):
+    bad = []
+    bad += [f"ontology licence {x}" for x in onto_licences if x != CCURL]
+    bad += [f"ontology banner {b[:40]}" for b in onto_banners if "CC BY 4.0" not in b]
+    bad += [f"tool {n}" for n, t in tool_texts.items() if "Apache License, Version 2.0" not in t]
+    if not ("CC BY 4.0" in licence_md and "Apache License 2.0" in licence_md): bad.append("LICENSE.md terms")
+    return bad
+lic_md = open(os.path.join(root, "LICENSE.md"), encoding="utf-8").read() if os.path.exists(os.path.join(root, "LICENSE.md")) else ""
+onto_files = [f for f in ttl if live(f)]
+lic_vals, banners = [], []
+for f in onto_files:
+    gg = rdflib.Graph(); gg.parse(f)
+    lic_vals += [str(o) for o in gg.objects(None, rdflib.URIRef("http://purl.org/dc/terms/license"))]
+    banners.append(open(f, encoding="utf-8").readline() + open(f, encoding="utf-8").readlines()[1])
+tool_files = glob.glob(os.path.join(root, "03-tooling", "*.py")) + glob.glob(os.path.join(root, "05-gates", "*.py"))
+tool_texts = {os.path.basename(f): open(f, encoding="utf-8").read() for f in tool_files}
+probs = licence_problems(lic_vals, banners, tool_texts, lic_md)
+check("licences match the arrangement", not probs, "; ".join(probs[:4]))
+check("the licence check can fail: Apache on an ontology is refused", bool(licence_problems([APACHE_URL := "http://www.apache.org/licenses/LICENSE-2.0"], banners, tool_texts, lic_md)))
+check("the licence check can fail: a tool without its Apache statement is refused", bool(licence_problems(lic_vals, banners, {"x.py": "no statement"}, lic_md)))
+check("the licence check can fail: missing LICENSE.md is refused", bool(licence_problems(lic_vals, banners, tool_texts, "")))
 
 print("VERDICT: PASS" if not fails else f"VERDICT: FAIL ({len(fails)} check(s): {'; '.join(fails)})")
 sys.exit(0 if not fails else 1)

@@ -1,17 +1,17 @@
-# O4DE 1.2.0 validation record
+# O4DE 1.2.1 validation record
 
 Produced on 2026-10-13 by running the commands shown, in this order, on the files of this package. The output is pasted unchanged, except that two lines of reasoner output are left out: the Java command line and a note of the Owlready2 library that only changes made to entities loaded in Python are listed. A later change to any file makes this record historical (L-114); a new version gets a new record. The gate takes about eight minutes on this package, because the shapes are run once for the data and once for each of the nine bad inputs.
 
-## 1. Release gate
+This version changes the licence only (see `CHANGELOG_v1_2_1.md`); no class, property, individual or shape changed.
 
 ```
-$ python3 05-gates/o4de_gate_v1_2_0.py .
+$ python3 05-gates/o4de_gate_v1_2_1.py .
 1. file structure
-  ok   exactly one tbox file  o4de_tbox_v1_2_0.ttl
-  ok   exactly one abox file  o4de_abox_v1_2_0.ttl
-  ok   exactly one shacl file  o4de_shacl_v1_2_0.ttl
+  ok   exactly one tbox file  o4de_tbox_v1_2_1.ttl
+  ok   exactly one abox file  o4de_abox_v1_2_1.ttl
+  ok   exactly one shacl file  o4de_shacl_v1_2_1.ttl
   ok   no other Turtle file  3 found
-   parsed: T-Box 11568 triples, A-Box 3117 triples, SHACL 424 triples
+   parsed: T-Box 11569 triples, A-Box 3118 triples, SHACL 425 triples
 2. role purity
   ok   T-Box holds no named individual
   ok   T-Box holds no taxonomy concept
@@ -39,52 +39,34 @@ $ python3 05-gates/o4de_gate_v1_2_0.py .
   ok   negative_undeclared_class_v1_0_0.ttl is refused  expected 'may only be typed with classes declared'
   ok   negative_wrong_datatype_v1_0_0.ttl is refused  expected 'must have the datatype'
   ok   negative_wrong_domain_v1_0_0.ttl is refused  expected 'must belong to the property's domain'
+7. licence: CC BY 4.0 for ontologies, shapes and documentation; Apache-2.0 for tooling and gates
+  ok   licences match the arrangement
+  ok   the licence check can fail: Apache on an ontology is refused
+  ok   the licence check can fail: a tool without its Apache statement is refused
+  ok   the licence check can fail: missing LICENSE.md is refused
 VERDICT: PASS
 ```
 
-## 2. Reasoner (HermiT), data as shipped
-
 ```
-$ python3 03-tooling/o4de_hermit_check_v1_2_0.py .
-merged graph: 14684 triples; 70 date/duration items mapped to xsd:string for the reasoner
+$ python3 03-tooling/o4de_hermit_check_v1_2_1.py .
+merged graph: 14686 triples; 70 date/duration items mapped to xsd:string for the reasoner
 * Owlready2 * Running HermiT...
-* Owlready2 * HermiT took 8.682919979095459 seconds
+* Owlready2 * HermiT took 4.848413944244385 seconds
 HermiT: ontology consistent
 unsatisfiable classes: none
 ```
 
-## 3. Reasoner, same data plus a deliberately contradictory individual (the check must fail)
-
-Two test statuses that the T-Box declares disjoint:
-
 ```
-$ python3 03-tooling/o4de_hermit_check_v1_2_0.py . --with fixtures/inconsistent_test_status_v1_1_0.ttl
-merged graph: 14688 triples; 70 date/duration items mapped to xsd:string for the reasoner
+$ python3 03-tooling/o4de_hermit_check_v1_2_1.py . --with fixtures/inconsistent_test_status_v1_1_0.ttl
+merged graph: 14690 triples; 70 date/duration items mapped to xsd:string for the reasoner
 * Owlready2 * Running HermiT...
 HermiT: ontology INCONSISTENT
 ```
 
-A mandatory and an optional feature:
-
 ```
-$ python3 03-tooling/o4de_hermit_check_v1_2_0.py . --with fixtures/inconsistent_disjoint_v1_0_0.ttl
-merged graph: 14688 triples; 70 date/duration items mapped to xsd:string for the reasoner
+$ python3 03-tooling/o4de_hermit_check_v1_2_1.py . --with fixtures/inconsistent_disjoint_v1_0_0.ttl
+merged graph: 14690 triples; 70 date/duration items mapped to xsd:string for the reasoner
 * Owlready2 * Running HermiT...
 HermiT: ontology INCONSISTENT
 ```
 
-## 4. OE structure check (rules N1, N2, V1, R1, H1, U1, A1, X1)
-
-```
-$ python3 oe_structure_check_v1_6_0.py . --as-package o4de --classes OE_STRUCTURE_CLASSES_v1_6_0.tsv
-examined 3 Turtle file(s) in 1 package(s); 0 violation(s)
-  class table: OE_STRUCTURE_CLASSES_v1_6_0.tsv; not read, by class: C1 2, G1 1, T1 11
-by rule: 
-VERDICT: CLEAN (no register given)
-```
-
-## What this record does not show
-
-- The reasoner was run on a copy in which `xsd:date` and `xsd:duration` are replaced by `xsd:string` (HermiT has neither); the shipped files keep the real datatypes.
-- The shapes do not enforce the 112 restrictions taken over from v5.2 or the 7 added in this version (see the consolidation records); the reasoner is the check that they are consistent with the rest.
-- No fixture is new in this version. The new classes are covered by the documentation shapes, which refuse a class without a definition (a fixture shows it).
