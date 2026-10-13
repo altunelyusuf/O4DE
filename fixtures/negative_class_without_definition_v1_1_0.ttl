@@ -1,0 +1,8 @@
+# EXPECT: A class needs a definition
+# A class of the enterprise domain structure with a label but no definition.
+@prefix o4de: <http://www.zt4swe.io/o4de#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+o4de:BadUndefinedClass a owl:Class ; rdfs:label "Bad undefined class" .

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""o4de_gate_v1_0_0.py -- the release gate of the O4DE package.
+"""o4de_gate_v1_1_0.py -- the release gate of the O4DE package.
 
-Run from the package root:   python3 05-gates/o4de_gate_v1_0_0.py .
+Run from the package root:   python3 05-gates/o4de_gate_v1_1_0.py .
 
 It reads the package, never trusts a count written in a document, and fails with exit 1 on the first broken property:
   1. file structure: exactly one T-Box, one A-Box and one SHACL file (highest version of each), named <name>_<role>_v<M>_<m>_<p>.ttl
@@ -100,7 +100,7 @@ check("a competency question file exists", cq is not None)
 if cq:
     text = open(cq, encoding="utf-8").read()
     blocks = re.findall(r"```sparql\n(.*?)```", text, re.S)
-    prefix = f"PREFIX : <{NS}>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
+    prefix = f"PREFIX : <{NS}>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\n"
     empty = []
     for i, q in enumerate(blocks, 1):
         try:

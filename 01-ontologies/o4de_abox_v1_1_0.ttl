@@ -1,5 +1,5 @@
 # O4DE: Ontology for Domain Engineering - A-Box
-# Version 1.0.0 (2026-10-13). Copyright 2026 Yusuf Altunel. Licensed under the Apache License, Version 2.0.
+# Version 1.1.0 (2026-10-13). Copyright 2026 Yusuf Altunel. Licensed under the Apache License, Version 2.0.
 # Role: A-Box. Taxonomies and example individuals only; no class or property declarations.
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -18,6 +18,15 @@ o4de:ArchitectureReviewMeetings a owl:NamedIndividual,
     o4de:meetingType "Review" ;
     o4de:participantCount "8"^^xsd:int ;
     o4de:recordsMeeting o4de:ExampleSeniorStakeholder .
+
+o4de:AutomateInventoryReplenishment a owl:NamedIndividual,
+        o4de:AutomationCandidate ;
+    rdfs:label "Automated Inventory Replenishment"@en ;
+    o4de:automationCandidateOf o4de:InventoryReservation ;
+    o4de:automationReadiness 85.0 ;
+    o4de:hasAutomationBenefit o4de:ReplenishmentTimeSaving ;
+    o4de:hasName "Automated Inventory Replenishment" ;
+    o4de:usesAutomationTechnique o4de:WorkflowAutomation .
 
 o4de:BlackFridayCampaign a owl:NamedIndividual,
         o4de:PromotionalCampaign ;
@@ -54,12 +63,6 @@ o4de:ECommerceAppPortfolio a owl:NamedIndividual,
     rdfs:label "E-Commerce Application Portfolio"@en ;
     o4de:applicationCount "12"^^xsd:int ;
     o4de:includesApplication o4de:AuthenticationComponent .
-
-o4de:ECommerceDomain a owl:NamedIndividual,
-        o4de:BusinessEnvironment ;
-    rdfs:label "E-Commerce Business Environment"@en ;
-    o4de:definesBusinessProcess o4de:OrderProcessingProcess ;
-    o4de:hasDescription "Business environment for e-commerce: online retail, payment processing and customer management" .
 
 o4de:ECommerceProductPortfolio a owl:NamedIndividual,
         o4de:ProductPortfolio ;
@@ -106,11 +109,54 @@ o4de:ITHierarchy a owl:NamedIndividual,
         o4de:ITDepartment ;
     o4de:hierarchyLevel "2"^^xsd:int .
 
+o4de:InventoryLevel a owl:NamedIndividual,
+        o4de:DataAttribute ;
+    rdfs:label "Inventory Level"@en ;
+    o4de:attributeOf o4de:ProductCatalog ;
+    o4de:hasName "Inventory Level" .
+
+o4de:JohnDoe a owl:NamedIndividual,
+        o4de:Person ;
+    rdfs:label "John Doe"@en ;
+    o4de:hasName "John Doe" ;
+    o4de:hasRole o4de:SupplyChainDirector ;
+    o4de:memberOf o4de:GlobalFashionRetailCorp .
+
+o4de:MerchandisePlanning a owl:NamedIndividual,
+        o4de:SubDomain ;
+    rdfs:label "Merchandise Planning"@en ;
+    o4de:hasName "Merchandise Planning" ;
+    o4de:subDomainOf o4de:FashionRetailOperations .
+
+o4de:MigrateToCloudWMS a owl:NamedIndividual,
+        o4de:ChangeRequest ;
+    rdfs:label "Migrate WMS to Cloud"@en ;
+    o4de:hasChangeImpact o4de:WMSMigrationImpact ;
+    o4de:hasName "Migrate WMS to Cloud" .
+
+o4de:NYCFlagshipStore a owl:NamedIndividual,
+        o4de:Store ;
+    rdfs:label "NYC Fifth Avenue Flagship"@en ;
+    o4de:hasCondition o4de:GoodCondition ;
+    o4de:hasName "NYC Fifth Avenue Flagship" ;
+    o4de:physicalAssetOf o4de:GlobalFashionRetailCorp .
+
+o4de:OmnichannelSales a owl:NamedIndividual,
+        o4de:SubDomain ;
+    rdfs:label "Omnichannel Sales"@en ;
+    o4de:hasName "Omnichannel Sales" ;
+    o4de:subDomainOf o4de:FashionRetailOperations .
+
 o4de:OperationsOffice a owl:NamedIndividual,
         o4de:OperationsManagement ;
     rdfs:label "Operations Office"@en ;
     o4de:configuresEnvironment o4de:ProductionEnvironment ;
     o4de:monitorsOperation o4de:OrderFulfillmentOperation .
+
+o4de:OrderProcessingBottleneck a owl:NamedIndividual,
+        o4de:Bottleneck ;
+    rdfs:label "Manual order validation bottleneck"@en ;
+    o4de:hasName "Manual order validation bottleneck" .
 
 o4de:OrderProcessingSIPOC a owl:NamedIndividual,
         o4de:SIPOCAnalysis ;
@@ -121,11 +167,33 @@ o4de:OrderProcessingSIPOC a owl:NamedIndividual,
     o4de:hasOutput o4de:DeliveredProduct ;
     o4de:hasSupplier o4de:ExampleSupplier .
 
+o4de:OrderValidation a owl:NamedIndividual,
+        o4de:Operation ;
+    rdfs:label "Order Validation"@en ;
+    o4de:hasName "Order Validation" ;
+    o4de:operationOf o4de:OrderFulfillmentProcess .
+
+o4de:Price a owl:NamedIndividual,
+        o4de:DataAttribute ;
+    rdfs:label "Price"@en ;
+    o4de:attributeOf o4de:ProductCatalog ;
+    o4de:hasName "Price" .
+
 o4de:ProjectActivitySummary a owl:NamedIndividual,
         o4de:ActivitySummary ;
     rdfs:label "Project Activity Summary"@en ;
     o4de:hasCreationDate "2024-06-30"^^xsd:date ;
     o4de:summarizesActivity o4de:WebAppRequirementsAnalysis .
+
+o4de:RealTimeInventoryRequirement a owl:NamedIndividual,
+        o4de:FunctionalRequirement ;
+    rdfs:label "Real-Time Inventory Visibility"@en ;
+    o4de:hasDescription "System must show inventory across all locations in real-time" ;
+    o4de:hasName "Real-Time Inventory Visibility" ;
+    o4de:hasPriority o4de:MustHavePriority ;
+    o4de:hasRequirementStatus o4de:ImplementedRequirement ;
+    o4de:realizedBy o4de:InventoryTrackingComponent ;
+    o4de:requirementOf o4de:WarehouseManagementSystem .
 
 o4de:RequirementsDocAnalysis a owl:NamedIndividual,
         o4de:DocumentAnalysisList ;
@@ -135,10 +203,22 @@ o4de:RequirementsDocAnalysis a owl:NamedIndividual,
     o4de:collectionDate "2024-05-20"^^xsd:date ;
     o4de:collectionMethod "Document review" .
 
+o4de:SKU a owl:NamedIndividual,
+        o4de:DataAttribute ;
+    rdfs:label "SKU"@en ;
+    o4de:attributeOf o4de:ProductCatalog ;
+    o4de:hasName "SKU" .
+
 o4de:SeniorDomainAnalyst a owl:NamedIndividual,
         o4de:DomainAnalyst ;
     rdfs:label "Senior Domain Analyst (example role holder)"@en ;
     o4de:performsActivity o4de:WebAppRequirementsAnalysis .
+
+o4de:ShippingExecution a owl:NamedIndividual,
+        o4de:Operation ;
+    rdfs:label "Shipping Execution"@en ;
+    o4de:hasName "Shipping Execution" ;
+    o4de:operationOf o4de:OrderFulfillmentProcess .
 
 o4de:StakeholderInterviewLog a owl:NamedIndividual,
         o4de:DataCollectionLog ;
@@ -147,19 +227,37 @@ o4de:StakeholderInterviewLog a owl:NamedIndividual,
     o4de:collectionMethod "Structured interviews" ;
     o4de:logsActivity o4de:WebAppRequirementsAnalysis .
 
+o4de:SupplyChainManagement a owl:NamedIndividual,
+        o4de:SubDomain ;
+    rdfs:label "Supply Chain Management"@en ;
+    o4de:hasName "Supply Chain Management" ;
+    o4de:subDomainOf o4de:FashionRetailOperations .
+
+o4de:WarehousePicking a owl:NamedIndividual,
+        o4de:Operation ;
+    rdfs:label "Warehouse Picking"@en ;
+    o4de:hasName "Warehouse Picking" ;
+    o4de:operationOf o4de:OrderFulfillmentProcess .
+
+o4de:WarehousePickingOptimization a owl:NamedIndividual,
+        o4de:ProcessImprovement ;
+    rdfs:label "Optimize Warehouse Picking Routes"@en ;
+    o4de:hasName "Optimize Warehouse Picking Routes" ;
+    o4de:usesMethodology o4de:LeanMethodology .
+
 <http://www.zt4swe.io/o4de-abox> a owl:Ontology ;
     dc:title "O4DE: Ontology for Domain Engineering (A-Box)"@en ;
     dcterms:created "2026-10-13"^^xsd:date ;
     dcterms:creator "Yusuf Altunel" ;
-    dcterms:description "Twelve SKOS taxonomies and illustrative example individuals for the Ontology for Domain Engineering."@en ;
+    dcterms:description "Thirteen SKOS taxonomies and illustrative example individuals for the Ontology for Domain Engineering."@en ;
     dcterms:license <http://www.apache.org/licenses/LICENSE-2.0> ;
     dcterms:modified "2026-10-13"^^xsd:date ;
     dcterms:rights "Copyright 2026 Yusuf Altunel" ;
     dcterms:title "O4DE: Ontology for Domain Engineering (A-Box)"@en ;
-    rdfs:comment "This file holds the individuals of O4DE: the twelve SKOS taxonomies that classify domain engineering and business concepts, and a small set of illustrative example individuals that show how the T-Box is used. Examples are invented for teaching and are not sourced facts. Counts are reproduced by 05-gates/o4de_gate_v1_0_0.py."@en ;
+    rdfs:comment "This file holds the individuals of O4DE: the thirteen SKOS taxonomies that classify domain engineering and business concepts, and a small set of illustrative example individuals, among them the Fashion Retail case, that show how the T-Box is used. Examples are invented for teaching and are not sourced facts. Counts are reproduced by the gate script in 05-gates."@en ;
     owl:imports <http://www.zt4swe.io/o4de> ;
-    owl:versionIRI <http://www.zt4swe.io/o4de-abox/1.0.0> ;
-    owl:versionInfo "1.0.0" .
+    owl:versionIRI <http://www.zt4swe.io/o4de-abox/1.1.0> ;
+    owl:versionInfo "1.1.0" .
 
 o4de:AIIntegration a owl:NamedIndividual,
         o4de:Opportunity ;
@@ -224,6 +322,27 @@ o4de:AuthVariationPoint a owl:NamedIndividual,
         o4de:SAMLVariant ;
     o4de:implementsVariability o4de:ParameterVariabilityMechanism .
 
+o4de:AutomationPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:AutomationBenefit,
+        o4de:AutomationCandidate,
+        o4de:AutomationROI,
+        o4de:AutomationScope,
+        o4de:AutomationTechnique,
+        o4de:CostReduction,
+        o4de:DataAutomation,
+        o4de:DecisionAutomation,
+        o4de:ErrorReduction,
+        o4de:IntegrationAutomation,
+        o4de:RoboticProcessAutomation,
+        o4de:ScalabilityImprovement,
+        o4de:TestAutomation,
+        o4de:TimeSaving,
+        o4de:WorkflowAutomation ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts of automation candidates, benefits and readiness."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Automation"@en .
+
 o4de:BasicAuth a owl:NamedIndividual,
         o4de:AlternativeFeature ;
     rdfs:label "Basic Authentication"@en ;
@@ -243,6 +362,43 @@ o4de:BusinessBenefitsConcept a skos:Concept ;
     skos:broader o4de:BusinessContextConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Business Benefits"@en .
+
+o4de:BusinessCapabilitiesPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:AuthorizationRule,
+        o4de:BusinessCapability,
+        o4de:BusinessEvent,
+        o4de:BusinessFunction,
+        o4de:BusinessLocation,
+        o4de:BusinessService,
+        o4de:CalculationRule,
+        o4de:CloudBasedDelivery,
+        o4de:CoreCapability,
+        o4de:CustomerRelationshipCapability,
+        o4de:CustomerService,
+        o4de:DecisionLogic,
+        o4de:EnablingCapability,
+        o4de:ExternalEvent,
+        o4de:FinancialManagementCapability,
+        o4de:HybridDelivery,
+        o4de:InHouseDelivery,
+        o4de:InternalEvent,
+        o4de:InternalService,
+        o4de:MarketingCapability,
+        o4de:OperatingModel,
+        o4de:OperationalCapability,
+        o4de:OutsourcedDelivery,
+        o4de:PartnerService,
+        o4de:ProductDevelopmentCapability,
+        o4de:ServiceDeliveryModel,
+        o4de:SupplyChainCapability,
+        o4de:SupportingCapability,
+        o4de:ValidationRule,
+        o4de:ValueStream,
+        o4de:ValueStreamStage ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts of what a business can do: capabilities, functions, services, value streams, business events and operating models."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Business capabilities"@en .
 
 o4de:BusinessEnvironmentConcept a skos:Concept ;
     rdfs:seeAlso o4de:BusinessEnvironment ;
@@ -272,6 +428,22 @@ o4de:ChangeManagementConcept a skos:Concept ;
     skos:broader o4de:DomainEvolutionConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Change Management"@en .
+
+o4de:ChangeManagementPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:ChangeImpact,
+        o4de:ChangeImpactAssessment,
+        o4de:ChangeManagement,
+        o4de:ChangeRequest,
+        o4de:CommunicationPlan,
+        o4de:Dependency,
+        o4de:ImpactAnalysis,
+        o4de:StakeholderImpactAnalysis,
+        o4de:TrainingPlan,
+        o4de:TransitionPlan ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts of change requests, control, impact and approval."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Change management"@en .
 
 o4de:ChecklistsConcept a skos:Concept ;
     skos:broader o4de:ProcessAssetsConcept ;
@@ -406,6 +578,35 @@ o4de:CyberSecurityThreats a owl:NamedIndividual,
     o4de:hasDescription "Growing cybersecurity threats against e-commerce platforms" ;
     o4de:threatLevel "High" .
 
+o4de:DataArchitecturePartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:AnalyticalData,
+        o4de:BusinessGlossary,
+        o4de:ConceptualDataModel,
+        o4de:DataAttribute,
+        o4de:DataClassification,
+        o4de:DataDictionary,
+        o4de:DataEntity,
+        o4de:DataExchange,
+        o4de:DataGovernance,
+        o4de:DataIntegration,
+        o4de:DataLineage,
+        o4de:DataMigration,
+        o4de:DataModel,
+        o4de:DataQualityRule,
+        o4de:DataRelationship,
+        o4de:InformationFlow,
+        o4de:LogicalDataModel,
+        o4de:MasterData,
+        o4de:MessageFlow,
+        o4de:PhysicalDataModel,
+        o4de:ReferenceData,
+        o4de:SensitiveData,
+        o4de:TransactionalData ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts of data entities, data structures, modeling levels and integration of data."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Data architecture"@en .
+
 o4de:DataCollectionLogConcept a skos:Concept ;
     rdfs:seeAlso o4de:DataCollectionLog ;
     skos:broader o4de:DataCollectionConcept ;
@@ -463,6 +664,23 @@ o4de:DiscountingManagementConcept a skos:Concept ;
     skos:inScheme o4de:FinancialAndMarketingTaxonomy ;
     skos:prefLabel "Discounting Management"@en .
 
+o4de:DiscoveryMethodsPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:APIDiscovery,
+        o4de:CodeMining,
+        o4de:DataProfiling,
+        o4de:DatabaseReverseEngineering,
+        o4de:DiscoveryMethod,
+        o4de:DocumentationMining,
+        o4de:DynamicAnalysis,
+        o4de:ExpertKnowledgeElicitation,
+        o4de:LogMining,
+        o4de:ProcessMining,
+        o4de:StaticAnalysis ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts of the methods used to discover and analyse a domain."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Discovery methods"@en .
+
 o4de:DistributionChannelConcept a skos:Concept ;
     rdfs:seeAlso o4de:DistributionChannel ;
     skos:broader o4de:ChannelManagementConcept ;
@@ -474,6 +692,76 @@ o4de:DocumentAnalysisListConcept a skos:Concept ;
     skos:broader o4de:DataCollectionConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Document Analysis List"@en .
+
+o4de:DomainAssetsPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Asset,
+        o4de:AssetLifecycleStage,
+        o4de:AssetRepository,
+        o4de:Deprecated,
+        o4de:DesignPattern,
+        o4de:Documentation,
+        o4de:InDevelopment,
+        o4de:Ontology,
+        o4de:Released,
+        o4de:Retired,
+        o4de:ServiceInterface,
+        o4de:TestAsset,
+        o4de:UnderReview,
+        o4de:VariabilityModel ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "The hierarchy of domain assets, such as models, components and knowledge held for reuse."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Domain assets"@en .
+
+o4de:DomainFoundationsPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:AdministrationDomain,
+        o4de:AgricultureDomain,
+        o4de:BoundedContext,
+        o4de:BusinessDomain,
+        o4de:ClinicalCareDomain,
+        o4de:ConstructionDomain,
+        o4de:ConsultingDomain,
+        o4de:CorporateFunctionDomain,
+        o4de:CrossCuttingConcern,
+        o4de:CustomerServiceDomain,
+        o4de:Domain,
+        o4de:DomainBoundary,
+        o4de:DomainScope,
+        o4de:DomainType,
+        o4de:ECommerceDomain,
+        o4de:EducationDomain,
+        o4de:EnergyDomain,
+        o4de:FashionRetailDomain,
+        o4de:FinanceDomain,
+        o4de:FinancialServicesDomain,
+        o4de:GovernmentDomain,
+        o4de:HealthcareDomain,
+        o4de:HospitalityDomain,
+        o4de:HumanResourcesDomain,
+        o4de:IndustryDomain,
+        o4de:InformationTechnologyDomain,
+        o4de:LegalDomain,
+        o4de:LegalServicesDomain,
+        o4de:LogisticsDomain,
+        o4de:ManufacturingDomain,
+        o4de:MarketingDomain,
+        o4de:MediaEntertainmentDomain,
+        o4de:ProcurementDomain,
+        o4de:ProfessionalServicesDomain,
+        o4de:QualityAssuranceDomain,
+        o4de:RealEstateDomain,
+        o4de:RetailDomain,
+        o4de:RiskManagementDomain,
+        o4de:SalesDomain,
+        o4de:SportsEntertainmentDomain,
+        o4de:SubDomain,
+        o4de:TechnicalDomain,
+        o4de:TelecommunicationsDomain,
+        o4de:TransportationDomain ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts that define a domain, its sub-domains, scope, boundaries, bounded contexts and domain types."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Domain foundations"@en .
 
 o4de:DomainModelConcept a skos:Concept ;
     rdfs:seeAlso o4de:DomainModel ;
@@ -501,6 +789,12 @@ o4de:DomainSpecificSoftwareArchitectureConcept a skos:Concept ;
 o4de:ECommerceCRM a owl:NamedIndividual,
         o4de:CRM ;
     rdfs:label "E-Commerce CRM System"@en .
+
+o4de:ECommerceDomain a owl:NamedIndividual,
+        o4de:BusinessEnvironment ;
+    rdfs:label "E-Commerce Business Environment"@en ;
+    o4de:definesBusinessProcess o4de:OrderProcessingProcess ;
+    o4de:hasDescription "Business environment for e-commerce: online retail, payment processing and customer management" .
 
 o4de:ECommerceOperationalArch a owl:NamedIndividual,
         o4de:OperationalArchitecture ;
@@ -638,6 +932,51 @@ o4de:GovernanceConcept a skos:Concept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Governance"@en .
 
+o4de:GovernanceModelsPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:ArchitectureReviewBoard,
+        o4de:BlockchainGovernance,
+        o4de:CentralizedGovernance,
+        o4de:ChangeAdvisoryBoard,
+        o4de:ConsensusProtocol,
+        o4de:DecentralizedGovernance,
+        o4de:DecentralizedOrganization,
+        o4de:DecisionAuthority,
+        o4de:DecisionRight,
+        o4de:DecisionScope,
+        o4de:DelegatedVoting,
+        o4de:DistributedAutonomousOrganization,
+        o4de:DistributedDecision,
+        o4de:FederatedGovernance,
+        o4de:GovernanceBoard,
+        o4de:GovernanceFramework,
+        o4de:GovernanceOperatingModel,
+        o4de:GovernanceToken,
+        o4de:Guideline,
+        o4de:HybridGovernance,
+        o4de:HybridOrganization,
+        o4de:OffChainGovernance,
+        o4de:OnChainGovernance,
+        o4de:OperationalDecision,
+        o4de:Policy,
+        o4de:Procedure,
+        o4de:ProofOfAuthority,
+        o4de:ProofOfStake,
+        o4de:ProofOfWork,
+        o4de:ProposalSystem,
+        o4de:QuadraticVoting,
+        o4de:SimpleVoting,
+        o4de:SmartContract,
+        o4de:Standard,
+        o4de:SteeringCommittee,
+        o4de:StrategicDecision,
+        o4de:TacticalDecision,
+        o4de:TokenBasedGovernance,
+        o4de:VotingMechanism ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts of governance: frameworks, decision rights, boards, policies, standards, procedures, and on-chain and off-chain governance."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Governance models"@en .
+
 o4de:GrowthStageConcept a skos:Concept ;
     rdfs:seeAlso o4de:GrowthStage ;
     skos:broader o4de:ProductLifecycleConcept ;
@@ -714,6 +1053,22 @@ o4de:IntroductionStageConcept a skos:Concept ;
     skos:inScheme o4de:ProductPortfolioTaxonomy ;
     skos:prefLabel "Introduction Stage"@en .
 
+o4de:InventoryReservation a owl:NamedIndividual,
+        o4de:Operation ;
+    rdfs:label "Inventory Reservation"@en ;
+    o4de:hasName "Inventory Reservation" ;
+    o4de:operationOf o4de:OrderFulfillmentProcess .
+
+o4de:InventoryTrackingComponent a owl:NamedIndividual,
+        o4de:Component ;
+    rdfs:label "Inventory Tracking Component"@en ;
+    o4de:creationDate "2022-06-01"^^xsd:date ;
+    o4de:domainAssetOf o4de:FashionRetailOperations ;
+    o4de:hasLifecycleStage o4de:Released ;
+    o4de:hasName "Inventory Tracking Component" ;
+    o4de:isReusable true ;
+    o4de:reuseCount 12 .
+
 o4de:KanbanConcept a skos:Concept ;
     skos:broader o4de:AgileMethodologiesConcept ;
     skos:inScheme o4de:OrganizationalTaxonomy ;
@@ -723,6 +1078,21 @@ o4de:KnowledgeManagementConcept a skos:Concept ;
     skos:broader o4de:SupportingProcessesConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Knowledge Management"@en .
+
+o4de:KnowledgeManagementPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:BestPractice,
+        o4de:CommunityOfPractice,
+        o4de:ExpertiseDirectory,
+        o4de:KnowledgeArchive,
+        o4de:KnowledgeBase,
+        o4de:KnowledgeManagement,
+        o4de:KnowledgeTransfer,
+        o4de:LessonsLearned,
+        o4de:LessonsLearnedRepository ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts of knowledge assets, their capture and their sharing."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Knowledge management"@en .
 
 o4de:LeanConcept a skos:Concept ;
     skos:broader o4de:AgileMethodologiesConcept ;
@@ -748,6 +1118,15 @@ o4de:LoadTimeConcept a skos:Concept ;
     skos:broader o4de:BindingTimesConcept ;
     skos:inScheme o4de:VariabilityTaxonomy ;
     skos:prefLabel "Load Time"@en .
+
+o4de:LondonDistributionCenter a owl:NamedIndividual,
+        o4de:Warehouse ;
+    rdfs:label "London Distribution Center"@en ;
+    o4de:acquisitionCost 25000000.00 ;
+    o4de:currentValue 28000000.00 ;
+    o4de:hasCondition o4de:ExcellentCondition ;
+    o4de:hasName "London Distribution Center" ;
+    o4de:physicalAssetOf o4de:GlobalFashionRetailCorp .
 
 o4de:MaintenanceConcept a skos:Concept ;
     skos:broader o4de:DomainEvolutionConcept ;
@@ -813,6 +1192,54 @@ o4de:OAuth2Variant a owl:NamedIndividual,
         o4de:Variant ;
     rdfs:label "OAuth 2.0 Variant"@en .
 
+o4de:OntologyLifecycleTestingAndDeploymentPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:ChangeLog,
+        o4de:CompetencyQuestion,
+        o4de:CompletenessTest,
+        o4de:Conceptualization,
+        o4de:ConsistencyTest,
+        o4de:CorrectnessTest,
+        o4de:CouldHave,
+        o4de:Deployment,
+        o4de:DevelopmentDeployment,
+        o4de:DevelopmentPhase,
+        o4de:DomainCorpus,
+        o4de:DomainExpertSource,
+        o4de:DomainLiterature,
+        o4de:ExistingOntology,
+        o4de:Failing,
+        o4de:Formalization,
+        o4de:Implementation,
+        o4de:KnowledgeSource,
+        o4de:Maintenance,
+        o4de:MajorVersion,
+        o4de:MigrationStrategy,
+        o4de:MinorVersion,
+        o4de:MustHave,
+        o4de:NotRun,
+        o4de:Passing,
+        o4de:PatchVersion,
+        o4de:PerformanceBenchmark,
+        o4de:PerformanceTest,
+        o4de:ProductionDeployment,
+        o4de:Project,
+        o4de:RESTfulAPI,
+        o4de:RequirementsSpecification,
+        o4de:SPARQLEndpoint,
+        o4de:ShouldHave,
+        o4de:Skipped,
+        o4de:StagingDeployment,
+        o4de:TestCase,
+        o4de:TestStatus,
+        o4de:TestSuite,
+        o4de:TestType,
+        o4de:Testing,
+        o4de:Version ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts for the lifecycle of an ontology: versions, tests, competency questions, deployment and integration."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Ontology lifecycle, testing and deployment"@en .
+
 o4de:OperationalArchitectureConcept a skos:Concept ;
     rdfs:seeAlso o4de:OperationalArchitecture ;
     skos:broader o4de:BusinessContextConcept ;
@@ -836,6 +1263,10 @@ o4de:OptimizingConcept a skos:Concept ;
     skos:notation "5" ;
     skos:prefLabel "Optimizing"@en .
 
+o4de:OrderFulfillmentCoordinator a owl:NamedIndividual,
+        o4de:BusinessRole ;
+    rdfs:label "Order Fulfillment Coordinator"@en .
+
 o4de:OrderProcessingConcept a skos:Concept ;
     skos:broader o4de:CoreBusinessProcessesConcept ;
     skos:inScheme o4de:BusinessProcessTaxonomy ;
@@ -844,6 +1275,78 @@ o4de:OrderProcessingConcept a skos:Concept ;
 o4de:OrderProcessingCost a owl:NamedIndividual,
         o4de:Cost ;
     rdfs:label "Order Processing Cost"@en .
+
+o4de:OrganizationalTaxonomyPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:CenturyOrganization,
+        o4de:CommoditizedDomain,
+        o4de:Community,
+        o4de:Conception,
+        o4de:Cooperative,
+        o4de:CrisisTrigger,
+        o4de:DefinedMaturity,
+        o4de:DepartmentDissolution,
+        o4de:DepartmentFormation,
+        o4de:DepartmentGrowth,
+        o4de:DepartmentLifecyclePhase,
+        o4de:DepartmentMaturity,
+        o4de:DepartmentRestructuring,
+        o4de:DomainMaturity,
+        o4de:EmergingDomain,
+        o4de:EnterpriseOrganization,
+        o4de:EvolutionAndRenewal,
+        o4de:EvolvingDomain,
+        o4de:Foundation,
+        o4de:FoundationBuilding,
+        o4de:GeographicScope,
+        o4de:GlobalScope,
+        o4de:GloballyDistributed,
+        o4de:GovernmentEntity,
+        o4de:GrowthAndExpansion,
+        o4de:GrowthStageOrganization,
+        o4de:GrowthTrigger,
+        o4de:HybridOperations,
+        o4de:Inception,
+        o4de:InitialMaturity,
+        o4de:InternationalScope,
+        o4de:LargeOrganization,
+        o4de:LegacyOrganization,
+        o4de:LifecyclePhase,
+        o4de:LifecycleTransitionTrigger,
+        o4de:LocalScope,
+        o4de:ManagedMaturity,
+        o4de:MatureDomain,
+        o4de:MatureOrganization,
+        o4de:MaturityAndOptimization,
+        o4de:MaturityLevel,
+        o4de:MaturityTrigger,
+        o4de:MediumOrganization,
+        o4de:MicroOrganization,
+        o4de:MultiLocation,
+        o4de:MultinationalOrganization,
+        o4de:NationalScope,
+        o4de:NonProfit,
+        o4de:OperationalCharacteristic,
+        o4de:Operations24x7,
+        o4de:OptimizingMaturity,
+        o4de:Organization,
+        o4de:OrganizationAge,
+        o4de:OrganizationSize,
+        o4de:OrganizationalLifecyclePhase,
+        o4de:OwnershipType,
+        o4de:PrivateCompany,
+        o4de:PublicCompany,
+        o4de:QuantitativelyManagedMaturity,
+        o4de:RegionalScope,
+        o4de:RemoteFirst,
+        o4de:SeasonalOperations,
+        o4de:SingleLocation,
+        o4de:SmallOrganization,
+        o4de:StartupOrganization,
+        o4de:SunsetAndClosure ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts that classify an organization by size, ownership, geographic scope, operating characteristics, lifecycle phase and maturity."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Organizational taxonomy"@en .
 
 o4de:OutputsConcept a skos:Concept ;
     skos:broader o4de:SIPOCAnalysisConcept ;
@@ -869,10 +1372,81 @@ o4de:PaymentProcessingConcept a skos:Concept ;
     skos:inScheme o4de:BusinessProcessTaxonomy ;
     skos:prefLabel "Payment Processing"@en .
 
+o4de:PeopleAndRolesPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Accountable,
+        o4de:AssetManager,
+        o4de:BusinessAnalyst,
+        o4de:Consulted,
+        o4de:DataAnalyst,
+        o4de:DataOwner,
+        o4de:DataSteward,
+        o4de:DomainEngineer,
+        o4de:DomainEngineeringRole,
+        o4de:DomainExpert,
+        o4de:Informed,
+        o4de:Person,
+        o4de:ProcessAnalyst,
+        o4de:ProcessOwner,
+        o4de:ProductLineManager,
+        o4de:ResponsibilityAssignment,
+        o4de:ResponsibilityType,
+        o4de:Responsible,
+        o4de:SystemOwner,
+        o4de:SystemsAnalyst ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts of persons, roles, stakeholders and responsibility assignment."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "People and roles"@en .
+
 o4de:PerformanceIssuesConcept a skos:Concept ;
     skos:broader o4de:TechnicalProblemsConcept ;
     skos:inScheme o4de:ProblemClassificationTaxonomy ;
     skos:prefLabel "Performance Issues"@en .
+
+o4de:PhysicalAssetsPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:AssetAcquisition,
+        o4de:AssetCondition,
+        o4de:AssetDepreciation,
+        o4de:AssetDisposal,
+        o4de:AssetInsurance,
+        o4de:AssetInventory,
+        o4de:AssetPortfolio,
+        o4de:AssetTransfer,
+        o4de:AssetValuation,
+        o4de:CorrectiveMaintenance,
+        o4de:CriticalCondition,
+        o4de:DataCenter,
+        o4de:DigitalAssetPortfolio,
+        o4de:DigitalTwin,
+        o4de:Equipment,
+        o4de:ExcellentCondition,
+        o4de:Facility,
+        o4de:Factory,
+        o4de:FairCondition,
+        o4de:Fleet,
+        o4de:GoodCondition,
+        o4de:ITEquipment,
+        o4de:Infrastructure,
+        o4de:IntegratedAssetPortfolio,
+        o4de:IoTEnabledAsset,
+        o4de:MaintenanceSchedule,
+        o4de:Office,
+        o4de:PhygitalAsset,
+        o4de:PhysicalAsset,
+        o4de:PhysicalAssetPortfolio,
+        o4de:PoorCondition,
+        o4de:PredictiveMaintenance,
+        o4de:PreventiveMaintenance,
+        o4de:ProductionEquipment,
+        o4de:Store,
+        o4de:TestEquipment,
+        o4de:TokenizedAsset,
+        o4de:Vehicle,
+        o4de:Warehouse ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts of equipment, facilities and other physical assets of a domain."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Physical assets"@en .
 
 o4de:PlatformVariabilityConcept a skos:Concept ;
     skos:broader o4de:VariabilityTypesConcept ;
@@ -946,6 +1520,16 @@ o4de:ProductPortfolioConcept a skos:Concept ;
     skos:inScheme o4de:ProductPortfolioTaxonomy ;
     skos:prefLabel "Product Portfolio"@en .
 
+o4de:ProductsPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:ProductConfiguration,
+        o4de:ProductFamily,
+        o4de:ProductLine,
+        o4de:ProductVariant ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts of product structure within a domain."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Products"@en .
+
 o4de:ProjectManagementConcept a skos:Concept ;
     skos:broader o4de:ManagementProcessesConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
@@ -956,6 +1540,30 @@ o4de:PromotionalCampaignConcept a skos:Concept ;
     skos:broader o4de:CampaignManagementConcept ;
     skos:inScheme o4de:FinancialAndMarketingTaxonomy ;
     skos:prefLabel "Promotional Campaign"@en .
+
+o4de:QualityAndMetricsPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:ComplianceMetric,
+        o4de:CustomerSatisfactionMetric,
+        o4de:DefectDensity,
+        o4de:EffectivenessMetric,
+        o4de:EfficiencyMetric,
+        o4de:EmployeeEngagementMetric,
+        o4de:InnovationMetric,
+        o4de:KPI,
+        o4de:Maintainability,
+        o4de:Performance,
+        o4de:ProductivityMetric,
+        o4de:ROI,
+        o4de:Reliability,
+        o4de:ReuseRate,
+        o4de:Scalability,
+        o4de:Security,
+        o4de:TimeToMarket,
+        o4de:Usability ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts of quality attributes, standards, metrics and measurement."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Quality and metrics"@en .
 
 o4de:QualityAssuranceConcept a skos:Concept ;
     rdfs:seeAlso o4de:QualityAssurance ;
@@ -1020,6 +1628,12 @@ o4de:RefundPolicyRule a owl:NamedIndividual,
     o4de:hasDescription "Customers may return items within 30 days for a full refund" ;
     o4de:ruleType "Policy" .
 
+o4de:ReplenishmentTimeSaving a owl:NamedIndividual,
+        o4de:TimeSaving ;
+    rdfs:label "Replenishment Time Saving"@en ;
+    o4de:costSavings 125000.00 ;
+    o4de:timeSavings "P1DT16H"^^xsd:duration .
+
 o4de:RequirementsAnalysisConcept a skos:Concept ;
     skos:broader o4de:DomainAnalysisConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
@@ -1029,6 +1643,42 @@ o4de:RequirementsDocumentsConcept a skos:Concept ;
     skos:broader o4de:DocumentationAssetsConcept ;
     skos:inScheme o4de:AssetClassificationTaxonomy ;
     skos:prefLabel "Requirements Documents"@en .
+
+o4de:RequirementsPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:AcceptanceCriteria,
+        o4de:ApprovedRequirement,
+        o4de:BusinessRequirement,
+        o4de:ComplianceRequirement,
+        o4de:CouldHavePriority,
+        o4de:DraftRequirement,
+        o4de:FunctionalRequirement,
+        o4de:ImplementedRequirement,
+        o4de:MustHavePriority,
+        o4de:NonFunctionalRequirement,
+        o4de:PerformanceRequirement,
+        o4de:ProposedRequirement,
+        o4de:ReliabilityRequirement,
+        o4de:Requirement,
+        o4de:RequirementConflict,
+        o4de:RequirementPriority,
+        o4de:RequirementSource,
+        o4de:RequirementStatus,
+        o4de:RequirementTraceability,
+        o4de:RequirementVersion,
+        o4de:ScalabilityRequirement,
+        o4de:Scenario,
+        o4de:SecurityRequirement,
+        o4de:ShouldHavePriority,
+        o4de:StakeholderRequirement,
+        o4de:UsabilityRequirement,
+        o4de:UseCase,
+        o4de:UserStory,
+        o4de:VerifiedRequirement,
+        o4de:WontHavePriority ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts that classify requirements by kind, priority, status and conflict."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Requirements"@en .
 
 o4de:ResponsivenessConcept a skos:Concept ;
     skos:broader o4de:OrganizationalAgilityConcept ;
@@ -1189,11 +1839,53 @@ o4de:SuppliersConcept a skos:Concept ;
     skos:inScheme o4de:StrategicAnalysisTaxonomy ;
     skos:prefLabel "Suppliers"@en .
 
+o4de:SupplyChainDirector a owl:NamedIndividual,
+        o4de:Role ;
+    rdfs:label "Supply Chain Director"@en ;
+    o4de:accountableFor o4de:OrderFulfillmentProcess ;
+    o4de:hasName "Supply Chain Director" .
+
 o4de:SystemCapabilitiesConcept a skos:Concept ;
     rdfs:seeAlso o4de:SystemCapabilities ;
     skos:broader o4de:BusinessContextConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "System Capabilities"@en .
+
+o4de:SystemsAndTechnologyPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:API,
+        o4de:APIContract,
+        o4de:ApplicationComponent,
+        o4de:ApplicationLayer,
+        o4de:ApplicationSystem,
+        o4de:BatchIntegration,
+        o4de:CloudNativeSystem,
+        o4de:DataLayer,
+        o4de:DataMapping,
+        o4de:EventDrivenArchitecture,
+        o4de:InfrastructureLayer,
+        o4de:IntegrationLayer,
+        o4de:IntegrationPattern,
+        o4de:IntegrationPoint,
+        o4de:IntegrationScenario,
+        o4de:LegacySystem,
+        o4de:MessageBus,
+        o4de:MessageQueue,
+        o4de:Microservices,
+        o4de:ModernSystem,
+        o4de:PointToPoint,
+        o4de:PresentationLayer,
+        o4de:RealTimeIntegration,
+        o4de:ServiceContract,
+        o4de:ServiceOrientedArchitecture,
+        o4de:SystemInterface,
+        o4de:TechnologyComponent,
+        o4de:TechnologyLayer,
+        o4de:TechnologyStack,
+        o4de:TransformationRule ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts of applications, platforms, infrastructure and their integration."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Systems and technology"@en .
 
 o4de:TeamLeaderPosition a owl:NamedIndividual,
         o4de:Position ;
@@ -1224,6 +1916,19 @@ o4de:ToolDevelopmentConcept a skos:Concept ;
     skos:broader o4de:DomainImplementationConcept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Tool Development"@en .
+
+o4de:ToolsPartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:DomainModelingTool,
+        o4de:OntologyEditor,
+        o4de:ProcessModelingTool,
+        o4de:Reasoner,
+        o4de:RequirementsManagementTool,
+        o4de:TripleStore,
+        o4de:VariabilityManagementTool ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "Concepts of the tools that support domain engineering work."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Tools"@en .
 
 o4de:TouchpointConcept a skos:Concept ;
     rdfs:seeAlso o4de:Touchpoint ;
@@ -1293,6 +1998,19 @@ o4de:VersionControlConcept a skos:Concept ;
     skos:inScheme o4de:DomainEngineeringTaxonomy ;
     skos:prefLabel "Version Control"@en .
 
+o4de:WMSMigrationImpact a owl:NamedIndividual,
+        o4de:ChangeImpact ;
+    rdfs:label "WMS Migration Impact"@en ;
+    o4de:hasDescription "Requires 3-month transition, impacts all warehouse operations" .
+
+o4de:WarehouseManagementSystem a owl:NamedIndividual,
+        o4de:ApplicationSystem ;
+    rdfs:label "WMS"@en ;
+    o4de:hasName "WMS" ;
+    o4de:integratesWith o4de:ERPSystem ;
+    o4de:monitorsAsset o4de:LondonDistributionCenter ;
+    o4de:supportsProcess o4de:OrderFulfillmentProcess .
+
 o4de:WeaknessesConcept a skos:Concept ;
     skos:broader o4de:SWOTAnalysisConcept ;
     skos:inScheme o4de:StrategicAnalysisTaxonomy ;
@@ -1318,6 +2036,49 @@ o4de:WebsiteExperience a owl:NamedIndividual,
     rdfs:label "Website Browsing Experience"@en ;
     o4de:satisfactionScore 4.3 .
 
+o4de:WorkStructurePartConcept a skos:Concept ;
+    rdfs:seeAlso o4de:Activity,
+        o4de:Bottleneck,
+        o4de:ContinuousImprovement,
+        o4de:CycleTime,
+        o4de:DecisionPoint,
+        o4de:Defects,
+        o4de:InventoryWaste,
+        o4de:Kaizen,
+        o4de:LeadTime,
+        o4de:LeanMethodology,
+        o4de:ManagementProcess,
+        o4de:Motion,
+        o4de:OptimizationOpportunity,
+        o4de:Overprocessing,
+        o4de:Overproduction,
+        o4de:ParallelExecution,
+        o4de:Process,
+        o4de:ProcessImprovement,
+        o4de:ProcessOptimizationMethodology,
+        o4de:ProcessPerformanceMetric,
+        o4de:ProcessReengineering,
+        o4de:ProcessSimulation,
+        o4de:ProcessTime,
+        o4de:ProcessWaste,
+        o4de:SequentialExecution,
+        o4de:SixSigmaMethodology,
+        o4de:Task,
+        o4de:TheoryOfConstraints,
+        o4de:Throughput,
+        o4de:Transportation,
+        o4de:Utilization,
+        o4de:ValueStreamMapping,
+        o4de:WaitTime,
+        o4de:Waiting,
+        o4de:WhatIfScenario,
+        o4de:WorkItem,
+        o4de:Workflow ;
+    skos:broader o4de:EnterpriseDomainStructureConcept ;
+    skos:definition "The fixed hierarchy of work from process through operation and activity to task, with bottlenecks, waste, improvement and simulation."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:prefLabel "Work structure"@en .
+
 o4de:AuthenticationComponent a owl:NamedIndividual,
         o4de:Component ;
     rdfs:label "Authentication Component"@en ;
@@ -1341,6 +2102,14 @@ o4de:CustomerServiceRole a owl:NamedIndividual,
         o4de:BusinessRole ;
     rdfs:label "Customer Service Role"@en ;
     o4de:hasDescription "Handles customer inquiries, complaints and support requests" .
+
+o4de:ERPSystem a owl:NamedIndividual,
+        o4de:ApplicationSystem ;
+    rdfs:label "Enterprise ERP System"@en ;
+    o4de:applicationSystemOf o4de:FashionRetailOperations ;
+    o4de:hasName "Enterprise ERP System" ;
+    o4de:supportsBusinessCapability o4de:InventoryManagementCapability ;
+    o4de:supportsProcess o4de:OrderFulfillmentProcess .
 
 o4de:EnterpriseAgility a owl:NamedIndividual,
         o4de:OrganizationalAgility ;
@@ -1374,6 +2143,13 @@ o4de:ExampleSupplier a owl:NamedIndividual,
         o4de:Supplier ;
     rdfs:label "Example Supplier"@en ;
     o4de:suppliesInput o4de:CustomerOrder .
+
+o4de:InventoryManagementCapability a owl:NamedIndividual,
+        o4de:CoreCapability ;
+    rdfs:label "Inventory Management"@en ;
+    o4de:capabilityOf o4de:GlobalFashionRetailCorp ;
+    o4de:hasDescription "Real-time inventory tracking across all channels" ;
+    o4de:hasName "Inventory Management" .
 
 o4de:LegacySystems a owl:NamedIndividual,
         o4de:Weakness ;
@@ -1534,6 +2310,14 @@ o4de:PremiumDiscount a owl:NamedIndividual,
     rdfs:label "Premium Customer Discount"@en ;
     o4de:discountPercentage 15.0 .
 
+o4de:ProductCatalog a owl:NamedIndividual,
+        o4de:DataEntity ;
+    rdfs:label "Product Catalog"@en ;
+    o4de:dataEntityOf o4de:FashionRetailOperations ;
+    o4de:dataManagedBy o4de:ERPSystem ;
+    o4de:hasDataClassification o4de:MasterData ;
+    o4de:hasName "Product Catalog" .
+
 o4de:WebAppFeatureModel a owl:NamedIndividual,
         o4de:FeatureModel ;
     rdfs:label "Web Application Feature Model"@en ;
@@ -1615,6 +2399,22 @@ o4de:FinancialManagementConcept a skos:Concept ;
         o4de:DiscountingManagementConcept,
         o4de:PricingManagementConcept ;
     skos:prefLabel "Financial Management"@en .
+
+o4de:GlobalFashionRetailCorp a owl:NamedIndividual,
+        o4de:Organization ;
+    rdfs:label "Global Fashion Retail Corporation"@en ;
+    o4de:annualRevenue 8500000000.00 ;
+    o4de:employeeCount 45000 ;
+    o4de:foundedDate "1995-03-15"^^xsd:date ;
+    o4de:hasDescription "International fashion retail company" ;
+    o4de:hasGeographicScope o4de:GlobalScope ;
+    o4de:hasName "Global Fashion Retail Corporation" ;
+    o4de:hasOperationalCharacteristic o4de:GloballyDistributed,
+        o4de:Operations24x7 ;
+    o4de:hasOrganizationMaturity o4de:DefinedMaturity ;
+    o4de:hasOrganizationSize o4de:MultinationalOrganization ;
+    o4de:hasOwnershipType o4de:PublicCompany ;
+    o4de:inLifecyclePhase o4de:MaturityAndOptimization .
 
 o4de:ITDepartment a owl:NamedIndividual,
         o4de:Department ;
@@ -1949,6 +2749,14 @@ o4de:DataCollectionConcept a skos:Concept ;
         o4de:MeetingListConcept ;
     skos:prefLabel "Data Collection"@en .
 
+o4de:FashionRetailOperations a owl:NamedIndividual,
+        o4de:Domain ;
+    rdfs:label "Fashion Retail Operations"@en ;
+    o4de:hasDescription "Complete fashion retail business domain" ;
+    o4de:hasDomainMaturity o4de:MatureDomain ;
+    o4de:hasDomainType o4de:FashionRetailDomain ;
+    o4de:hasName "Fashion Retail Operations" .
+
 o4de:ProcessMaturityConcept a skos:Concept ;
     skos:inScheme o4de:ProcessMaturityTaxonomy ;
     skos:narrower o4de:DefinedConcept,
@@ -2013,6 +2821,17 @@ o4de:DomainAssetsConcept a skos:Concept ;
         o4de:FrameworkConcept,
         o4de:ReferenceArchitectureConcept ;
     skos:prefLabel "Domain Assets"@en .
+
+o4de:OrderFulfillmentProcess a owl:NamedIndividual,
+        o4de:CoreBusinessProcess ;
+    rdfs:label "Order Fulfillment"@en ;
+    o4de:cycleTime "P2D"^^xsd:duration ;
+    o4de:hasBusinessRole o4de:OrderFulfillmentCoordinator ;
+    o4de:hasDescription "End-to-end order processing from placement to delivery" ;
+    o4de:hasName "Order Fulfillment" ;
+    o4de:leadTime "P5D"^^xsd:duration ;
+    o4de:realizesCapability o4de:InventoryManagementCapability ;
+    o4de:throughput 15000.0 .
 
 o4de:ProcessMaturityTaxonomy a skos:ConceptScheme ;
     dc:description "Classification of process maturity levels"@en ;
@@ -2086,6 +2905,36 @@ o4de:OrganizationalTaxonomy a skos:ConceptScheme ;
     dc:description "Classification of organizational, human resource and agility concepts"@en ;
     dc:title "Organizational Structure Taxonomy"@en ;
     skos:hasTopConcept o4de:OrganizationalManagementConcept .
+
+o4de:EnterpriseDomainStructureConcept a skos:Concept ;
+    skos:definition "The structure of the business domain an organization works in, divided into the parts below."@en ;
+    skos:inScheme o4de:EnterpriseDomainStructureTaxonomy ;
+    skos:narrower o4de:AutomationPartConcept,
+        o4de:BusinessCapabilitiesPartConcept,
+        o4de:ChangeManagementPartConcept,
+        o4de:DataArchitecturePartConcept,
+        o4de:DiscoveryMethodsPartConcept,
+        o4de:DomainAssetsPartConcept,
+        o4de:DomainFoundationsPartConcept,
+        o4de:GovernanceModelsPartConcept,
+        o4de:KnowledgeManagementPartConcept,
+        o4de:OntologyLifecycleTestingAndDeploymentPartConcept,
+        o4de:OrganizationalTaxonomyPartConcept,
+        o4de:PeopleAndRolesPartConcept,
+        o4de:PhysicalAssetsPartConcept,
+        o4de:ProductsPartConcept,
+        o4de:QualityAndMetricsPartConcept,
+        o4de:RequirementsPartConcept,
+        o4de:SystemsAndTechnologyPartConcept,
+        o4de:ToolsPartConcept,
+        o4de:WorkStructurePartConcept ;
+    skos:prefLabel "Enterprise Domain Structure"@en ;
+    skos:topConceptOf o4de:EnterpriseDomainStructureTaxonomy .
+
+o4de:EnterpriseDomainStructureTaxonomy a skos:ConceptScheme ;
+    dc:description "The parts into which the structure of an enterprise domain is divided: foundations, organization, governance, capabilities, work, people, requirements, data, technology, assets, products, automation, change, knowledge, discovery, quality, tools and the ontology lifecycle"@en ;
+    dc:title "Enterprise Domain Structure Taxonomy"@en ;
+    skos:hasTopConcept o4de:EnterpriseDomainStructureConcept .
 
 o4de:AssetClassificationTaxonomy a skos:ConceptScheme ;
     dc:description "Hierarchical classification of domain assets by type and characteristics"@en ;

@@ -1,4 +1,4 @@
-# O4DE against Domain Engineering Ontology v5.2: measured fit and gap (version 1.0.0)
+# O4DE against Domain Engineering Ontology v5.2: measured fit and gap (version 1.0.0, with a note on 1.1.0 appended)
 
 This note compares two ontologies of domain engineering that exist in the owner's work: **O4DE** (this package) and **Domain Engineering Ontology v5.2**, the earlier enterprise ontology. It is a measurement, not a merge. Version 1.0.0 of O4DE does **not** contain v5.2; the section "Proposal for 1.1.0" says what absorbing it would take and what only the owner can decide.
 
@@ -70,3 +70,7 @@ The v5.2 header states the creator as "Domain Engineering Consortium", the year 
 3. Extend the shape file and the competency questions to the new modules and run the gate and the reasoner again.
 
 **What only the owner can decide:** whether all 16 parts belong in a domain engineering ontology or only some (for example, the on-chain governance classes). Nothing in the rules or the files settles that point; the proposal is to take all of them, because the owner's collection note names them as domain engineering material.
+
+## Status in 1.1.0 (appended 2026-10-13)
+
+The proposal above was carried out in version 1.1.0. v5.2 is now a module of the three O4DE files: 489 of its classes and 967 of its properties were added, 39 classes and 15 properties turned out to be the same term as an O4DE term and were merged (the 15 shared classes counted above plus 24 more found when the undeclared names were declared), and the terms it used without declaring were declared. Where this note says 1.0.0 "copies nothing" from v5.2, that was true of 1.0.0 only. The text above is kept as written for 1.0.0, with only the heading extended. Of the 422 undeclared names it counts, 322 are classes, 21 properties and 79 individuals. The decisions, including the reading of the licence, are in `O4DE_Consolidation_Record_Domain_Engineering_Ontology_v5_2_v1_1_0.md`. Whether all of the parts belong in the ontology is still the owner's decision; all were taken.

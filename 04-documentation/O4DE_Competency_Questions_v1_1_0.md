@@ -1,7 +1,7 @@
-# O4DE competency questions, version 1.0.0
+# O4DE competency questions, version 1.1.0
 
-Each question is paired with a SPARQL query. Every query declares the prefix `PREFIX : <http://www.zt4swe.io/o4de#>` (shown once here, left out of the blocks below) and must return at least one row when run against the T-Box and A-Box together; `05-gates/o4de_gate_v1_0_0.py` runs them all.
-The questions are grouped by the part of the ontology they test. A longer list drafted in an earlier working session could not be recovered; these 27 are the questions of this version.
+Each question is paired with a SPARQL query. Every query declares the prefix `PREFIX : <http://www.zt4swe.io/o4de#>` (with the usual rdf, rdfs, owl, skos and xsd prefixes; shown once here, left out of the blocks below) and must return at least one row when run against the T-Box and A-Box together; the gate script in `05-gates` runs them all.
+The questions are grouped by the part of the ontology they test. A longer list drafted in an earlier working session could not be recovered; the first 27 questions are those of version 1.0.0 and the last group was added in version 1.1.0 for the enterprise domain structure.
 
 ## Domain engineering core
 
@@ -171,4 +171,84 @@ SELECT ?sprint ?velocity ?activity WHERE { ?sprint :sprintVelocity ?velocity . O
 
 ```sparql
 SELECT ?employee ?manager WHERE { ?employee :reportsTo+ ?manager . }
+```
+
+## Enterprise domain structure
+
+**CQ28. Which sub-domains does a business domain contain?**
+
+```sparql
+SELECT ?domain ?sub WHERE { ?sub :subDomainOf ?domain . }
+```
+
+**CQ29. Which operations make up a business process, and which capability does the process realize?**
+
+```sparql
+SELECT ?process ?operation ?capability WHERE { ?operation :operationOf ?process . ?process :realizesCapability ?capability . }
+```
+
+**CQ30. What are the cycle time, lead time and throughput of a process?**
+
+```sparql
+SELECT ?process ?cycle ?lead ?throughput WHERE { ?process :cycleTime ?cycle ; :leadTime ?lead ; :throughput ?throughput . }
+```
+
+**CQ31. How is an organization classified by size, ownership, geographic scope and lifecycle phase?**
+
+```sparql
+SELECT ?org ?size ?ownership ?scope ?phase WHERE { ?org :hasOrganizationSize ?size ; :hasOwnershipType ?ownership ; :hasGeographicScope ?scope ; :inLifecyclePhase ?phase . }
+```
+
+**CQ32. Which capabilities does an organization have?**
+
+```sparql
+SELECT ?capability ?org WHERE { ?capability :capabilityOf ?org . }
+```
+
+**CQ33. What priority and status does a requirement have?**
+
+```sparql
+SELECT ?requirement ?priority ?status WHERE { ?requirement :hasPriority ?priority ; :hasRequirementStatus ?status . }
+```
+
+**CQ34. Which attributes does a data entity have, and how is the data classified?**
+
+```sparql
+SELECT ?entity ?attribute ?class WHERE { ?attribute :attributeOf ?entity . ?entity :hasDataClassification ?class . }
+```
+
+**CQ35. Which candidates for automation exist, and by which technique could they be automated?**
+
+```sparql
+SELECT ?candidate ?work ?technique WHERE { ?candidate :automationCandidateOf ?work ; :usesAutomationTechnique ?technique . }
+```
+
+**CQ36. In what condition are the physical assets of an organization?**
+
+```sparql
+SELECT ?asset ?condition WHERE { ?asset :hasCondition ?condition . }
+```
+
+**CQ37. Which change requests exist, and what impact do they have?**
+
+```sparql
+SELECT ?request ?impact WHERE { ?request a :ChangeRequest . ?impact a :ChangeImpact . }
+```
+
+**CQ38. Which parts is the enterprise domain structure divided into, and how many classes does each part hold?**
+
+```sparql
+SELECT ?part (COUNT(?class) AS ?classes) WHERE { ?part skos:inScheme :EnterpriseDomainStructureTaxonomy ; rdfs:seeAlso ?class . } GROUP BY ?part ORDER BY DESC(?classes)
+```
+
+**CQ39. Which classes were taken over from the earlier domain engineering ontology, and what is their original term?**
+
+```sparql
+SELECT ?class ?original WHERE { ?class rdfs:seeAlso ?original . FILTER(STRSTARTS(STR(?original), "http://domainengineering.org/ontology#")) }
+```
+
+**CQ40. Which classes of different parts of the ontology are declared equivalent?**
+
+```sparql
+SELECT ?class ?twin WHERE { ?class owl:equivalentClass ?twin . }
 ```

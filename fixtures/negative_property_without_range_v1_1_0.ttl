@@ -1,0 +1,8 @@
+# EXPECT: A property needs a range
+# An object property that declares a domain but no range.
+@prefix o4de: <http://www.zt4swe.io/o4de#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+o4de:badLink a owl:ObjectProperty ; rdfs:label "bad link" ; rdfs:domain o4de:Process ; skos:definition "A link that is missing its range, which the shapes must refuse." .

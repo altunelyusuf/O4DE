@@ -1,0 +1,8 @@
+# EXPECT: must belong to the property's range
+# An organization whose size is a class that is not an organization size (a value from the ownership types).
+@prefix o4de: <http://www.zt4swe.io/o4de#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+o4de:BadSizedOrganization a owl:NamedIndividual, o4de:Organization ; rdfs:label "Badly sized organization" ; o4de:hasOrganizationSize o4de:PublicCompany .
